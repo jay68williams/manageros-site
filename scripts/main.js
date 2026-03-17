@@ -216,6 +216,9 @@ function initCardAnimations() {
   animateHorizontalBars();
   animateVerticalBars();
   animateChecklist();
+  animateLeadNetwork();
+  animateDocBurst();
+  animateNodeTree();
 }
 
 /* --- 1. Chat Mockup: Typewriter effect with looping --- */
@@ -451,4 +454,353 @@ function animateChecklist() {
   }
 
   runChecklistLoop();
+}
+
+/* ===== SOLUTION CARD ANIMATIONS ===== */
+
+/* --- Lead Generation: Profile network animation --- */
+function animateLeadNetwork() {
+  const container = document.getElementById('lead-gen-anim');
+  if (!container) return;
+  const svg = container.querySelector('.solution-svg');
+  const linesGroup = svg.querySelector('.network-lines');
+  const nodesGroup = svg.querySelector('.network-nodes');
+  const ns = 'http://www.w3.org/2000/svg';
+  const cx = 150, cy = 90, radius = 65;
+  const nodeCount = 10;
+  const nodePositions = [];
+
+  // Create 10 outer profile nodes
+  for (let i = 0; i < nodeCount; i++) {
+    const angle = (i / nodeCount) * Math.PI * 2 - Math.PI / 2;
+    const nx = cx + Math.cos(angle) * radius;
+    const ny = cy + Math.sin(angle) * radius;
+    nodePositions.push({ x: nx, y: ny });
+
+    // Node circle
+    const circle = document.createElementNS(ns, 'circle');
+    circle.setAttribute('cx', nx);
+    circle.setAttribute('cy', ny);
+    circle.setAttribute('r', '9');
+    circle.setAttribute('fill', 'var(--light-grey)');
+    circle.setAttribute('stroke', 'var(--border-grey)');
+    circle.setAttribute('stroke-width', '1');
+    circle.setAttribute('opacity', '0');
+    circle.classList.add('net-node');
+    nodesGroup.appendChild(circle);
+
+    // Tiny head
+    const head = document.createElementNS(ns, 'circle');
+    head.setAttribute('cx', nx);
+    head.setAttribute('cy', ny - 2);
+    head.setAttribute('r', '3');
+    head.setAttribute('fill', 'none');
+    head.setAttribute('stroke', 'var(--text-secondary)');
+    head.setAttribute('stroke-width', '1');
+    head.setAttribute('opacity', '0');
+    head.classList.add('net-node');
+    nodesGroup.appendChild(head);
+
+    // Tiny body arc
+    const body = document.createElementNS(ns, 'path');
+    body.setAttribute('d', `M${nx - 4} ${ny + 4} a4 3 0 0 1 8 0`);
+    body.setAttribute('fill', 'none');
+    body.setAttribute('stroke', 'var(--text-secondary)');
+    body.setAttribute('stroke-width', '1');
+    body.setAttribute('opacity', '0');
+    body.classList.add('net-node');
+    nodesGroup.appendChild(body);
+  }
+
+  const netNodes = nodesGroup.querySelectorAll('.net-node');
+
+  function runNetworkLoop() {
+    // Reset: hide all nodes and lines
+    linesGroup.innerHTML = '';
+    netNodes.forEach(n => { n.setAttribute('opacity', '0'); });
+
+    let idx = 0;
+    function showNextNode() {
+      if (idx >= nodeCount) {
+        // All visible, pulse lines, then reset
+        setTimeout(runNetworkLoop, 3000);
+        return;
+      }
+      const pos = nodePositions[idx];
+
+      // Draw line from center to node
+      const line = document.createElementNS(ns, 'line');
+      line.setAttribute('x1', cx);
+      line.setAttribute('y1', cy);
+      line.setAttribute('x2', cx);
+      line.setAttribute('y2', cy);
+      line.setAttribute('stroke', 'var(--cherry-red)');
+      line.setAttribute('stroke-width', '1');
+      line.setAttribute('opacity', '0.3');
+      linesGroup.appendChild(line);
+
+      // Animate line extending
+      let progress = 0;
+      const animLine = setInterval(() => {
+        progress += 0.08;
+        if (progress >= 1) { progress = 1; clearInterval(animLine); }
+        line.setAttribute('x2', cx + (pos.x - cx) * progress);
+        line.setAttribute('y2', cy + (pos.y - cy) * progress);
+      }, 16);
+
+      // Show node elements (3 per node: circle, head, body)
+      const start = idx * 3;
+      setTimeout(() => {
+        for (let j = start; j < start + 3 && j < netNodes.length; j++) {
+          netNodes[j].setAttribute('opacity', '1');
+          netNodes[j].style.transition = 'opacity 0.3s ease';
+        }
+      }, 200);
+
+      idx++;
+      setTimeout(showNextNode, 250);
+    }
+
+    setTimeout(showNextNode, 500);
+  }
+
+  runNetworkLoop();
+}
+
+/* --- Document Processing: File burst animation --- */
+function animateDocBurst() {
+  const container = document.getElementById('doc-process-anim');
+  if (!container) return;
+  const svg = container.querySelector('.solution-svg');
+  const burstGroup = svg.querySelector('.burst-files');
+  const ns = 'http://www.w3.org/2000/svg';
+  const cx = 150, cy = 80;
+  const fileCount = 8;
+  const burstRadius = 60;
+  const fileEls = [];
+
+  // Create burst file icons
+  for (let i = 0; i < fileCount; i++) {
+    const angle = (i / fileCount) * Math.PI * 2 - Math.PI / 2;
+    const tx = cx + Math.cos(angle) * burstRadius;
+    const ty = cy + Math.sin(angle) * burstRadius;
+
+    const g = document.createElementNS(ns, 'g');
+    g.setAttribute('transform', `translate(${cx - 10}, ${cy - 12})`);
+    g.setAttribute('opacity', '0');
+    g.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+
+    const rect = document.createElementNS(ns, 'rect');
+    rect.setAttribute('width', '20');
+    rect.setAttribute('height', '24');
+    rect.setAttribute('rx', '2');
+    rect.setAttribute('fill', 'none');
+    rect.setAttribute('stroke', 'var(--cherry-red)');
+    rect.setAttribute('stroke-width', '1.2');
+    rect.setAttribute('opacity', '0.6');
+    g.appendChild(rect);
+
+    // Corner fold
+    const fold = document.createElementNS(ns, 'path');
+    fold.setAttribute('d', 'M14 0 L14 6 L20 6');
+    fold.setAttribute('fill', 'none');
+    fold.setAttribute('stroke', 'var(--cherry-red)');
+    fold.setAttribute('stroke-width', '0.8');
+    fold.setAttribute('opacity', '0.4');
+    g.appendChild(fold);
+
+    // Lines on file
+    for (let l = 0; l < 3; l++) {
+      const ln = document.createElementNS(ns, 'line');
+      ln.setAttribute('x1', '4');
+      ln.setAttribute('y1', String(10 + l * 4));
+      ln.setAttribute('x2', String(14 - l * 2));
+      ln.setAttribute('y2', String(10 + l * 4));
+      ln.setAttribute('stroke', 'var(--cherry-red)');
+      ln.setAttribute('stroke-width', '0.8');
+      ln.setAttribute('opacity', '0.35');
+      g.appendChild(ln);
+    }
+
+    burstGroup.appendChild(g);
+    fileEls.push({ el: g, targetX: tx - 10, targetY: ty - 12, originX: cx - 10, originY: cy - 12 });
+  }
+
+  function runDocLoop() {
+    // Reset all to center
+    fileEls.forEach(f => {
+      f.el.setAttribute('transform', `translate(${f.originX}, ${f.originY})`);
+      f.el.setAttribute('opacity', '0');
+      f.el.style.transition = 'none';
+    });
+
+    // Phase 1: Burst outward
+    setTimeout(() => {
+      fileEls.forEach((f, i) => {
+        setTimeout(() => {
+          f.el.style.transition = 'all 0.6s cubic-bezier(0.2, 0.8, 0.3, 1)';
+          f.el.setAttribute('transform', `translate(${f.targetX}, ${f.targetY})`);
+          f.el.setAttribute('opacity', '1');
+        }, i * 80);
+      });
+    }, 300);
+
+    // Phase 2: Return to center
+    setTimeout(() => {
+      fileEls.forEach((f, i) => {
+        setTimeout(() => {
+          f.el.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+          f.el.setAttribute('transform', `translate(${f.originX}, ${f.originY})`);
+          f.el.setAttribute('opacity', '0');
+        }, i * 60);
+      });
+    }, fileEls.length * 80 + 2500);
+
+    // Restart loop
+    setTimeout(runDocLoop, fileEls.length * 80 + 2500 + fileEls.length * 60 + 1500);
+  }
+
+  runDocLoop();
+}
+
+/* --- Client Reporting: Node tree consolidation --- */
+function animateNodeTree() {
+  const container = document.getElementById('client-report-anim');
+  if (!container) return;
+  const svg = container.querySelector('.solution-svg');
+  const linesGroup = svg.querySelector('.tree-lines');
+  const topGroup = svg.querySelector('.tree-top-nodes');
+  const midGroup = svg.querySelector('.tree-mid-nodes');
+  const ns = 'http://www.w3.org/2000/svg';
+
+  // 7 top data source nodes
+  const topNodes = [
+    { x: 30, y: 25 }, { x: 70, y: 20 }, { x: 110, y: 28 },
+    { x: 150, y: 18 }, { x: 190, y: 25 }, { x: 230, y: 22 }, { x: 270, y: 28 }
+  ];
+  // 3 middle merge nodes
+  const midNodes = [
+    { x: 80, y: 85 }, { x: 150, y: 80 }, { x: 220, y: 85 }
+  ];
+  // Client node at bottom
+  const clientPos = { x: 150, y: 150 };
+
+  // Labels for top nodes
+  const labels = ['CRM', 'Email', 'Slack', 'API', 'Data', 'KPIs', 'Logs'];
+
+  // Create top nodes
+  topNodes.forEach((n, i) => {
+    const circle = document.createElementNS(ns, 'circle');
+    circle.setAttribute('cx', n.x);
+    circle.setAttribute('cy', n.y);
+    circle.setAttribute('r', '10');
+    circle.setAttribute('fill', 'var(--light-grey)');
+    circle.setAttribute('stroke', 'var(--border-grey)');
+    circle.setAttribute('stroke-width', '1');
+    circle.setAttribute('opacity', '0');
+    circle.classList.add('tree-top-node');
+    topGroup.appendChild(circle);
+
+    const text = document.createElementNS(ns, 'text');
+    text.setAttribute('x', n.x);
+    text.setAttribute('y', n.y + 3);
+    text.setAttribute('text-anchor', 'middle');
+    text.setAttribute('font-size', '6');
+    text.setAttribute('fill', 'var(--text-secondary)');
+    text.setAttribute('font-weight', '500');
+    text.setAttribute('opacity', '0');
+    text.textContent = labels[i];
+    text.classList.add('tree-top-node');
+    topGroup.appendChild(text);
+  });
+
+  // Create mid nodes
+  midNodes.forEach(n => {
+    const circle = document.createElementNS(ns, 'circle');
+    circle.setAttribute('cx', n.x);
+    circle.setAttribute('cy', n.y);
+    circle.setAttribute('r', '8');
+    circle.setAttribute('fill', 'var(--cherry-red)');
+    circle.setAttribute('opacity', '0');
+    circle.classList.add('tree-mid-node');
+    midGroup.appendChild(circle);
+  });
+
+  const topEls = topGroup.querySelectorAll('.tree-top-node');
+  const midEls = midGroup.querySelectorAll('.tree-mid-node');
+
+  // Map: which top nodes connect to which mid nodes
+  const topToMid = [
+    [0, 1, 2],  // mid[0] receives from top[0], top[1], top[2]
+    [2, 3, 4],  // mid[1] receives from top[2], top[3], top[4]
+    [4, 5, 6]   // mid[2] receives from top[4], top[5], top[6]
+  ];
+
+  function drawAnimatedLine(x1, y1, x2, y2, delay, color) {
+    const line = document.createElementNS(ns, 'line');
+    line.setAttribute('x1', x1);
+    line.setAttribute('y1', y1);
+    line.setAttribute('x2', x1);
+    line.setAttribute('y2', y1);
+    line.setAttribute('stroke', color || 'var(--border-grey)');
+    line.setAttribute('stroke-width', '1');
+    line.setAttribute('opacity', '0.4');
+    linesGroup.appendChild(line);
+
+    setTimeout(() => {
+      let progress = 0;
+      const anim = setInterval(() => {
+        progress += 0.06;
+        if (progress >= 1) { progress = 1; clearInterval(anim); }
+        line.setAttribute('x2', x1 + (x2 - x1) * progress);
+        line.setAttribute('y2', y1 + (y2 - y1) * progress);
+      }, 16);
+    }, delay);
+  }
+
+  function runTreeLoop() {
+    linesGroup.innerHTML = '';
+    topEls.forEach(n => n.setAttribute('opacity', '0'));
+    midEls.forEach(n => n.setAttribute('opacity', '0'));
+
+    // Phase 1: Show top nodes
+    topNodes.forEach((n, i) => {
+      setTimeout(() => {
+        topEls[i * 2].setAttribute('opacity', '1');
+        topEls[i * 2 + 1].setAttribute('opacity', '1');
+      }, i * 150);
+    });
+
+    // Phase 2: Draw lines from top to mid, show mid nodes
+    const phase2Start = topNodes.length * 150 + 300;
+    topToMid.forEach((sources, midIdx) => {
+      sources.forEach((topIdx, si) => {
+        const delay = phase2Start + midIdx * 400 + si * 100;
+        drawAnimatedLine(
+          topNodes[topIdx].x, topNodes[topIdx].y + 10,
+          midNodes[midIdx].x, midNodes[midIdx].y - 8,
+          delay, 'var(--border-grey)'
+        );
+      });
+      setTimeout(() => {
+        midEls[midIdx].setAttribute('opacity', '0.2');
+        setTimeout(() => midEls[midIdx].setAttribute('opacity', '1'), 100);
+      }, phase2Start + midIdx * 400 + 300);
+    });
+
+    // Phase 3: Draw lines from mid to client
+    const phase3Start = phase2Start + topToMid.length * 400 + 500;
+    midNodes.forEach((n, i) => {
+      drawAnimatedLine(
+        n.x, n.y + 8,
+        clientPos.x, clientPos.y - 14,
+        phase3Start + i * 200, 'var(--cherry-red)'
+      );
+    });
+
+    // Restart
+    setTimeout(runTreeLoop, phase3Start + midNodes.length * 200 + 3000);
+  }
+
+  runTreeLoop();
 }

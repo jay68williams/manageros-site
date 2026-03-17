@@ -564,17 +564,23 @@
         <!-- Lead Generation -->
         <div class="solution-card">
           <div class="solution-card-preview">
-            <div class="solution-card-preview-inner">
-              <div class="preview-line short"></div>
-              <div class="preview-line medium"></div>
-              <div class="preview-line accent"></div>
-              <div class="preview-line" style="width:70%"></div>
+            <div class="solution-anim-container" id="lead-gen-anim">
+              <svg viewBox="0 0 300 180" class="solution-svg">
+                <!-- Network lines (drawn by JS) -->
+                <g class="network-lines"></g>
+                <!-- Central profile -->
+                <circle cx="150" cy="90" r="22" fill="var(--cherry-red)" opacity="0.15" class="central-pulse"/>
+                <circle cx="150" cy="82" r="8" fill="none" stroke="var(--cherry-red)" stroke-width="1.5"/>
+                <path d="M138 98 a12 10 0 0 1 24 0" fill="none" stroke="var(--cherry-red)" stroke-width="1.5"/>
+                <!-- 10 surrounding nodes (positioned by JS) -->
+                <g class="network-nodes"></g>
+              </svg>
             </div>
           </div>
           <div class="solution-card-body">
             <div class="solution-card-meta">
               <span class="solution-card-tag">SMB</span>
-              <span class="solution-card-tag">✦ 2–3 weeks</span>
+              <span class="solution-card-tag">✦ 2-3 weeks</span>
             </div>
             <h3>Lead Generation</h3>
             <p>Capture and qualify leads instantly</p>
@@ -595,17 +601,25 @@
         <!-- Document Processing -->
         <div class="solution-card">
           <div class="solution-card-preview">
-            <div class="solution-card-preview-inner">
-              <div class="preview-line accent" style="width:50%"></div>
-              <div class="preview-line medium"></div>
-              <div class="preview-line short"></div>
-              <div class="preview-line" style="width:90%"></div>
+            <div class="solution-anim-container" id="doc-process-anim">
+              <svg viewBox="0 0 300 180" class="solution-svg">
+                <!-- Burst files (animated by JS) -->
+                <g class="burst-files"></g>
+                <!-- Central file icon -->
+                <rect x="130" y="55" width="40" height="50" rx="3" fill="var(--cherry-red)" opacity="0.12" class="central-file-bg"/>
+                <rect x="132" y="57" width="36" height="46" rx="2" fill="none" stroke="var(--cherry-red)" stroke-width="1.5"/>
+                <path d="M160 57 L160 67 L168 67" fill="none" stroke="var(--cherry-red)" stroke-width="1.2"/>
+                <line x1="139" y1="72" x2="161" y2="72" stroke="var(--cherry-red)" stroke-width="1" opacity="0.5"/>
+                <line x1="139" y1="78" x2="157" y2="78" stroke="var(--cherry-red)" stroke-width="1" opacity="0.5"/>
+                <line x1="139" y1="84" x2="155" y2="84" stroke="var(--cherry-red)" stroke-width="1" opacity="0.5"/>
+                <line x1="139" y1="90" x2="153" y2="90" stroke="var(--cherry-red)" stroke-width="1" opacity="0.5"/>
+              </svg>
             </div>
           </div>
           <div class="solution-card-body">
             <div class="solution-card-meta">
               <span class="solution-card-tag">Enterprise</span>
-              <span class="solution-card-tag">✦ 2–4 weeks</span>
+              <span class="solution-card-tag">✦ 2-4 weeks</span>
             </div>
             <h3>Document Processing</h3>
             <p>Extract, analyse, and act on your documents</p>
@@ -625,17 +639,26 @@
         <!-- Client Reporting -->
         <div class="solution-card">
           <div class="solution-card-preview">
-            <div class="solution-card-preview-inner">
-              <div class="preview-line" style="width:75%"></div>
-              <div class="preview-line accent" style="width:35%"></div>
-              <div class="preview-line medium"></div>
-              <div class="preview-line short"></div>
+            <div class="solution-anim-container" id="client-report-anim">
+              <svg viewBox="0 0 300 180" class="solution-svg">
+                <!-- Connection lines (drawn by JS) -->
+                <g class="tree-lines"></g>
+                <!-- Top data nodes (positioned by JS) -->
+                <g class="tree-top-nodes"></g>
+                <!-- Middle merge layer -->
+                <g class="tree-mid-nodes"></g>
+                <!-- Bottom client node -->
+                <circle cx="150" cy="155" r="14" fill="var(--cherry-red)" opacity="0.15" class="client-pulse"/>
+                <circle cx="150" cy="150" r="5" fill="none" stroke="var(--cherry-red)" stroke-width="1.3"/>
+                <path d="M143 160 a7 6 0 0 1 14 0" fill="none" stroke="var(--cherry-red)" stroke-width="1.3"/>
+                <text x="150" y="175" text-anchor="middle" font-size="8" fill="var(--cherry-red)" font-weight="600" opacity="0.7">CLIENT</text>
+              </svg>
             </div>
           </div>
           <div class="solution-card-body">
             <div class="solution-card-meta">
               <span class="solution-card-tag">SMB</span>
-              <span class="solution-card-tag">✦ 1–2 weeks</span>
+              <span class="solution-card-tag">✦ 1-2 weeks</span>
             </div>
             <h3>Client Reporting</h3>
             <p>Automated weekly reports and KPI tracking</p>

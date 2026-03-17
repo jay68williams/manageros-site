@@ -1321,6 +1321,46 @@ section {
   overflow: hidden;
 }
 
+.solution-anim-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.solution-svg {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes centralPulse {
+  0%, 100% { r: 22; opacity: 0.10; }
+  50% { r: 26; opacity: 0.20; }
+}
+
+.central-pulse {
+  animation: centralPulse 2s ease-in-out infinite;
+}
+
+@keyframes clientPulse {
+  0%, 100% { r: 14; opacity: 0.10; }
+  50% { r: 17; opacity: 0.22; }
+}
+
+.client-pulse {
+  animation: clientPulse 2s ease-in-out infinite;
+}
+
+@keyframes fileBgPulse {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 0.18; }
+}
+
+.central-file-bg {
+  animation: fileBgPulse 2s ease-in-out infinite;
+}
+
 .solution-card-preview-inner {
   width: 85%;
   height: 80%;
