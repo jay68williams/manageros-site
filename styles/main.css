@@ -2159,26 +2159,26 @@ section {
   color: var(--text-primary);
 }
 
-/* Light mode: show sun, hide moon */
+/* Light mode: show moon (switch to dark), hide sun */
 .sun-icon {
-  opacity: 1;
-  transform: rotate(0deg) scale(1);
-}
-
-.moon-icon {
-  opacity: 0;
-  transform: rotate(-90deg) scale(0.5);
-}
-
-/* Dark mode: show moon, hide sun */
-[data-theme="dark"] .sun-icon {
   opacity: 0;
   transform: rotate(90deg) scale(0.5);
 }
 
-[data-theme="dark"] .moon-icon {
+.moon-icon {
   opacity: 1;
   transform: rotate(0deg) scale(1);
+}
+
+/* Dark mode: show sun (switch to light), hide moon */
+[data-theme="dark"] .sun-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+[data-theme="dark"] .moon-icon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
 }
 
 [data-theme="dark"] .theme-toggle {
