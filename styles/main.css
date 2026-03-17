@@ -29,6 +29,7 @@ html {
 
   /* Accent */
   --red: #c2031f;
+  --cherry-red: #c2031f;
   --red-hover: #a00219;
   --red-light: rgba(194, 3, 31, 0.08);
   --red-glow: rgba(194, 3, 31, 0.15);
@@ -2628,6 +2629,7 @@ section {
   --text-tertiary: #6b7280;
   --text-primary: #f0f0f0;
   --black: #f0f0f0;
+  --cherry-red: #ff6b7a;
   --dark-bg: #0a0a0a;
   --dark-bg-light: #111111;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);

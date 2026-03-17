@@ -484,7 +484,7 @@ function animateLeadNetwork() {
     bg.setAttribute('cy', ny);
     bg.setAttribute('r', '12');
     bg.setAttribute('fill', 'var(--cherry-red)');
-    bg.setAttribute('opacity', '0.06');
+    bg.setAttribute('opacity', '0.12');
     g.appendChild(bg);
 
     // Head
@@ -542,8 +542,8 @@ function animateLeadNetwork() {
       line.setAttribute('x2', cx);
       line.setAttribute('y2', cy);
       line.setAttribute('stroke', 'var(--cherry-red)');
-      line.setAttribute('stroke-width', '1.2');
-      line.setAttribute('opacity', '0.35');
+      line.setAttribute('stroke-width', '1.5');
+      line.setAttribute('opacity', '0.6');
       line.setAttribute('stroke-linecap', 'round');
       linesGroup.appendChild(line);
 
@@ -606,19 +606,19 @@ function animateDocBurst() {
     page.setAttribute('width', '24');
     page.setAttribute('height', '30');
     page.setAttribute('rx', '2');
-    page.setAttribute('fill', 'var(--light-grey)');
+    page.setAttribute('fill', 'var(--cherry-red)');
+    page.setAttribute('opacity', '0.15');
     page.setAttribute('stroke', 'var(--cherry-red)');
-    page.setAttribute('stroke-width', '1.2');
-    page.setAttribute('opacity', '0.7');
+    page.setAttribute('stroke-width', '1.5');
     g.appendChild(page);
 
     // Corner fold
     const fold = document.createElementNS(ns, 'path');
     fold.setAttribute('d', 'M6 -15 L6 -9 L12 -9');
-    fold.setAttribute('fill', 'var(--light-grey)');
+    fold.setAttribute('fill', 'none');
     fold.setAttribute('stroke', 'var(--cherry-red)');
-    fold.setAttribute('stroke-width', '0.8');
-    fold.setAttribute('opacity', '0.5');
+    fold.setAttribute('stroke-width', '1');
+    fold.setAttribute('opacity', '0.7');
     g.appendChild(fold);
 
     // Text lines
@@ -630,7 +630,7 @@ function animateDocBurst() {
       ln.setAttribute('y2', String(-4 + l * 6));
       ln.setAttribute('stroke', 'var(--cherry-red)');
       ln.setAttribute('stroke-width', '1');
-      ln.setAttribute('opacity', '0.3');
+      ln.setAttribute('opacity', '0.5');
       ln.setAttribute('stroke-linecap', 'round');
       g.appendChild(ln);
     }
@@ -766,7 +766,7 @@ function animateNodeTree() {
     bg.setAttribute('cy', s.y);
     bg.setAttribute('r', '14');
     bg.setAttribute('fill', 'var(--cherry-red)');
-    bg.setAttribute('opacity', '0.05');
+    bg.setAttribute('opacity', '0.1');
     g.appendChild(bg);
 
     // Icon
@@ -796,8 +796,8 @@ function animateNodeTree() {
     line.setAttribute('x2', x1);
     line.setAttribute('y2', y1);
     line.setAttribute('stroke', 'var(--cherry-red)');
-    line.setAttribute('stroke-width', '1');
-    line.setAttribute('opacity', '0.25');
+    line.setAttribute('stroke-width', '1.5');
+    line.setAttribute('opacity', '0.5');
     line.setAttribute('stroke-linecap', 'round');
     linesGroup.appendChild(line);
 
