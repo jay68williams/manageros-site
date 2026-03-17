@@ -33,11 +33,14 @@
         Manager OS
       </a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#platform">Features</a></li>
         <li><a href="pricing.html">Pricing</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
-        <li class="nav-cta"><a href="contact.html" class="btn btn-primary">Book a Demo</a></li>
+        <li class="nav-cta">
+          <a href="contact.html" class="btn btn-dark">Book a Call</a>
+          <a href="contact.html" class="btn btn-primary">Get Started</a>
+        </li>
       </ul>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
         <span></span><span></span><span></span>
@@ -49,28 +52,19 @@
   <section class="hero" id="hero">
     <div class="container">
       <div class="hero-content">
-        <span class="hero-label">Now deploying across the UK</span>
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Now deploying across the UK
+        </div>
         <h1>Your AI employee, <span class="highlight">physically on-site</span></h1>
-        <p class="hero-description">We deploy a dedicated Mac Mini AI station to your office. Local processing. Zero cloud dependence. Full control.</p>
+        <p class="hero-description">We deploy a dedicated Mac Mini AI station to your office. Local processing. Zero cloud dependence. Full control of your data.</p>
         <div class="hero-ctas">
-          <a href="contact.html" class="btn btn-primary btn-lg">Book a Demo</a>
+          <a href="contact.html" class="btn btn-dark btn-lg">Book a Call &rarr;</a>
           <a href="#how-it-works" class="btn btn-secondary btn-lg">See How It Works</a>
         </div>
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <div class="hero-stat-number">48hrs</div>
-            <div class="hero-stat-label">Deployment time</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-number">100%</div>
-            <div class="hero-stat-label">On-premise</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-number">0</div>
-            <div class="hero-stat-label">Cloud dependence</div>
-          </div>
-        </div>
       </div>
+
+      <!-- Dashboard Mockup -->
       <div class="hero-visual">
         <div class="hero-floating-badge">
           <div class="badge-icon">
@@ -83,200 +77,282 @@
             <span class="hero-dashboard-dot red"></span>
             <span class="hero-dashboard-dot yellow"></span>
             <span class="hero-dashboard-dot green"></span>
-            <span class="hero-dashboard-title">Station Command - Kingsbrook M&A</span>
+            <span class="hero-dashboard-title">Station Command — Kingsbrook M&A</span>
           </div>
-          <div class="hero-metric-row">
-            <span class="hero-metric-label">
-              <i data-lucide="users" style="width:16px;height:16px"></i>
-              Leads Screened Today
-            </span>
-            <span class="hero-metric-value green">487</span>
-          </div>
-          <div class="hero-metric-row">
-            <span class="hero-metric-label">
-              <i data-lucide="target" style="width:16px;height:16px"></i>
-              Qualified This Week
-            </span>
-            <span class="hero-metric-value blue">12</span>
-          </div>
-          <div class="hero-metric-row">
-            <span class="hero-metric-label">
-              <i data-lucide="clock" style="width:16px;height:16px"></i>
-              Hours Automated
-            </span>
-            <span class="hero-metric-value amber">2,400+</span>
-          </div>
-          <div class="hero-metric-row">
-            <span class="hero-metric-label">
-              <i data-lucide="cloud-off" style="width:16px;height:16px"></i>
-              Data Sent to Cloud
-            </span>
-            <span class="hero-metric-value green">None</span>
-          </div>
-          <div class="hero-status-bar">
-            <span class="status-dot"></span>
-            All systems operational - Running Llama 3.1 locally
+          <div class="hero-dashboard-body">
+            <div class="hero-metric-grid">
+              <div class="hero-metric-card">
+                <div class="hero-metric-label">
+                  <i data-lucide="users" style="width:14px;height:14px"></i>
+                  Leads Screened
+                </div>
+                <div class="hero-metric-value">487</div>
+              </div>
+              <div class="hero-metric-card">
+                <div class="hero-metric-label">
+                  <i data-lucide="target" style="width:14px;height:14px"></i>
+                  Qualified Weekly
+                </div>
+                <div class="hero-metric-value green">12</div>
+              </div>
+              <div class="hero-metric-card">
+                <div class="hero-metric-label">
+                  <i data-lucide="clock" style="width:14px;height:14px"></i>
+                  Hours Automated
+                </div>
+                <div class="hero-metric-value">2,400+</div>
+              </div>
+              <div class="hero-metric-card">
+                <div class="hero-metric-label">
+                  <i data-lucide="cloud-off" style="width:14px;height:14px"></i>
+                  Cloud Data
+                </div>
+                <div class="hero-metric-value green">None</div>
+              </div>
+            </div>
+            <div class="hero-status-bar">
+              <span class="status-dot"></span>
+              All systems operational — Running Llama 3.1 locally
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== TRUST BAR ===== -->
-  <section class="trust-bar">
+  <!-- ===== STATS (Pain Points) ===== -->
+  <section class="stats-section">
     <div class="container">
-      <div class="trust-items reveal-stagger">
-        <div class="trust-item">
-          <div class="trust-item-icon">
-            <i data-lucide="shield" style="width:20px;height:20px"></i>
+      <div class="stats-grid reveal-stagger">
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon">
+              <i data-lucide="user-x" style="width:16px;height:16px"></i>
+            </div>
+            <span class="stat-card-label">Lost Leads</span>
           </div>
-          <span class="trust-item-text">ICO Registered</span>
+          <div class="stat-card-number">67%</div>
+          <p class="stat-card-description">of leads go cold without timely, multi-touch follow-up</p>
+          <div class="stat-card-visual">
+            <span class="stat-bar filled" style="height:80%"></span>
+            <span class="stat-bar filled" style="height:70%"></span>
+            <span class="stat-bar filled" style="height:90%"></span>
+            <span class="stat-bar filled" style="height:60%"></span>
+            <span class="stat-bar filled" style="height:75%"></span>
+            <span class="stat-bar filled" style="height:85%"></span>
+            <span class="stat-bar filled" style="height:50%"></span>
+            <span class="stat-bar dark" style="height:40%"></span>
+            <span class="stat-bar dark" style="height:30%"></span>
+            <span class="stat-bar dark" style="height:20%"></span>
+          </div>
         </div>
-        <div class="trust-item">
-          <div class="trust-item-icon">
-            <i data-lucide="map-pin" style="width:20px;height:20px"></i>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon">
+              <i data-lucide="layers" style="width:16px;height:16px"></i>
+            </div>
+            <span class="stat-card-label">Tool Chaos</span>
           </div>
-          <span class="trust-item-text">UK-Based</span>
+          <div class="stat-card-number">12+</div>
+          <p class="stat-card-description">disconnected tools that don't share data or context</p>
+          <div class="stat-card-visual">
+            <span class="stat-bar filled" style="height:30%"></span>
+            <span class="stat-bar filled" style="height:40%"></span>
+            <span class="stat-bar filled" style="height:45%"></span>
+            <span class="stat-bar filled" style="height:55%"></span>
+            <span class="stat-bar filled" style="height:60%"></span>
+            <span class="stat-bar filled" style="height:70%"></span>
+            <span class="stat-bar filled" style="height:75%"></span>
+            <span class="stat-bar filled" style="height:85%"></span>
+            <span class="stat-bar filled" style="height:90%"></span>
+            <span class="stat-bar filled" style="height:100%"></span>
+          </div>
         </div>
-        <div class="trust-item">
-          <div class="trust-item-icon">
-            <i data-lucide="zap" style="width:20px;height:20px"></i>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon">
+              <i data-lucide="alert-circle" style="width:16px;height:16px"></i>
+            </div>
+            <span class="stat-card-label">Wasted Hours</span>
           </div>
-          <span class="trust-item-text">Deployed in 48 Hours</span>
-        </div>
-        <div class="trust-item">
-          <div class="trust-item-icon">
-            <i data-lucide="hard-drive" style="width:20px;height:20px"></i>
+          <div class="stat-card-number">40hrs</div>
+          <p class="stat-card-description">per week spent on tasks an AI station handles automatically</p>
+          <div class="stat-card-visual">
+            <span class="stat-bar filled" style="height:100%"></span>
+            <span class="stat-bar filled" style="height:95%"></span>
+            <span class="stat-bar filled" style="height:85%"></span>
+            <span class="stat-bar filled" style="height:90%"></span>
+            <span class="stat-bar filled" style="height:80%"></span>
+            <span class="stat-bar filled" style="height:70%"></span>
+            <span class="stat-bar filled" style="height:75%"></span>
+            <span class="stat-bar filled" style="height:60%"></span>
+            <span class="stat-bar dark" style="height:40%"></span>
+            <span class="stat-bar dark" style="height:25%"></span>
           </div>
-          <span class="trust-item-text">On-Premise Data</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PROBLEM SECTION ===== -->
-  <section class="problem-section" id="problem">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-label">The Problem</span>
-        <h2 class="section-title">Everyone's talking about AI. Few are actually using it.</h2>
-        <p class="section-subtitle">Most agencies sell cloud subscriptions and complexity. We ship hardware that works offline. Your data never leaves your building. You own the system.</p>
-      </div>
-      <div class="problem-grid reveal-stagger">
-        <div class="problem-card">
-          <div class="problem-card-icon">
-            <i data-lucide="cloud" style="width:24px;height:24px"></i>
-          </div>
-          <h3>Cloud AI = your data on someone else's servers</h3>
-          <p>Every query, every client name, every document - sent to third-party servers you don't control.</p>
-        </div>
-        <div class="problem-card">
-          <div class="problem-card-icon">
-            <i data-lucide="trending-up" style="width:24px;height:24px"></i>
-          </div>
-          <h3>SaaS subscriptions = costs that keep climbing</h3>
-          <p>Per-seat pricing, per-query charges, usage caps. The bill grows but the value doesn't.</p>
-        </div>
-        <div class="problem-card">
-          <div class="problem-card-icon">
-            <i data-lucide="puzzle" style="width:24px;height:24px"></i>
-          </div>
-          <h3>Complexity = systems your team never adopts</h3>
-          <p>Overcomplicated dashboards, weeks of onboarding, tools that sit unused after month one.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SOLUTION SECTION ===== -->
-  <section class="solution-section" id="solution">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-label">The Solution</span>
-        <h2 class="section-title">Manager OS: AI that shows up for work</h2>
-        <p class="section-subtitle">A physical AI station that lives in your office, processes locally, and integrates with your existing tools.</p>
-      </div>
-      <div class="solution-grid reveal-stagger">
-        <div class="solution-card">
-          <div class="solution-card-icon">
-            <i data-lucide="server" style="width:24px;height:24px"></i>
-          </div>
-          <h3>Physical Hardware</h3>
-          <p>Mac Mini delivered to your office. Real hardware you can see and touch. No virtual machines, no shared instances.</p>
-        </div>
-        <div class="solution-card">
-          <div class="solution-card-icon">
-            <i data-lucide="cpu" style="width:24px;height:24px"></i>
-          </div>
-          <h3>Local AI</h3>
-          <p>Llama 3.1 running on-device. No API calls to OpenAI. No data sent anywhere. Full processing power under your roof.</p>
-        </div>
-        <div class="solution-card">
-          <div class="solution-card-icon">
-            <i data-lucide="plug" style="width:24px;height:24px"></i>
-          </div>
-          <h3>Full Integration</h3>
-          <p>Connects to your CRM, email, calendar, and existing tools. Works with GoHighLevel, Slack, and more.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== USE CASES ===== -->
-  <section class="usecases-section" id="use-cases">
+  <!-- Scroll Cue + Diamond Divider -->
+  <div class="flow-line-section" style="background:var(--off-white);padding:0">
+    <div class="scroll-cue">
+      <div class="scroll-cue-mouse"></div>
+      <span class="scroll-cue-arrow">▼</span>
+    </div>
+  </div>
+  <div class="diamond-divider"></div>
+
+  <!-- ===== PLATFORM (Features) ===== -->
+  <section class="platform-section" id="platform">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">Capabilities</span>
-        <h2 class="section-title">What does your operator actually do?</h2>
-        <p class="section-subtitle">Your AI station handles the work your team does manually - every day, without breaks.</p>
+        <div class="section-badge">
+          <i data-lucide="cpu" style="width:14px;height:14px"></i>
+          PLATFORM
+        </div>
+        <h2 class="section-title">The complete <span class="highlight">on-premise</span> AI platform</h2>
+        <p class="section-subtitle">Physical hardware. Local AI models. Full integration with your existing tools. Everything runs inside your office.</p>
       </div>
-      <div class="usecases-grid reveal-stagger">
-        <div class="usecase-card">
-          <div class="usecase-card-icon">
-            <i data-lucide="filter" style="width:24px;height:24px"></i>
+
+      <div class="feature-grid reveal-stagger">
+        <!-- Local AI -->
+        <div class="feature-card">
+          <span class="feature-card-category">On-Premise AI</span>
+          <div class="feature-card-title-row">
+            <div class="feature-card-title-left">
+              <div class="feature-card-icon">
+                <i data-lucide="brain" style="width:18px;height:18px"></i>
+              </div>
+              <h3>Local AI Engine</h3>
+            </div>
+            <span class="feature-card-stat">Zero cloud</span>
           </div>
-          <div>
-            <h3>Lead Qualification</h3>
-            <p>Auto-screen prospects, score against your criteria, draft personalised outreach. 487 companies screened daily.</p>
-          </div>
-        </div>
-        <div class="usecase-card">
-          <div class="usecase-card-icon">
-            <i data-lucide="file-text" style="width:24px;height:24px"></i>
-          </div>
-          <div>
-            <h3>Document Processing</h3>
-            <p>Read contracts, extract data, update your systems. No manual data entry, no missed details.</p>
-          </div>
-        </div>
-        <div class="usecase-card">
-          <div class="usecase-card-icon">
-            <i data-lucide="bar-chart-3" style="width:24px;height:24px"></i>
-          </div>
-          <div>
-            <h3>Client Reporting</h3>
-            <p>Generate weekly reports, track KPIs, alert on anomalies. Your team sees the insights, not the spreadsheets.</p>
+          <p>Llama 3.1 running on-device. No API calls, no data sent to third parties. Full processing power under your roof.</p>
+          <div class="feature-tags">
+            <span class="feature-tag">Llama 3.1</span>
+            <span class="feature-tag">On-Device</span>
+            <span class="feature-tag">Private</span>
           </div>
         </div>
-        <div class="usecase-card">
-          <div class="usecase-card-icon">
-            <i data-lucide="calendar" style="width:24px;height:24px"></i>
+
+        <!-- Lead Qualification -->
+        <div class="feature-card">
+          <span class="feature-card-category">Automation</span>
+          <div class="feature-card-title-row">
+            <div class="feature-card-title-left">
+              <div class="feature-card-icon">
+                <i data-lucide="filter" style="width:18px;height:18px"></i>
+              </div>
+              <h3>Lead Qualification</h3>
+            </div>
+            <span class="feature-card-stat">487/day</span>
           </div>
-          <div>
-            <h3>Meeting Prep</h3>
-            <p>Research attendees, summarise past interactions, draft agendas. Walk into every meeting fully briefed.</p>
+          <p>Auto-screen prospects, score against your criteria, draft personalised outreach — all running locally.</p>
+          <div class="feature-tags">
+            <span class="feature-tag">Screening</span>
+            <span class="feature-tag">Scoring</span>
+            <span class="feature-tag">Outreach</span>
+          </div>
+        </div>
+
+        <!-- Document Processing -->
+        <div class="feature-card">
+          <span class="feature-card-category">Data Management</span>
+          <div class="feature-card-title-row">
+            <div class="feature-card-title-left">
+              <div class="feature-card-icon">
+                <i data-lucide="file-text" style="width:18px;height:18px"></i>
+              </div>
+              <h3>Document Vault</h3>
+            </div>
+            <span class="feature-card-stat">Unlimited</span>
+          </div>
+          <p>Read contracts, extract data, update your systems. No manual data entry, no missed details.</p>
+          <div class="feature-tags">
+            <span class="feature-tag">Contracts</span>
+            <span class="feature-tag">Extraction</span>
+            <span class="feature-tag">Reports</span>
+          </div>
+        </div>
+
+        <!-- Integrations -->
+        <div class="feature-card">
+          <span class="feature-card-category">Connectivity</span>
+          <div class="feature-card-title-row">
+            <div class="feature-card-title-left">
+              <div class="feature-card-icon">
+                <i data-lucide="plug" style="width:18px;height:18px"></i>
+              </div>
+              <h3>Integrations</h3>
+            </div>
+            <span class="feature-card-stat">20+ tools</span>
+          </div>
+          <p>Connect to your CRM, email, calendar, and existing tools. GoHighLevel, Slack, and more.</p>
+          <div class="feature-tags">
+            <span class="feature-tag">CRM</span>
+            <span class="feature-tag">Calendar</span>
+            <span class="feature-tag">Email</span>
+          </div>
+        </div>
+
+        <!-- Client Reporting -->
+        <div class="feature-card">
+          <span class="feature-card-category">Intelligence</span>
+          <div class="feature-card-title-row">
+            <div class="feature-card-title-left">
+              <div class="feature-card-icon">
+                <i data-lucide="bar-chart-3" style="width:18px;height:18px"></i>
+              </div>
+              <h3>Analytics</h3>
+            </div>
+            <span class="feature-card-stat">Real-time</span>
+          </div>
+          <p>Patterns, trends, and anomalies detected across all your data. Weekly reports generated automatically.</p>
+          <div class="feature-tags">
+            <span class="feature-tag">Trends</span>
+            <span class="feature-tag">KPIs</span>
+            <span class="feature-tag">Alerts</span>
+          </div>
+        </div>
+
+        <!-- Meeting Prep -->
+        <div class="feature-card">
+          <span class="feature-card-category">Automation</span>
+          <div class="feature-card-title-row">
+            <div class="feature-card-title-left">
+              <div class="feature-card-icon">
+                <i data-lucide="calendar" style="width:18px;height:18px"></i>
+              </div>
+              <h3>Meeting Prep</h3>
+            </div>
+            <span class="feature-card-stat">80% time saved</span>
+          </div>
+          <p>Research attendees, summarise past interactions, draft agendas. Walk in fully briefed.</p>
+          <div class="feature-tags">
+            <span class="feature-tag">Research</span>
+            <span class="feature-tag">Summaries</span>
+            <span class="feature-tag">Agendas</span>
           </div>
         </div>
       </div>
+
+      <p class="platform-summary reveal">All features. One platform. Zero cloud dependency.</p>
     </div>
   </section>
+
+  <!-- Diamond Divider -->
+  <div class="diamond-divider"></div>
 
   <!-- ===== HOW IT WORKS ===== -->
   <section class="howitworks-section" id="how-it-works">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">Process</span>
-        <h2 class="section-title">Deployed in 48 hours. Yours forever.</h2>
+        <div class="section-badge">
+          <i data-lucide="git-branch" style="width:14px;height:14px"></i>
+          PROCESS
+        </div>
+        <h2 class="section-title">Deployed in <span class="highlight">48 hours.</span> Yours forever.</h2>
         <p class="section-subtitle">From first call to fully operational AI station in your office.</p>
       </div>
       <div class="steps-grid reveal-stagger">
@@ -293,7 +369,7 @@
         <div class="step-card">
           <div class="step-number">3</div>
           <h3>On-Site Deployment</h3>
-          <p>Hardware delivered to your office, plugged in, and tested. Same day.</p>
+          <p>Hardware delivered, plugged in, and tested in your office. Same day.</p>
         </div>
         <div class="step-card">
           <div class="step-number">4</div>
@@ -304,16 +380,139 @@
     </div>
   </section>
 
+  <!-- Scroll Cue + Diamond -->
+  <div class="flow-line-section" style="background:var(--off-white);padding:0">
+    <div class="scroll-cue">
+      <div class="scroll-cue-mouse"></div>
+      <span class="scroll-cue-arrow">▼</span>
+    </div>
+  </div>
+  <div class="diamond-divider"></div>
+
+  <!-- ===== SOLUTIONS (What We Build) ===== -->
+  <section class="solutions-section" id="solutions">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-badge">
+          <i data-lucide="layout-grid" style="width:14px;height:14px"></i>
+          WHAT WE BUILD
+        </div>
+        <h2 class="section-title"><span class="highlight">Solutions</span> that deliver</h2>
+        <p class="section-subtitle">AI systems built for your specific business needs</p>
+      </div>
+
+      <div class="solutions-grid reveal-stagger">
+        <!-- Lead Generation -->
+        <div class="solution-card">
+          <div class="solution-card-preview">
+            <div class="solution-card-preview-inner">
+              <div class="preview-line short"></div>
+              <div class="preview-line medium"></div>
+              <div class="preview-line accent"></div>
+              <div class="preview-line" style="width:70%"></div>
+            </div>
+          </div>
+          <div class="solution-card-body">
+            <div class="solution-card-meta">
+              <span class="solution-card-tag">SMB</span>
+              <span class="solution-card-tag">✦ 2–3 weeks</span>
+            </div>
+            <h3>Lead Generation</h3>
+            <p>Capture and qualify leads instantly</p>
+            <ul class="solution-card-features">
+              <li>Form capture</li>
+              <li>Lead scoring</li>
+              <li>CRM sync</li>
+            </ul>
+            <div class="solution-card-tech">
+              <span class="tech-badge">GoHighLevel</span>
+              <span class="tech-badge">Zapier</span>
+              <span class="tech-badge">Slack</span>
+            </div>
+            <a href="contact.html" class="btn btn-dark btn-full">Learn More</a>
+          </div>
+        </div>
+
+        <!-- Document Processing -->
+        <div class="solution-card">
+          <div class="solution-card-preview">
+            <div class="solution-card-preview-inner">
+              <div class="preview-line accent" style="width:50%"></div>
+              <div class="preview-line medium"></div>
+              <div class="preview-line short"></div>
+              <div class="preview-line" style="width:90%"></div>
+            </div>
+          </div>
+          <div class="solution-card-body">
+            <div class="solution-card-meta">
+              <span class="solution-card-tag">Enterprise</span>
+              <span class="solution-card-tag">✦ 2–4 weeks</span>
+            </div>
+            <h3>Document Processing</h3>
+            <p>Extract, analyse, and act on your documents</p>
+            <ul class="solution-card-features">
+              <li>Contract analysis</li>
+              <li>Data extraction</li>
+              <li>Automated filing</li>
+            </ul>
+            <div class="solution-card-tech">
+              <span class="tech-badge">Llama 3.1</span>
+              <span class="tech-badge">Local Storage</span>
+            </div>
+            <a href="contact.html" class="btn btn-dark btn-full">Learn More</a>
+          </div>
+        </div>
+
+        <!-- Client Reporting -->
+        <div class="solution-card">
+          <div class="solution-card-preview">
+            <div class="solution-card-preview-inner">
+              <div class="preview-line" style="width:75%"></div>
+              <div class="preview-line accent" style="width:35%"></div>
+              <div class="preview-line medium"></div>
+              <div class="preview-line short"></div>
+            </div>
+          </div>
+          <div class="solution-card-body">
+            <div class="solution-card-meta">
+              <span class="solution-card-tag">SMB</span>
+              <span class="solution-card-tag">✦ 1–2 weeks</span>
+            </div>
+            <h3>Client Reporting</h3>
+            <p>Automated weekly reports and KPI tracking</p>
+            <ul class="solution-card-features">
+              <li>Weekly reports</li>
+              <li>KPI dashboards</li>
+              <li>Anomaly alerts</li>
+            </ul>
+            <div class="solution-card-tech">
+              <span class="tech-badge">Analytics</span>
+              <span class="tech-badge">Email</span>
+              <span class="tech-badge">Slack</span>
+            </div>
+            <a href="contact.html" class="btn btn-dark btn-full">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diamond Divider -->
+  <div class="diamond-divider"></div>
+
   <!-- ===== SOCIAL PROOF ===== -->
   <section class="proof-section" id="proof">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">Results</span>
-        <h2 class="section-title">Already running for UK businesses</h2>
+        <div class="section-badge">
+          <i data-lucide="award" style="width:14px;height:14px"></i>
+          RESULTS
+        </div>
+        <h2 class="section-title">Already running for <span class="highlight">UK businesses</span></h2>
       </div>
       <div class="proof-card reveal">
-        <p class="proof-quote">487 companies screened daily. 12 qualified leads per week. Zero data leaves our office.</p>
-        <p class="proof-author">Kingsbrook M&A - Pilot Partner</p>
+        <p class="proof-quote">"487 companies screened daily. 12 qualified leads per week. Zero data leaves our office."</p>
+        <p class="proof-author">Kingsbrook M&A — Pilot Partner</p>
       </div>
       <div class="proof-stats reveal-stagger">
         <div class="proof-stat">
@@ -332,18 +531,25 @@
     </div>
   </section>
 
+  <!-- Diamond Divider -->
+  <div class="diamond-divider"></div>
+
   <!-- ===== PRICING TEASER ===== -->
   <section class="pricing-section" id="pricing">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">Pricing</span>
-        <h2 class="section-title">Three ways to work with us</h2>
+        <div class="section-badge">
+          <i data-lucide="credit-card" style="width:14px;height:14px"></i>
+          PRICING
+        </div>
+        <h2 class="section-title">Straightforward pricing. <span class="highlight">No surprises.</span></h2>
         <p class="section-subtitle">All plans include hardware, setup, and 30-day guarantee.</p>
       </div>
       <div class="pricing-grid reveal-stagger">
         <!-- Starter -->
         <div class="pricing-card">
           <div class="pricing-card-name">Starter</div>
+          <p class="pricing-card-desc">Perfect for solo operators testing AI</p>
           <div class="pricing-card-price">
             <span class="amount">&pound;400</span>
             <span class="period">/month</span>
@@ -355,15 +561,13 @@
             <li>GoHighLevel integration</li>
             <li>Email support</li>
           </ul>
-          <p class="pricing-card-best">Best for: Solo operators testing AI</p>
-          <div class="form-submit" style="margin-top: 1.5rem">
-            <a href="contact.html" class="btn btn-secondary" style="width:100%;justify-content:center">Get Started</a>
-          </div>
+          <a href="contact.html" class="btn btn-secondary btn-full">Get Started</a>
         </div>
         <!-- Growth -->
         <div class="pricing-card popular">
-          <div class="pricing-badge">Popular</div>
+          <div class="pricing-badge">Most Popular</div>
           <div class="pricing-card-name">Growth</div>
+          <p class="pricing-card-desc">For teams automating serious volume</p>
           <div class="pricing-card-price">
             <span class="amount">&pound;800</span>
             <span class="period">/month</span>
@@ -376,14 +580,12 @@
             <li>Voice agent (VAPI.ai)</li>
             <li>Priority support + remote monitoring</li>
           </ul>
-          <p class="pricing-card-best">Best for: Teams automating serious volume</p>
-          <div class="form-submit" style="margin-top: 1.5rem">
-            <a href="contact.html" class="btn btn-primary" style="width:100%;justify-content:center">Get Started</a>
-          </div>
+          <a href="contact.html" class="btn btn-primary btn-full">Get Started</a>
         </div>
         <!-- Scale -->
         <div class="pricing-card">
           <div class="pricing-card-name">Scale</div>
+          <p class="pricing-card-desc">For multi-site operations</p>
           <div class="pricing-card-price">
             <span class="amount">&pound;1,200</span>
             <span class="period">/month</span>
@@ -397,21 +599,24 @@
             <li>Dedicated account manager</li>
             <li>Quarterly strategy reviews</li>
           </ul>
-          <p class="pricing-card-best">Best for: Multi-site operations</p>
-          <div class="form-submit" style="margin-top: 1.5rem">
-            <a href="contact.html" class="btn btn-secondary" style="width:100%;justify-content:center">Get Started</a>
-          </div>
+          <a href="contact.html" class="btn btn-secondary btn-full">Get Started</a>
         </div>
       </div>
-      <p class="pricing-note reveal"><a href="pricing.html"><strong>View full pricing details</strong></a></p>
+      <p class="pricing-note reveal"><a href="pricing.html"><strong>View full pricing details &rarr;</strong></a></p>
     </div>
   </section>
+
+  <!-- Diamond Divider -->
+  <div class="diamond-divider"></div>
 
   <!-- ===== FAQ ===== -->
   <section class="faq-section" id="faq">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">FAQ</span>
+        <div class="section-badge">
+          <i data-lucide="help-circle" style="width:14px;height:14px"></i>
+          FAQ
+        </div>
         <h2 class="section-title">Common questions</h2>
       </div>
       <div class="faq-list reveal">
@@ -422,7 +627,7 @@
           </button>
           <div class="faq-answer">
             <div class="faq-answer-content">
-              No. We handle the entire setup and provide hands-on training for your team. You get a simple dashboard to manage your AI - no coding required.
+              No. We handle the entire setup and provide hands-on training for your team. You get a simple dashboard to manage your AI — no coding required.
             </div>
           </div>
         </div>
@@ -459,6 +664,17 @@
             </div>
           </div>
         </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            How is this different from cloud AI tools?
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Cloud AI (like ChatGPT, Claude) sends your data to third-party servers. Manager OS runs everything locally on hardware in your office. You own it, you control it, and your data never leaves your building.
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -466,44 +682,51 @@
   <!-- ===== FINAL CTA ===== -->
   <section class="final-cta">
     <div class="container reveal">
-      <h2>Stop waiting. Start automating.</h2>
+      <h2>Stop waiting. <span class="highlight">Start automating.</span></h2>
       <p>The businesses using AI now will be the ones winning in 12 months. The gap between those using AI and those waiting is only getting wider.</p>
-      <a href="contact.html" class="btn btn-primary btn-lg">Book Your Discovery Call</a>
+      <div class="final-cta-buttons">
+        <a href="contact.html" class="btn btn-dark btn-lg">Book a Call &rarr;</a>
+        <a href="pricing.html" class="btn btn-secondary btn-lg">View Pricing</a>
+      </div>
     </div>
   </section>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-grid">
+      <div class="footer-main">
         <div class="footer-brand">
           <a href="index.html" class="nav-logo">
             <div class="logo-icon">M</div>
             Manager OS
           </a>
-          <p class="footer-tagline">Your AI employee, physically on-site. Local hardware. Local AI. Full privacy.</p>
+          <p class="footer-tagline">We deploy physical AI stations to UK businesses. Local hardware, local AI, full privacy. Your data never leaves your building.</p>
+          <div class="footer-badges">
+            <span class="footer-badge">
+              <i data-lucide="shield-check" style="width:12px;height:12px"></i>
+              ICO Registered
+            </span>
+            <span class="footer-badge">
+              <i data-lucide="zap" style="width:12px;height:12px"></i>
+              48hr Deployment
+            </span>
+          </div>
         </div>
         <div class="footer-column">
-          <h4>Pages</h4>
+          <h4>Product</h4>
           <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#platform">Features</a></li>
             <li><a href="pricing.html">Pricing</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="contact.html">Book a Call</a></li>
           </ul>
         </div>
         <div class="footer-column">
           <h4>Company</h4>
           <ul class="footer-links">
+            <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
-            <li><a href="contact.html">Book a Demo</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h4>Contact</h4>
-          <ul class="footer-links">
             <li><a href="mailto:hello@manageros.co.uk">hello@manageros.co.uk</a></li>
-            <li><span>UK-Based</span></li>
           </ul>
         </div>
       </div>
@@ -526,10 +749,10 @@
   <!-- Scripts -->
   <script src="scripts/main.js"></script>
   <script>
-    // Initialize Lucide icons
     if (typeof lucide !== 'undefined') {
       lucide.createIcons();
     }
   </script>
+
 </body>
 </html>
