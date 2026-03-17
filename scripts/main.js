@@ -587,12 +587,12 @@ function animateDocBurst() {
 
   // Spawn positions in a fan around the folder
   const positions = [
-    { x: 50,  y: 30 },
-    { x: 100, y: 15 },
-    { x: 200, y: 15 },
-    { x: 250, y: 30 },
-    { x: 60,  y: 120 },
-    { x: 240, y: 120 },
+    { x: 70,  y: 35 },
+    { x: 110, y: 25 },
+    { x: 195, y: 25 },
+    { x: 235, y: 35 },
+    { x: 80,  y: 125 },
+    { x: 225, y: 125 },
   ];
 
   for (let i = 0; i < docCount; i++) {
@@ -693,17 +693,17 @@ function animateNodeTree() {
   const sourcesGroup = svg.querySelector('.report-sources');
   const ns = 'http://www.w3.org/2000/svg';
 
-  const reportCenter = { x: 150, y: 140 };
+  const reportCenter = { x: 150, y: 145 };
 
   // 7 data sources arranged in an arc at the top
   const sources = [
-    { x: 30,  y: 35, label: 'CRM',   icon: 'database' },
-    { x: 75,  y: 18, label: 'Email',  icon: 'envelope' },
-    { x: 120, y: 10, label: 'Slack',  icon: 'chat' },
-    { x: 165, y: 8,  label: 'API',    icon: 'globe' },
-    { x: 210, y: 15, label: 'Data',   icon: 'chart' },
-    { x: 255, y: 28, label: 'KPIs',   icon: 'gauge' },
-    { x: 285, y: 50, label: 'Logs',   icon: 'list' },
+    { x: 40,  y: 50, label: 'CRM',   icon: 'database' },
+    { x: 80,  y: 35, label: 'Email',  icon: 'envelope' },
+    { x: 120, y: 27, label: 'Slack',  icon: 'chat' },
+    { x: 160, y: 25, label: 'API',    icon: 'globe' },
+    { x: 200, y: 30, label: 'Data',   icon: 'chart' },
+    { x: 240, y: 42, label: 'KPIs',   icon: 'gauge' },
+    { x: 270, y: 60, label: 'Logs',   icon: 'list' },
   ];
 
   // SVG icon paths for each type
