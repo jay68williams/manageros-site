@@ -3,6 +3,7 @@
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
   initNavToggle();
   initFaqAccordion();
   initScrollReveal();
@@ -10,6 +11,38 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initContactForm();
 });
+
+/* --- Theme Toggle (Day/Night Mode) --- */
+function initThemeToggle() {
+  const toggle = document.getElementById('themeToggle');
+  if (!toggle) return;
+
+  // Check saved preference or system preference
+  const saved = localStorage.getItem('theme');
+  if (saved) {
+    document.documentElement.setAttribute('data-theme', saved);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+
+  toggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+
+    if (next === 'light') {
+      document.documentElement.removeAttribute('data-theme');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+
+    localStorage.setItem('theme', next);
+
+    // Re-render lucide icons for the toggle
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  });
+}
 
 /* --- Mobile Nav Toggle --- */
 function initNavToggle() {

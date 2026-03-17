@@ -2128,3 +2128,434 @@ section {
     gap: 1.5rem;
   }
 }
+
+/* ============================================
+   THEME TOGGLE BUTTON
+   ============================================ */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border-grey);
+  background: var(--white);
+  cursor: pointer;
+  transition: all var(--duration) var(--ease);
+  position: relative;
+  margin-left: 0.5rem;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  border-color: var(--red);
+  background: var(--red-light);
+}
+
+.theme-icon {
+  position: absolute;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  color: var(--text-primary);
+}
+
+/* Light mode: show sun, hide moon */
+.sun-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.moon-icon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+/* Dark mode: show moon, hide sun */
+[data-theme="dark"] .sun-icon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+[data-theme="dark"] .moon-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+[data-theme="dark"] .theme-toggle {
+  border-color: #333;
+  background: #222;
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  border-color: var(--red);
+  background: rgba(194, 3, 31, 0.15);
+}
+
+[data-theme="dark"] .theme-icon {
+  color: #e5e5e5;
+}
+
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+[data-theme="dark"] {
+  --white: #0f0f0f;
+  --off-white: #141414;
+  --light-grey: #1a1a1a;
+  --border-grey: #2a2a2a;
+  --text-secondary: #9ca3af;
+  --text-tertiary: #6b7280;
+  --text-primary: #f0f0f0;
+  --black: #f0f0f0;
+  --dark-bg: #0a0a0a;
+  --dark-bg-light: #111111;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] body {
+  background: #0f0f0f;
+  color: #f0f0f0;
+}
+
+/* Navbar */
+[data-theme="dark"] .navbar {
+  background: rgba(15, 15, 15, 0.95);
+  border-bottom-color: #222;
+}
+
+[data-theme="dark"] .nav-logo {
+  color: #f0f0f0;
+}
+
+[data-theme="dark"] .logo-icon {
+  background: var(--red);
+  color: #fff;
+}
+
+[data-theme="dark"] .nav-links a {
+  color: #ccc;
+}
+
+[data-theme="dark"] .nav-links a:hover {
+  color: var(--red);
+}
+
+[data-theme="dark"] .btn-dark {
+  background: #f0f0f0;
+  color: #0f0f0f;
+}
+
+[data-theme="dark"] .btn-dark:hover {
+  background: #ddd;
+}
+
+[data-theme="dark"] .btn-secondary {
+  border-color: #333;
+  color: #ccc;
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  border-color: #555;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Section badges */
+[data-theme="dark"] .section-badge {
+  background: #1a1a1a;
+  border-color: #333;
+  color: #aaa;
+}
+
+/* Hero */
+[data-theme="dark"] .hero {
+  background: #0f0f0f;
+}
+
+[data-theme="dark"] .hero-subtitle {
+  color: #999;
+}
+
+/* Dashboard mockup */
+[data-theme="dark"] .hero-mockup-window {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .mockup-titlebar {
+  background: #1f1f1f;
+  border-bottom-color: #2a2a2a;
+  color: #777;
+}
+
+[data-theme="dark"] .mockup-body {
+  background: #1a1a1a;
+}
+
+[data-theme="dark"] .hero-metric-grid .metric-card {
+  background: #222;
+  border-color: #333;
+}
+
+[data-theme="dark"] .metric-label {
+  color: #888;
+}
+
+[data-theme="dark"] .hero-mockup-badge {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+/* Stats cards */
+[data-theme="dark"] .stat-card {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .stat-card-icon {
+  background: #222;
+}
+
+[data-theme="dark"] .stat-card-label {
+  color: #999;
+}
+
+[data-theme="dark"] .stat-card-desc {
+  color: #888;
+}
+
+/* Features */
+[data-theme="dark"] .feature-card {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .feature-card:hover {
+  border-color: #444;
+}
+
+[data-theme="dark"] .feature-category {
+  background: #222;
+  border-color: #333;
+  color: #aaa;
+}
+
+[data-theme="dark"] .feature-icon {
+  background: #222;
+}
+
+[data-theme="dark"] .feature-stat {
+  background: #222;
+  border-color: #333;
+  color: #aaa;
+}
+
+[data-theme="dark"] .feature-tag {
+  background: #222;
+  border-color: #333;
+  color: #aaa;
+}
+
+/* Flow lines */
+[data-theme="dark"] .flow-line-section::before {
+  background: #2a2a2a;
+}
+
+[data-theme="dark"] .diamond-divider::after {
+  border-color: #333;
+}
+
+/* How it works */
+[data-theme="dark"] .how-section {
+  background: #141414;
+}
+
+[data-theme="dark"] .step-number {
+  background: #1a1a1a;
+  border-color: #333;
+  color: #f0f0f0;
+}
+
+/* Solutions */
+[data-theme="dark"] .solution-card {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .solution-card:hover {
+  border-color: #444;
+}
+
+[data-theme="dark"] .solution-preview {
+  background: #222;
+  border-color: #333;
+}
+
+[data-theme="dark"] .solution-tag {
+  background: #222;
+  border-color: #333;
+  color: #aaa;
+}
+
+/* Social proof */
+[data-theme="dark"] .proof-section {
+  background: #141414;
+}
+
+[data-theme="dark"] .proof-quote-card {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+/* Pricing */
+[data-theme="dark"] .pricing-card {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .pricing-card.popular {
+  border-color: var(--red);
+}
+
+[data-theme="dark"] .pricing-card-desc,
+[data-theme="dark"] .pricing-card-setup {
+  color: #888;
+}
+
+[data-theme="dark"] .pricing-card-features li::before {
+  color: var(--red);
+}
+
+[data-theme="dark"] .pricing-card-best {
+  color: #888;
+}
+
+/* FAQ */
+[data-theme="dark"] .faq-item {
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .faq-question {
+  color: #f0f0f0;
+}
+
+[data-theme="dark"] .faq-answer-content {
+  color: #999;
+}
+
+/* Final CTA */
+[data-theme="dark"] .final-cta {
+  background: #141414;
+}
+
+/* Footer stays dark in both modes */
+
+/* About page */
+[data-theme="dark"] .about-hero {
+  background: #0f0f0f;
+}
+
+[data-theme="dark"] .story-section p {
+  color: #bbb;
+}
+
+[data-theme="dark"] .hardware-features li {
+  color: #ccc;
+}
+
+[data-theme="dark"] .hardware-visual {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .value-card {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .value-card-icon {
+  background: #222;
+}
+
+/* Contact page */
+[data-theme="dark"] .contact-hero {
+  background: #0f0f0f;
+}
+
+[data-theme="dark"] .contact-form {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group select,
+[data-theme="dark"] .form-group textarea {
+  background: #222;
+  border-color: #333;
+  color: #f0f0f0;
+}
+
+[data-theme="dark"] .form-group input:focus,
+[data-theme="dark"] .form-group select:focus,
+[data-theme="dark"] .form-group textarea:focus {
+  border-color: var(--red);
+}
+
+[data-theme="dark"] .form-group label {
+  color: #ccc;
+}
+
+[data-theme="dark"] .contact-info-card {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .contact-info-card a {
+  color: var(--red);
+}
+
+/* All plans */
+[data-theme="dark"] .all-plans-item {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .all-plans-icon {
+  background: #222;
+}
+
+/* Mobile nav */
+[data-theme="dark"] .nav-toggle span {
+  background: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+  [data-theme="dark"] .nav-links {
+    background: #0f0f0f;
+  }
+
+  [data-theme="dark"] .nav-links li {
+    border-bottom-color: #222;
+  }
+  
+  [data-theme="dark"] .mobile-cta {
+    background: rgba(15, 15, 15, 0.95);
+    border-top-color: #222;
+  }
+}
+
+/* Scroll cue */
+[data-theme="dark"] .scroll-cue-dot {
+  border-color: #555;
+}
+
+/* Mini charts */
+[data-theme="dark"] .mini-chart .bar {
+  background: #555;
+}
+
+[data-theme="dark"] .mini-chart .bar.filled {
+  background: var(--red);
+}
