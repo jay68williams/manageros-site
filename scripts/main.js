@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavScrollEffect();
   initSmoothScroll();
   initContactForm();
+  initCardAnimations();
 });
 
 /* --- Theme Toggle (Day/Night Mode) --- */
@@ -207,4 +208,247 @@ function initContactForm() {
       }, 3000);
     }
   });
+}
+
+/* ===== FEATURE CARD ANIMATIONS ===== */
+function initCardAnimations() {
+  animateChatMockup();
+  animateHorizontalBars();
+  animateVerticalBars();
+  animateChecklist();
+}
+
+/* --- 1. Chat Mockup: Typewriter effect with looping --- */
+function animateChatMockup() {
+  const mockup = document.querySelector('.chat-mockup');
+  if (!mockup) return;
+
+  const userBubble = mockup.querySelector('.chat-bubble.user');
+  const aiBubble = mockup.querySelector('.chat-bubble.ai');
+  const typing = mockup.querySelector('.chat-typing');
+  if (!userBubble || !aiBubble || !typing) return;
+
+  const userText = "What's our pipeline value this quarter?";
+  const aiFullHTML = aiBubble.innerHTML;
+  // Extract just the text content after the icon
+  const aiIcon = aiBubble.querySelector('i');
+  const aiText = "Your pipeline stands at \u00a32.4M across 47 active deals. 12 are forecast to close this month.";
+
+  function runChatLoop() {
+    // Reset all elements
+    userBubble.style.opacity = '0';
+    aiBubble.style.opacity = '0';
+    typing.style.opacity = '0';
+    userBubble.textContent = '';
+    userBubble.style.animation = 'none';
+    aiBubble.style.animation = 'none';
+    typing.style.animation = 'none';
+
+    let charIndex = 0;
+
+    // Step 1: Fade in user bubble then type
+    setTimeout(() => {
+      userBubble.style.opacity = '1';
+      userBubble.style.transition = 'opacity 0.3s';
+
+      const typeUser = setInterval(() => {
+        charIndex++;
+        userBubble.textContent = userText.slice(0, charIndex);
+        if (charIndex >= userText.length) {
+          clearInterval(typeUser);
+
+          // Step 2: Show typing indicator
+          setTimeout(() => {
+            typing.style.opacity = '1';
+            typing.style.transition = 'opacity 0.3s';
+
+            // Step 3: After typing, show AI response
+            setTimeout(() => {
+              typing.style.opacity = '0';
+
+              setTimeout(() => {
+                aiBubble.style.opacity = '1';
+                aiBubble.style.transition = 'opacity 0.3s';
+                // Rebuild AI content with icon
+                aiBubble.innerHTML = '';
+                if (aiIcon) {
+                  const iconClone = aiIcon.cloneNode(true);
+                  aiBubble.appendChild(iconClone);
+                  if (typeof lucide !== 'undefined') lucide.createIcons({ nodes: [aiBubble] });
+                }
+                const textSpan = document.createElement('span');
+                textSpan.className = 'ai-typewriter';
+                aiBubble.appendChild(textSpan);
+
+                let aiCharIndex = 0;
+                const typeAI = setInterval(() => {
+                  aiCharIndex++;
+                  textSpan.textContent = aiText.slice(0, aiCharIndex);
+                  if (aiCharIndex >= aiText.length) {
+                    clearInterval(typeAI);
+                    // Wait then loop
+                    setTimeout(runChatLoop, 3000);
+                  }
+                }, 25);
+              }, 300);
+            }, 1500);
+          }, 400);
+        }
+      }, 45);
+    }, 500);
+  }
+
+  runChatLoop();
+}
+
+/* --- 2. Horizontal Bar Chart: Sequential fill from top --- */
+function animateHorizontalBars() {
+  const chart = document.querySelector('.bar-chart-graphic');
+  if (!chart) return;
+
+  const fills = chart.querySelectorAll('.bar-fill');
+  const targets = [];
+  fills.forEach(f => {
+    targets.push(f.style.width);
+    f.style.width = '0%';
+    f.style.animation = 'none';
+    f.style.transition = 'width 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+  });
+
+  function runBarLoop() {
+    // Reset all bars
+    fills.forEach(f => { f.style.width = '0%'; });
+
+    // Fill one at a time
+    fills.forEach((fill, i) => {
+      setTimeout(() => {
+        fill.style.width = targets[i];
+      }, i * 300);
+    });
+
+    // After all filled, wait then restart
+    setTimeout(runBarLoop, fills.length * 300 + 3000);
+  }
+
+  runBarLoop();
+}
+
+/* --- 3. Vertical Bar Chart: Animate bars up one by one --- */
+function animateVerticalBars() {
+  const chart = document.querySelector('.vbar-chart-graphic');
+  if (!chart) return;
+
+  const bars = chart.querySelectorAll('.vbar');
+  const targets = [];
+  bars.forEach(b => {
+    targets.push(b.style.height);
+    b.style.height = '0%';
+    b.style.animation = 'none';
+    b.style.transition = 'height 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+  });
+
+  function runVBarLoop() {
+    // Reset all bars
+    bars.forEach(b => { b.style.height = '0%'; });
+
+    // Grow one at a time
+    bars.forEach((bar, i) => {
+      setTimeout(() => {
+        bar.style.height = targets[i];
+      }, i * 200);
+    });
+
+    // After all grown, wait then restart
+    setTimeout(runVBarLoop, bars.length * 200 + 3000);
+  }
+
+  runVBarLoop();
+}
+
+/* --- 4. Checklist: Animated cursor clicks checkboxes --- */
+function animateChecklist() {
+  const checklist = document.querySelector('.checklist-graphic');
+  if (!checklist) return;
+
+  const items = checklist.querySelectorAll('.checklist-item');
+  if (!items.length) return;
+
+  // Create cursor element
+  const cursor = document.createElement('div');
+  cursor.className = 'animated-cursor';
+  cursor.innerHTML = '<svg width="16" height="20" viewBox="0 0 16 20" fill="none"><path d="M1 1l5.5 16.5L9 12l6 2L1 1z" fill="#111" stroke="#fff" stroke-width="1.2"/></svg>';
+  checklist.style.position = 'relative';
+  cursor.style.position = 'absolute';
+  cursor.style.zIndex = '10';
+  cursor.style.opacity = '0';
+  cursor.style.pointerEvents = 'none';
+  cursor.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+  cursor.style.transform = 'translate(0, 0)';
+  checklist.appendChild(cursor);
+
+  function runChecklistLoop() {
+    // Reset all items to unchecked
+    items.forEach(item => {
+      item.classList.remove('checked');
+      const box = item.querySelector('.check-box');
+      if (box) {
+        box.classList.add('empty');
+        box.innerHTML = '';
+      }
+    });
+
+    cursor.style.opacity = '0';
+    cursor.style.left = '0px';
+    cursor.style.top = '0px';
+
+    let stepIndex = 0;
+
+    function clickNextItem() {
+      if (stepIndex >= items.length) {
+        // All checked, wait then restart
+        setTimeout(() => {
+          cursor.style.opacity = '0';
+          setTimeout(runChecklistLoop, 800);
+        }, 1500);
+        return;
+      }
+
+      const item = items[stepIndex];
+      const box = item.querySelector('.check-box');
+      if (!box) { stepIndex++; clickNextItem(); return; }
+
+      // Get box position relative to checklist
+      const checklistRect = checklist.getBoundingClientRect();
+      const boxRect = box.getBoundingClientRect();
+      const targetX = boxRect.left - checklistRect.left + boxRect.width / 2;
+      const targetY = boxRect.top - checklistRect.top + boxRect.height / 2;
+
+      // Move cursor to checkbox
+      cursor.style.opacity = '1';
+      cursor.style.left = targetX + 'px';
+      cursor.style.top = targetY + 'px';
+
+      // Click after arriving
+      setTimeout(() => {
+        // Scale cursor for click effect
+        cursor.style.transform = 'scale(0.85)';
+
+        setTimeout(() => {
+          cursor.style.transform = 'scale(1)';
+          // Check the item
+          item.classList.add('checked');
+          box.classList.remove('empty');
+          box.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+          stepIndex++;
+          setTimeout(clickNextItem, 600);
+        }, 150);
+      }, 700);
+    }
+
+    // Start after a brief delay
+    setTimeout(clickNextItem, 800);
+  }
+
+  runChecklistLoop();
 }

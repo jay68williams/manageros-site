@@ -1072,6 +1072,34 @@ section {
   color: var(--cherry-red);
 }
 
+/* More badge for integrations */
+.integration-icon-item.more-badge {
+  background: var(--cherry-red);
+  border-color: var(--cherry-red);
+}
+
+.integration-icon-item.more-badge span {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.integration-icon-item.more-badge:hover {
+  border-color: var(--cherry-red);
+  transform: translateY(-2px);
+}
+
+/* Animated cursor for checklist */
+.animated-cursor {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+/* AI typewriter span */
+.ai-typewriter {
+  display: inline;
+}
+
 /* --- Vertical Bar Chart --- */
 .vbar-chart-graphic {
   padding: 0.75rem 0.75rem 0.5rem;
