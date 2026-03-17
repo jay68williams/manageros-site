@@ -458,7 +458,7 @@ function animateChecklist() {
 
 /* ===== SOLUTION CARD ANIMATIONS ===== */
 
-/* --- Lead Generation: Profile network animation --- */
+/* --- Lead Generation: Network with growing lines --- */
 function animateLeadNetwork() {
   const container = document.getElementById('lead-gen-anim');
   if (!container) return;
@@ -466,341 +466,385 @@ function animateLeadNetwork() {
   const linesGroup = svg.querySelector('.network-lines');
   const nodesGroup = svg.querySelector('.network-nodes');
   const ns = 'http://www.w3.org/2000/svg';
-  const cx = 150, cy = 90, radius = 65;
+  const cx = 150, cy = 90, radius = 68;
   const nodeCount = 10;
-  const nodePositions = [];
+  const nodes = [];
 
-  // Create 10 outer profile nodes
   for (let i = 0; i < nodeCount; i++) {
     const angle = (i / nodeCount) * Math.PI * 2 - Math.PI / 2;
     const nx = cx + Math.cos(angle) * radius;
     const ny = cy + Math.sin(angle) * radius;
-    nodePositions.push({ x: nx, y: ny });
 
-    // Node circle
-    const circle = document.createElementNS(ns, 'circle');
-    circle.setAttribute('cx', nx);
-    circle.setAttribute('cy', ny);
-    circle.setAttribute('r', '9');
-    circle.setAttribute('fill', 'var(--light-grey)');
-    circle.setAttribute('stroke', 'var(--border-grey)');
-    circle.setAttribute('stroke-width', '1');
-    circle.setAttribute('opacity', '0');
-    circle.classList.add('net-node');
-    nodesGroup.appendChild(circle);
+    const g = document.createElementNS(ns, 'g');
+    g.setAttribute('opacity', '0');
 
-    // Tiny head
+    // Background circle
+    const bg = document.createElementNS(ns, 'circle');
+    bg.setAttribute('cx', nx);
+    bg.setAttribute('cy', ny);
+    bg.setAttribute('r', '12');
+    bg.setAttribute('fill', 'var(--cherry-red)');
+    bg.setAttribute('opacity', '0.06');
+    g.appendChild(bg);
+
+    // Head
     const head = document.createElementNS(ns, 'circle');
     head.setAttribute('cx', nx);
-    head.setAttribute('cy', ny - 2);
-    head.setAttribute('r', '3');
+    head.setAttribute('cy', ny - 3);
+    head.setAttribute('r', '4');
     head.setAttribute('fill', 'none');
-    head.setAttribute('stroke', 'var(--text-secondary)');
-    head.setAttribute('stroke-width', '1');
-    head.setAttribute('opacity', '0');
-    head.classList.add('net-node');
-    nodesGroup.appendChild(head);
+    head.setAttribute('stroke', 'var(--cherry-red)');
+    head.setAttribute('stroke-width', '1.3');
+    head.setAttribute('stroke-linecap', 'round');
+    g.appendChild(head);
 
-    // Tiny body arc
-    const body = document.createElementNS(ns, 'path');
-    body.setAttribute('d', `M${nx - 4} ${ny + 4} a4 3 0 0 1 8 0`);
-    body.setAttribute('fill', 'none');
-    body.setAttribute('stroke', 'var(--text-secondary)');
-    body.setAttribute('stroke-width', '1');
-    body.setAttribute('opacity', '0');
-    body.classList.add('net-node');
-    nodesGroup.appendChild(body);
+    // Shoulders
+    const shoulders = document.createElementNS(ns, 'path');
+    shoulders.setAttribute('d', `M${nx - 6} ${ny + 6} a6 5 0 0 1 12 0`);
+    shoulders.setAttribute('fill', 'none');
+    shoulders.setAttribute('stroke', 'var(--cherry-red)');
+    shoulders.setAttribute('stroke-width', '1.3');
+    shoulders.setAttribute('stroke-linecap', 'round');
+    g.appendChild(shoulders);
+
+    nodesGroup.appendChild(g);
+    nodes.push({ x: nx, y: ny, el: g });
   }
 
-  const netNodes = nodesGroup.querySelectorAll('.net-node');
-
-  function runNetworkLoop() {
-    // Reset: hide all nodes and lines
+  function runLoop() {
     linesGroup.innerHTML = '';
-    netNodes.forEach(n => { n.setAttribute('opacity', '0'); });
+    nodes.forEach(n => n.el.setAttribute('opacity', '0'));
 
     let idx = 0;
-    function showNextNode() {
+    function connectNext() {
       if (idx >= nodeCount) {
-        // All visible, pulse lines, then reset
-        setTimeout(runNetworkLoop, 3000);
+        // Hold visible, then fade and restart
+        setTimeout(() => {
+          nodes.forEach(n => {
+            n.el.style.transition = 'opacity 0.5s ease';
+            n.el.setAttribute('opacity', '0');
+          });
+          linesGroup.querySelectorAll('line').forEach(l => {
+            l.style.transition = 'opacity 0.5s ease';
+            l.setAttribute('opacity', '0');
+          });
+          setTimeout(runLoop, 1200);
+        }, 2500);
         return;
       }
-      const pos = nodePositions[idx];
 
-      // Draw line from center to node
+      const target = nodes[idx];
+
+      // Create line
       const line = document.createElementNS(ns, 'line');
       line.setAttribute('x1', cx);
       line.setAttribute('y1', cy);
       line.setAttribute('x2', cx);
       line.setAttribute('y2', cy);
       line.setAttribute('stroke', 'var(--cherry-red)');
-      line.setAttribute('stroke-width', '1');
-      line.setAttribute('opacity', '0.3');
+      line.setAttribute('stroke-width', '1.2');
+      line.setAttribute('opacity', '0.35');
+      line.setAttribute('stroke-linecap', 'round');
       linesGroup.appendChild(line);
 
-      // Animate line extending
-      let progress = 0;
-      const animLine = setInterval(() => {
-        progress += 0.08;
-        if (progress >= 1) { progress = 1; clearInterval(animLine); }
-        line.setAttribute('x2', cx + (pos.x - cx) * progress);
-        line.setAttribute('y2', cy + (pos.y - cy) * progress);
+      // Animate line growing from center to node
+      const dx = target.x - cx;
+      const dy = target.y - cy;
+      let t = 0;
+      const grow = setInterval(() => {
+        t += 0.05;
+        if (t >= 1) {
+          t = 1;
+          clearInterval(grow);
+          // Show node when line arrives
+          target.el.style.transition = 'opacity 0.3s ease';
+          target.el.setAttribute('opacity', '1');
+        }
+        line.setAttribute('x2', cx + dx * t);
+        line.setAttribute('y2', cy + dy * t);
       }, 16);
 
-      // Show node elements (3 per node: circle, head, body)
-      const start = idx * 3;
-      setTimeout(() => {
-        for (let j = start; j < start + 3 && j < netNodes.length; j++) {
-          netNodes[j].setAttribute('opacity', '1');
-          netNodes[j].style.transition = 'opacity 0.3s ease';
-        }
-      }, 200);
-
       idx++;
-      setTimeout(showNextNode, 250);
+      setTimeout(connectNext, 300);
     }
 
-    setTimeout(showNextNode, 500);
+    setTimeout(connectNext, 400);
   }
 
-  runNetworkLoop();
+  runLoop();
 }
 
-/* --- Document Processing: File burst animation --- */
+/* --- Document Processing: Folder opens and spawns documents --- */
 function animateDocBurst() {
   const container = document.getElementById('doc-process-anim');
   if (!container) return;
   const svg = container.querySelector('.solution-svg');
   const burstGroup = svg.querySelector('.burst-files');
   const ns = 'http://www.w3.org/2000/svg';
-  const cx = 150, cy = 80;
-  const fileCount = 8;
-  const burstRadius = 60;
-  const fileEls = [];
+  const folderCx = 152, folderCy = 78;
+  const docCount = 6;
+  const docs = [];
 
-  // Create burst file icons
-  for (let i = 0; i < fileCount; i++) {
-    const angle = (i / fileCount) * Math.PI * 2 - Math.PI / 2;
-    const tx = cx + Math.cos(angle) * burstRadius;
-    const ty = cy + Math.sin(angle) * burstRadius;
+  // Spawn positions in a fan around the folder
+  const positions = [
+    { x: 50,  y: 30 },
+    { x: 100, y: 15 },
+    { x: 200, y: 15 },
+    { x: 250, y: 30 },
+    { x: 60,  y: 120 },
+    { x: 240, y: 120 },
+  ];
 
+  for (let i = 0; i < docCount; i++) {
     const g = document.createElementNS(ns, 'g');
-    g.setAttribute('transform', `translate(${cx - 10}, ${cy - 12})`);
     g.setAttribute('opacity', '0');
-    g.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
 
-    const rect = document.createElementNS(ns, 'rect');
-    rect.setAttribute('width', '20');
-    rect.setAttribute('height', '24');
-    rect.setAttribute('rx', '2');
-    rect.setAttribute('fill', 'none');
-    rect.setAttribute('stroke', 'var(--cherry-red)');
-    rect.setAttribute('stroke-width', '1.2');
-    rect.setAttribute('opacity', '0.6');
-    g.appendChild(rect);
+    // Page shape
+    const page = document.createElementNS(ns, 'rect');
+    page.setAttribute('x', '-12');
+    page.setAttribute('y', '-15');
+    page.setAttribute('width', '24');
+    page.setAttribute('height', '30');
+    page.setAttribute('rx', '2');
+    page.setAttribute('fill', 'var(--light-grey)');
+    page.setAttribute('stroke', 'var(--cherry-red)');
+    page.setAttribute('stroke-width', '1.2');
+    page.setAttribute('opacity', '0.7');
+    g.appendChild(page);
 
     // Corner fold
     const fold = document.createElementNS(ns, 'path');
-    fold.setAttribute('d', 'M14 0 L14 6 L20 6');
-    fold.setAttribute('fill', 'none');
+    fold.setAttribute('d', 'M6 -15 L6 -9 L12 -9');
+    fold.setAttribute('fill', 'var(--light-grey)');
     fold.setAttribute('stroke', 'var(--cherry-red)');
     fold.setAttribute('stroke-width', '0.8');
-    fold.setAttribute('opacity', '0.4');
+    fold.setAttribute('opacity', '0.5');
     g.appendChild(fold);
 
-    // Lines on file
+    // Text lines
     for (let l = 0; l < 3; l++) {
       const ln = document.createElementNS(ns, 'line');
-      ln.setAttribute('x1', '4');
-      ln.setAttribute('y1', String(10 + l * 4));
-      ln.setAttribute('x2', String(14 - l * 2));
-      ln.setAttribute('y2', String(10 + l * 4));
+      ln.setAttribute('x1', '-7');
+      ln.setAttribute('y1', String(-4 + l * 6));
+      ln.setAttribute('x2', String(5 - l));
+      ln.setAttribute('y2', String(-4 + l * 6));
       ln.setAttribute('stroke', 'var(--cherry-red)');
-      ln.setAttribute('stroke-width', '0.8');
-      ln.setAttribute('opacity', '0.35');
+      ln.setAttribute('stroke-width', '1');
+      ln.setAttribute('opacity', '0.3');
+      ln.setAttribute('stroke-linecap', 'round');
       g.appendChild(ln);
     }
 
+    g.setAttribute('transform', `translate(${folderCx}, ${folderCy})`);
     burstGroup.appendChild(g);
-    fileEls.push({ el: g, targetX: tx - 10, targetY: ty - 12, originX: cx - 10, originY: cy - 12 });
+
+    docs.push({
+      el: g,
+      tx: positions[i].x,
+      ty: positions[i].y,
+      ox: folderCx,
+      oy: folderCy
+    });
   }
 
-  function runDocLoop() {
-    // Reset all to center
-    fileEls.forEach(f => {
-      f.el.setAttribute('transform', `translate(${f.originX}, ${f.originY})`);
-      f.el.setAttribute('opacity', '0');
-      f.el.style.transition = 'none';
+  function runLoop() {
+    // Reset to center
+    docs.forEach(d => {
+      d.el.setAttribute('transform', `translate(${d.ox}, ${d.oy}) scale(0.3)`);
+      d.el.setAttribute('opacity', '0');
     });
 
-    // Phase 1: Burst outward
+    // Phase 1: Documents fly out from folder
     setTimeout(() => {
-      fileEls.forEach((f, i) => {
+      docs.forEach((d, i) => {
         setTimeout(() => {
-          f.el.style.transition = 'all 0.6s cubic-bezier(0.2, 0.8, 0.3, 1)';
-          f.el.setAttribute('transform', `translate(${f.targetX}, ${f.targetY})`);
-          f.el.setAttribute('opacity', '1');
-        }, i * 80);
+          d.el.style.transition = 'all 0.7s cubic-bezier(0.2, 0.8, 0.3, 1)';
+          d.el.setAttribute('transform', `translate(${d.tx}, ${d.ty}) scale(1)`);
+          d.el.setAttribute('opacity', '1');
+        }, i * 120);
       });
     }, 300);
 
-    // Phase 2: Return to center
+    // Phase 2: Documents return to folder
+    const outDuration = docs.length * 120 + 700 + 2000;
     setTimeout(() => {
-      fileEls.forEach((f, i) => {
+      docs.forEach((d, i) => {
         setTimeout(() => {
-          f.el.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-          f.el.setAttribute('transform', `translate(${f.originX}, ${f.originY})`);
-          f.el.setAttribute('opacity', '0');
-        }, i * 60);
+          d.el.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+          d.el.setAttribute('transform', `translate(${d.ox}, ${d.oy}) scale(0.3)`);
+          d.el.setAttribute('opacity', '0');
+        }, i * 80);
       });
-    }, fileEls.length * 80 + 2500);
+    }, outDuration);
 
-    // Restart loop
-    setTimeout(runDocLoop, fileEls.length * 80 + 2500 + fileEls.length * 60 + 1500);
+    const totalCycle = outDuration + docs.length * 80 + 500 + 1000;
+    setTimeout(runLoop, totalCycle);
   }
 
-  runDocLoop();
+  runLoop();
 }
 
-/* --- Client Reporting: Node tree consolidation --- */
+/* --- Client Reporting: Icon sources flowing to report --- */
 function animateNodeTree() {
   const container = document.getElementById('client-report-anim');
   if (!container) return;
   const svg = container.querySelector('.solution-svg');
-  const linesGroup = svg.querySelector('.tree-lines');
-  const topGroup = svg.querySelector('.tree-top-nodes');
-  const midGroup = svg.querySelector('.tree-mid-nodes');
+  const linesGroup = svg.querySelector('.report-lines');
+  const sourcesGroup = svg.querySelector('.report-sources');
   const ns = 'http://www.w3.org/2000/svg';
 
-  // 7 top data source nodes
-  const topNodes = [
-    { x: 30, y: 25 }, { x: 70, y: 20 }, { x: 110, y: 28 },
-    { x: 150, y: 18 }, { x: 190, y: 25 }, { x: 230, y: 22 }, { x: 270, y: 28 }
+  const reportCenter = { x: 150, y: 140 };
+
+  // 7 data sources arranged in an arc at the top
+  const sources = [
+    { x: 30,  y: 35, label: 'CRM',   icon: 'database' },
+    { x: 75,  y: 18, label: 'Email',  icon: 'envelope' },
+    { x: 120, y: 10, label: 'Slack',  icon: 'chat' },
+    { x: 165, y: 8,  label: 'API',    icon: 'globe' },
+    { x: 210, y: 15, label: 'Data',   icon: 'chart' },
+    { x: 255, y: 28, label: 'KPIs',   icon: 'gauge' },
+    { x: 285, y: 50, label: 'Logs',   icon: 'list' },
   ];
-  // 3 middle merge nodes
-  const midNodes = [
-    { x: 80, y: 85 }, { x: 150, y: 80 }, { x: 220, y: 85 }
-  ];
-  // Client node at bottom
-  const clientPos = { x: 150, y: 150 };
 
-  // Labels for top nodes
-  const labels = ['CRM', 'Email', 'Slack', 'API', 'Data', 'KPIs', 'Logs'];
+  // SVG icon paths for each type
+  function getIconPath(type, x, y) {
+    const g = document.createElementNS(ns, 'g');
+    switch(type) {
+      case 'database':
+        // Database cylinder
+        g.innerHTML = `<ellipse cx="${x}" cy="${y-4}" rx="7" ry="3" fill="none" stroke="var(--cherry-red)" stroke-width="1.2"/>
+          <path d="M${x-7} ${y-4} v8 a7 3 0 0 0 14 0 v-8" fill="none" stroke="var(--cherry-red)" stroke-width="1.2"/>`;
+        break;
+      case 'envelope':
+        // Email envelope
+        g.innerHTML = `<rect x="${x-8}" y="${y-5}" width="16" height="12" rx="1.5" fill="none" stroke="var(--cherry-red)" stroke-width="1.2"/>
+          <path d="M${x-8} ${y-5} l8 6 l8 -6" fill="none" stroke="var(--cherry-red)" stroke-width="1.2"/>`;
+        break;
+      case 'chat':
+        // Chat bubble
+        g.innerHTML = `<rect x="${x-8}" y="${y-7}" width="16" height="11" rx="3" fill="none" stroke="var(--cherry-red)" stroke-width="1.2"/>
+          <path d="M${x-3} ${y+4} l-2 4 l4 -3" fill="none" stroke="var(--cherry-red)" stroke-width="1.2" stroke-linejoin="round"/>`;
+        break;
+      case 'globe':
+        // Globe
+        g.innerHTML = `<circle cx="${x}" cy="${y}" r="7" fill="none" stroke="var(--cherry-red)" stroke-width="1.2"/>
+          <ellipse cx="${x}" cy="${y}" rx="3.5" ry="7" fill="none" stroke="var(--cherry-red)" stroke-width="0.8"/>
+          <line x1="${x-7}" y1="${y}" x2="${x+7}" y2="${y}" stroke="var(--cherry-red)" stroke-width="0.8"/>`;
+        break;
+      case 'chart':
+        // Bar chart
+        g.innerHTML = `<line x1="${x-7}" y1="${y+6}" x2="${x+7}" y2="${y+6}" stroke="var(--cherry-red)" stroke-width="1.2"/>
+          <rect x="${x-6}" y="${y}" width="3" height="6" fill="var(--cherry-red)" opacity="0.5" rx="0.5"/>
+          <rect x="${x-1.5}" y="${y-4}" width="3" height="10" fill="var(--cherry-red)" opacity="0.5" rx="0.5"/>
+          <rect x="${x+3}" y="${y-1}" width="3" height="7" fill="var(--cherry-red)" opacity="0.5" rx="0.5"/>`;
+        break;
+      case 'gauge':
+        // Gauge/speedometer
+        g.innerHTML = `<path d="M${x-7} ${y+3} a7 7 0 0 1 14 0" fill="none" stroke="var(--cherry-red)" stroke-width="1.2"/>
+          <line x1="${x}" y1="${y+3}" x2="${x+4}" y2="${y-3}" stroke="var(--cherry-red)" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="${x}" cy="${y+3}" r="1.5" fill="var(--cherry-red)" opacity="0.5"/>`;
+        break;
+      case 'list':
+        // List/clipboard
+        g.innerHTML = `<rect x="${x-6}" y="${y-7}" width="12" height="15" rx="1.5" fill="none" stroke="var(--cherry-red)" stroke-width="1.2"/>
+          <line x1="${x-3}" y1="${y-3}" x2="${x+3}" y2="${y-3}" stroke="var(--cherry-red)" stroke-width="0.9" opacity="0.5"/>
+          <line x1="${x-3}" y1="${y}" x2="${x+3}" y2="${y}" stroke="var(--cherry-red)" stroke-width="0.9" opacity="0.5"/>
+          <line x1="${x-3}" y1="${y+3}" x2="${x+2}" y2="${y+3}" stroke="var(--cherry-red)" stroke-width="0.9" opacity="0.5"/>`;
+        break;
+    }
+    return g;
+  }
 
-  // Create top nodes
-  topNodes.forEach((n, i) => {
-    const circle = document.createElementNS(ns, 'circle');
-    circle.setAttribute('cx', n.x);
-    circle.setAttribute('cy', n.y);
-    circle.setAttribute('r', '10');
-    circle.setAttribute('fill', 'var(--light-grey)');
-    circle.setAttribute('stroke', 'var(--border-grey)');
-    circle.setAttribute('stroke-width', '1');
-    circle.setAttribute('opacity', '0');
-    circle.classList.add('tree-top-node');
-    topGroup.appendChild(circle);
+  const sourceEls = [];
+  sources.forEach((s, i) => {
+    const g = document.createElementNS(ns, 'g');
+    g.setAttribute('opacity', '0');
 
-    const text = document.createElementNS(ns, 'text');
-    text.setAttribute('x', n.x);
-    text.setAttribute('y', n.y + 3);
-    text.setAttribute('text-anchor', 'middle');
-    text.setAttribute('font-size', '6');
-    text.setAttribute('fill', 'var(--text-secondary)');
-    text.setAttribute('font-weight', '500');
-    text.setAttribute('opacity', '0');
-    text.textContent = labels[i];
-    text.classList.add('tree-top-node');
-    topGroup.appendChild(text);
+    // Background circle
+    const bg = document.createElementNS(ns, 'circle');
+    bg.setAttribute('cx', s.x);
+    bg.setAttribute('cy', s.y);
+    bg.setAttribute('r', '14');
+    bg.setAttribute('fill', 'var(--cherry-red)');
+    bg.setAttribute('opacity', '0.05');
+    g.appendChild(bg);
+
+    // Icon
+    const icon = getIconPath(s.icon, s.x, s.y);
+    g.appendChild(icon);
+
+    // Label below
+    const label = document.createElementNS(ns, 'text');
+    label.setAttribute('x', s.x);
+    label.setAttribute('y', s.y + 20);
+    label.setAttribute('text-anchor', 'middle');
+    label.setAttribute('font-size', '7');
+    label.setAttribute('fill', 'var(--cherry-red)');
+    label.setAttribute('font-weight', '600');
+    label.setAttribute('opacity', '0.6');
+    label.textContent = s.label;
+    g.appendChild(label);
+
+    sourcesGroup.appendChild(g);
+    sourceEls.push({ el: g, x: s.x, y: s.y });
   });
 
-  // Create mid nodes
-  midNodes.forEach(n => {
-    const circle = document.createElementNS(ns, 'circle');
-    circle.setAttribute('cx', n.x);
-    circle.setAttribute('cy', n.y);
-    circle.setAttribute('r', '8');
-    circle.setAttribute('fill', 'var(--cherry-red)');
-    circle.setAttribute('opacity', '0');
-    circle.classList.add('tree-mid-node');
-    midGroup.appendChild(circle);
-  });
-
-  const topEls = topGroup.querySelectorAll('.tree-top-node');
-  const midEls = midGroup.querySelectorAll('.tree-mid-node');
-
-  // Map: which top nodes connect to which mid nodes
-  const topToMid = [
-    [0, 1, 2],  // mid[0] receives from top[0], top[1], top[2]
-    [2, 3, 4],  // mid[1] receives from top[2], top[3], top[4]
-    [4, 5, 6]   // mid[2] receives from top[4], top[5], top[6]
-  ];
-
-  function drawAnimatedLine(x1, y1, x2, y2, delay, color) {
+  function drawFlowLine(x1, y1, x2, y2, delay) {
     const line = document.createElementNS(ns, 'line');
     line.setAttribute('x1', x1);
     line.setAttribute('y1', y1);
     line.setAttribute('x2', x1);
     line.setAttribute('y2', y1);
-    line.setAttribute('stroke', color || 'var(--border-grey)');
+    line.setAttribute('stroke', 'var(--cherry-red)');
     line.setAttribute('stroke-width', '1');
-    line.setAttribute('opacity', '0.4');
+    line.setAttribute('opacity', '0.25');
+    line.setAttribute('stroke-linecap', 'round');
     linesGroup.appendChild(line);
 
     setTimeout(() => {
-      let progress = 0;
+      const dx = x2 - x1, dy = y2 - y1;
+      let t = 0;
       const anim = setInterval(() => {
-        progress += 0.06;
-        if (progress >= 1) { progress = 1; clearInterval(anim); }
-        line.setAttribute('x2', x1 + (x2 - x1) * progress);
-        line.setAttribute('y2', y1 + (y2 - y1) * progress);
+        t += 0.04;
+        if (t >= 1) { t = 1; clearInterval(anim); }
+        line.setAttribute('x2', x1 + dx * t);
+        line.setAttribute('y2', y1 + dy * t);
       }, 16);
     }, delay);
   }
 
-  function runTreeLoop() {
+  function runLoop() {
     linesGroup.innerHTML = '';
-    topEls.forEach(n => n.setAttribute('opacity', '0'));
-    midEls.forEach(n => n.setAttribute('opacity', '0'));
+    sourceEls.forEach(s => s.el.setAttribute('opacity', '0'));
 
-    // Phase 1: Show top nodes
-    topNodes.forEach((n, i) => {
+    // Phase 1: Pop in source icons one by one
+    sourceEls.forEach((s, i) => {
       setTimeout(() => {
-        topEls[i * 2].setAttribute('opacity', '1');
-        topEls[i * 2 + 1].setAttribute('opacity', '1');
-      }, i * 150);
+        s.el.style.transition = 'opacity 0.4s ease';
+        s.el.setAttribute('opacity', '1');
+      }, i * 200);
     });
 
-    // Phase 2: Draw lines from top to mid, show mid nodes
-    const phase2Start = topNodes.length * 150 + 300;
-    topToMid.forEach((sources, midIdx) => {
-      sources.forEach((topIdx, si) => {
-        const delay = phase2Start + midIdx * 400 + si * 100;
-        drawAnimatedLine(
-          topNodes[topIdx].x, topNodes[topIdx].y + 10,
-          midNodes[midIdx].x, midNodes[midIdx].y - 8,
-          delay, 'var(--border-grey)'
-        );
+    // Phase 2: Draw flow lines from each source to center
+    const phase2Start = sourceEls.length * 200 + 400;
+    sourceEls.forEach((s, i) => {
+      drawFlowLine(s.x, s.y + 14, reportCenter.x, reportCenter.y - 20, phase2Start + i * 180);
+    });
+
+    // Phase 3: Hold, then fade and restart
+    const totalTime = phase2Start + sourceEls.length * 180 + 800 + 2500;
+    setTimeout(() => {
+      sourceEls.forEach(s => {
+        s.el.style.transition = 'opacity 0.5s ease';
+        s.el.setAttribute('opacity', '0');
       });
-      setTimeout(() => {
-        midEls[midIdx].setAttribute('opacity', '0.2');
-        setTimeout(() => midEls[midIdx].setAttribute('opacity', '1'), 100);
-      }, phase2Start + midIdx * 400 + 300);
-    });
-
-    // Phase 3: Draw lines from mid to client
-    const phase3Start = phase2Start + topToMid.length * 400 + 500;
-    midNodes.forEach((n, i) => {
-      drawAnimatedLine(
-        n.x, n.y + 8,
-        clientPos.x, clientPos.y - 14,
-        phase3Start + i * 200, 'var(--cherry-red)'
-      );
-    });
-
-    // Restart
-    setTimeout(runTreeLoop, phase3Start + midNodes.length * 200 + 3000);
+      linesGroup.querySelectorAll('line').forEach(l => {
+        l.style.transition = 'opacity 0.5s ease';
+        l.setAttribute('opacity', '0');
+      });
+      setTimeout(runLoop, 1200);
+    }, totalTime);
   }
 
-  runTreeLoop();
+  runLoop();
 }
