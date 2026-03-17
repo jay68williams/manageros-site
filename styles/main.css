@@ -839,6 +839,359 @@ section {
   border: 1px solid var(--border-grey);
 }
 
+/* ===== CARD GRAPHICS (OperatorOS-style) ===== */
+.card-graphic {
+  margin: 1.25rem 0 1rem;
+  border-radius: var(--radius-md);
+  background: var(--light-grey);
+  border: 1px solid var(--border-grey);
+  padding: 1rem;
+  overflow: hidden;
+}
+
+/* --- Chat Mockup --- */
+.chat-mockup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.chat-bubble {
+  padding: 0.625rem 0.875rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  max-width: 92%;
+  animation: fadeSlideUp 0.6s ease both;
+}
+
+.chat-bubble.user {
+  background: var(--white);
+  border: 1px solid var(--border-grey);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+  color: var(--text-primary);
+  animation-delay: 0.1s;
+}
+
+.chat-bubble.ai {
+  background: var(--cherry-red);
+  color: #fff;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  animation-delay: 0.4s;
+}
+
+.chat-bubble.ai i {
+  flex-shrink: 0;
+  margin-top: 2px;
+  opacity: 0.8;
+}
+
+.chat-typing {
+  display: flex;
+  gap: 4px;
+  align-self: flex-start;
+  padding: 0.5rem 0.75rem;
+  background: var(--white);
+  border: 1px solid var(--border-grey);
+  border-radius: 12px;
+  animation: fadeSlideUp 0.6s ease 0.7s both;
+}
+
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: typingPulse 1.4s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingPulse {
+  0%, 60%, 100% { opacity: 0.3; transform: scale(0.8); }
+  30% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Horizontal Bar Chart --- */
+.bar-chart-graphic {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.bar-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  width: 28px;
+  text-align: right;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+.bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--white);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border-grey);
+}
+
+.bar-fill {
+  height: 100%;
+  background: var(--charcoal);
+  border-radius: 4px;
+  animation: barGrow 1s ease both;
+  transition: width 0.6s ease;
+}
+
+.bar-fill.accent {
+  background: var(--cherry-red);
+}
+
+@keyframes barGrow {
+  from { width: 0 !important; }
+}
+
+.bar-chart-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-grey);
+}
+
+.chart-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.chart-count {
+  margin-left: auto;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* --- Icon Grid (Document Vault) --- */
+.icon-grid-graphic {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  padding: 0.75rem;
+}
+
+.icon-grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.625rem 0.25rem;
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  border: 1px solid var(--border-grey);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.icon-grid-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.icon-grid-item i {
+  color: var(--text-secondary);
+}
+
+.icon-grid-item span {
+  font-size: 0.625rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-align: center;
+}
+
+/* --- Integration Grid --- */
+.integration-grid-graphic {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.625rem;
+  padding: 0.75rem;
+}
+
+.integration-icon-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
+  background: var(--white);
+  border: 1px solid var(--border-grey);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: default;
+}
+
+.integration-icon-item i {
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.integration-icon-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-color: var(--cherry-red);
+}
+
+.integration-icon-item:hover i {
+  color: var(--cherry-red);
+}
+
+/* --- Vertical Bar Chart --- */
+.vbar-chart-graphic {
+  padding: 0.75rem 0.75rem 0.5rem;
+}
+
+.vbar-chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.375rem;
+  height: 100px;
+}
+
+.vbar-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  gap: 0.375rem;
+}
+
+.vbar {
+  width: 100%;
+  background: var(--charcoal);
+  border-radius: 4px 4px 0 0;
+  animation: vbarGrow 0.8s ease both;
+  transition: height 0.4s ease;
+  min-height: 4px;
+}
+
+.vbar.accent {
+  background: var(--cherry-red);
+}
+
+@keyframes vbarGrow {
+  from { height: 0 !important; }
+}
+
+.vbar-label {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* --- Checklist --- */
+.checklist-graphic {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-grey);
+  background: var(--white);
+  transition: background 0.2s ease;
+}
+
+.checklist-item:first-child {
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.checklist-item:last-child {
+  border-bottom: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+.checklist-item.checked {
+  color: var(--text-muted);
+}
+
+.checklist-item.checked .check-box {
+  background: var(--cherry-red);
+  border-color: var(--cherry-red);
+}
+
+.checklist-item.checked .check-box i {
+  color: #fff;
+}
+
+.check-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1.5px solid var(--border-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.check-box.empty {
+  background: var(--white);
+}
+
+.new-badge {
+  margin-left: auto;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--cherry-red);
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.5px;
+}
+
+.checklist-item.new-item {
+  background: #fff5f5;
+}
+
 /* Platform summary text */
 .platform-summary {
   text-align: center;
@@ -2356,6 +2709,84 @@ section {
   background: #222;
   border-color: #333;
   color: #aaa;
+}
+
+/* Dark mode card graphics */
+[data-theme="dark"] .card-graphic {
+  background: #111;
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .chat-bubble.user {
+  background: #222;
+  border-color: #333;
+  color: #ddd;
+}
+
+[data-theme="dark"] .chat-typing {
+  background: #222;
+  border-color: #333;
+}
+
+[data-theme="dark"] .bar-track {
+  background: #222;
+  border-color: #333;
+}
+
+[data-theme="dark"] .bar-fill {
+  background: #ddd;
+}
+
+[data-theme="dark"] .bar-chart-footer {
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .icon-grid-item {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .icon-grid-item:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+[data-theme="dark"] .icon-grid-item i {
+  color: #aaa;
+}
+
+[data-theme="dark"] .integration-icon-item {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .integration-icon-item:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+[data-theme="dark"] .integration-icon-item i {
+  color: #aaa;
+}
+
+[data-theme="dark"] .vbar {
+  background: #ddd;
+}
+
+[data-theme="dark"] .checklist-item {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+  color: #bbb;
+}
+
+[data-theme="dark"] .check-box {
+  border-color: #444;
+}
+
+[data-theme="dark"] .check-box.empty {
+  background: #222;
+}
+
+[data-theme="dark"] .checklist-item.new-item {
+  background: #1f1212;
 }
 
 /* Flow lines */
