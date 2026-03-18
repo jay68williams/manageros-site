@@ -1,0 +1,136 @@
+# Fusion Creative Station - Docker Compose
+# Run this on your Mac Mini with: docker-compose up -d
+
+version: '3.8'
+
+services:
+  # PostgreSQL Database with pgvector
+  postgres:
+    image: ankane/pgvector:latest
+    container_name: fusion-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=agentdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database-schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    networks:
+      - fusion-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # n8n - Workflow Automation
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: fusion-n8n
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_USER}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_PASSWORD}
+      - WEBHOOK_URL=${WEBHOOK_URL:-http://localhost:5678}
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=n8n
+      - DB_POSTGRESDB_USER=postgres
+      - DB_POSTGRESDB_PASSWORD=${DB_PASSWORD}
+      - GENERIC_TIMEZONE=Europe/London
+      - N8N_DEFAULT_BINARY_DATA_MODE=filesystem
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./n8n/workflows:/backup/workflows
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - fusion-network
+
+  # Ollama - Local LLM
+  ollama:
+    image: ollama/ollama:latest
+    container_name: fusion-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - fusion-network
+    # Pull models on first start
+    entrypoint: >
+      sh -c "
+        ollama serve &
+        sleep 10 &&
+        ollama pull llama3.1:8b &&
+        ollama pull nomic-embed-text &&
+        echo 'Models ready' &&
+        wait
+      "
+
+  # Redis - For caching and queues
+  redis:
+    image: redis:7-alpine
+    container_name: fusion-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - fusion-network
+
+  # Agent Core - Custom API (placeholder for future)
+  agent-core:
+    image: node:18-alpine
+    container_name: fusion-agent-core
+    working_dir: /app
+    command: sh -c "npm install -g json-server && json-server --watch /app/db.json --port 3001 --host 0.0.0.0"
+    ports:
+      - "3001:3001"
+    volumes:
+      - agent_data:/app
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - fusion-network
+    environment:
+      - DATABASE_URL=postgresql://postgres:${DB_PASSWORD}@postgres:5432/agentdb
+      - REDIS_URL=redis://redis:6379
+
+  # Watchtower - Auto-update containers
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: fusion-watchtower
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=3600
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_INCLUDE_STOPPED=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: n8n ollama agent-core
+    networks:
+      - fusion-network
+
+volumes:
+  postgres_data:
+    driver: local
+  n8n_data:
+    driver: local
+  ollama_data:
+    driver: local
+  redis_data:
+    driver: local
+  agent_data:
+    driver: local
+
+networks:
+  fusion-network:
+    driver: bridge
+    name: fusion-network
