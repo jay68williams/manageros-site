@@ -219,6 +219,7 @@ function initCardAnimations() {
   animateLeadNetwork();
   animateDocBurst();
   animateNodeTree();
+  animatePlatformDemo();
 }
 
 /* --- 1. Chat Mockup: Typewriter effect with looping --- */
@@ -844,6 +845,117 @@ function animateNodeTree() {
       });
       setTimeout(runLoop, 1200);
     }, totalTime);
+  }
+
+  runLoop();
+}
+
+/* --- Platform Demo: Cursor → Type → Results Popup --- */
+function animatePlatformDemo() {
+  const cursor = document.getElementById('demoCursor');
+  const inputArea = document.getElementById('demoInputArea');
+  const inputBox = document.getElementById('demoInputBox');
+  const placeholder = document.getElementById('demoPlaceholder');
+  const inputText = document.getElementById('demoInputText');
+  const caret = document.getElementById('demoCaret');
+  const sendBtn = document.getElementById('demoSendBtn');
+  const popup = document.getElementById('demoResultsPopup');
+
+  if (!cursor || !inputArea || !inputText) return;
+
+  const typingText = "Show me this week's lead report";
+  let loopTimer = null;
+
+  function resetAll() {
+    cursor.style.transition = 'none';
+    cursor.style.opacity = '0';
+    cursor.style.left = '30%';
+    cursor.style.top = '55%';
+    inputArea.classList.remove('focused');
+    placeholder.style.opacity = '1';
+    placeholder.style.display = '';
+    inputText.textContent = '';
+    caret.style.display = 'none';
+    sendBtn.classList.remove('active');
+    popup.classList.remove('visible');
+  }
+
+  function moveCursor(targetX, targetY, duration) {
+    return new Promise(resolve => {
+      cursor.style.transition = `left ${duration}ms cubic-bezier(0.4,0,0.2,1), top ${duration}ms cubic-bezier(0.4,0,0.2,1)`;
+      cursor.style.left = targetX;
+      cursor.style.top = targetY;
+      setTimeout(resolve, duration);
+    });
+  }
+
+  function typeText(text, charDelay) {
+    return new Promise(resolve => {
+      let i = 0;
+      function addChar() {
+        if (i < text.length) {
+          inputText.textContent += text[i];
+          i++;
+          setTimeout(addChar, charDelay);
+        } else {
+          resolve();
+        }
+      }
+      addChar();
+    });
+  }
+
+  async function runLoop() {
+    resetAll();
+
+    // 1. Cursor fades in at starting position
+    await new Promise(r => setTimeout(r, 800));
+    cursor.style.transition = 'opacity 0.4s ease';
+    cursor.style.opacity = '1';
+    await new Promise(r => setTimeout(r, 500));
+
+    // 2. Cursor moves to the input box
+    const inputRect = inputBox.getBoundingClientRect();
+    const uiRect = cursor.parentElement.getBoundingClientRect();
+    const targetLeft = ((inputRect.left - uiRect.left) + 80) + 'px';
+    const targetTop = ((inputRect.top - uiRect.top) + 12) + 'px';
+
+    await moveCursor(targetLeft, targetTop, 900);
+    await new Promise(r => setTimeout(r, 200));
+
+    // 3. Click effect — input gains focus
+    inputArea.classList.add('focused');
+    placeholder.style.opacity = '0';
+    setTimeout(() => { placeholder.style.display = 'none'; }, 200);
+    caret.style.display = 'inline-block';
+    await new Promise(r => setTimeout(r, 300));
+
+    // 4. Cursor fades out while typing begins
+    cursor.style.transition = 'opacity 0.3s ease';
+    cursor.style.opacity = '0';
+
+    // 5. Type out the text
+    await typeText(typingText, 60);
+    await new Promise(r => setTimeout(r, 300));
+
+    // 6. Send button activates
+    sendBtn.classList.add('active');
+    await new Promise(r => setTimeout(r, 600));
+
+    // 7. Caret disappears, results popup slides in
+    caret.style.display = 'none';
+    popup.classList.add('visible');
+    await new Promise(r => setTimeout(r, 3500));
+
+    // 8. Fade everything out
+    popup.classList.remove('visible');
+    inputArea.classList.remove('focused');
+    sendBtn.classList.remove('active');
+
+    await new Promise(r => setTimeout(r, 800));
+
+    // 9. Loop
+    loopTimer = setTimeout(runLoop, 500);
   }
 
   runLoop();
