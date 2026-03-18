@@ -1,0 +1,67 @@
+{
+  "name": "Fusion Creative - AI Lead Qualification",
+  "nodes": [
+    {
+      "type": "n8n-nodes-base.postgresTrigger",
+      "parameters": {
+        "event": "INSERT",
+        "table": "prospects",
+        "conditions": {
+          "status": "new"
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.set",
+      "parameters": {
+        "values": {
+          "prompt": "={{ 
+            'You are a lead qualification specialist for Fusion Creative, a short-form video agency.\n\n' +
+            'Prospect: ' + $json.first_name + ' ' + $json.last_name + '\n' +
+            'Company: ' + $json.company + '\n' +
+            'Title: ' + $json.title + '\n' +
+            'Vertical: ' + $json.vertical + '\n\n' +
+            'Score this lead 0-100 based on:\n' +
+            '1. Likelihood they produce video content (25 pts)\n' +
+            '2. Business type fits our portfolio (25 pts)\n' +
+            '3. Location in Newcastle area (15 pts)\n' +
+            '4. Decision-making authority (25 pts)\n' +
+            '5. Signals of growth/hiring (10 pts)\n\n' +
+            'Return ONLY a JSON object: {\"score\": number, \"reason\": \"brief reason\", \"qualified\": true/false}'
+          }}"
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.ollama",
+      "parameters": {
+        "model": "llama3.1:8b",
+        "prompt": "={{ $json.prompt }}",
+        "system_message": "You are an expert at qualifying leads for a creative agency. Be objective and consistent."
+      }
+    },
+    {
+      "type": "n8n-nodes-base.set",
+      "parameters": {
+        "values": {
+          "result": "={{ $json.output }}"
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.postgres",
+      "parameters": {
+        "operation": "update",
+        "table": "prospects",
+        "columns": "ai_score,qualification_reason,status",
+        "updateKey": "email"
+      }
+    }
+  ],
+  "connections": {
+    "New Prospect": ["Build Prompt"],
+    "Build Prompt": ["Ollama Qualify"],
+    "Ollama Qualify": ["Parse Result"],
+    "Parse Result": ["Update Status"]
+  }
+}

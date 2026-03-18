@@ -1,0 +1,134 @@
+{
+  "name": "Fusion Creative - 5 Touch Sequence",
+  "nodes": [
+    {
+      "type": "n8n-nodes-base.postgresTrigger",
+      "parameters": {
+        "event": "UPDATE",
+        "table": "prospects",
+        "conditions": {
+          "status": "qualified"
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.set",
+      "parameters": {
+        "values": {
+          "sequence_id": "={{ $json.email }}_{{ Date.now() }}"
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.postgres",
+      "parameters": {
+        "operation": "insert",
+        "table": "sequences",
+        "columns": "prospect_email,sequence_id,touch_count,next_touch_date,status"
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "method": "POST",
+        "url": "http://agent-core:3001/api/linkedin/connect",
+        "body": {
+          "linkedin_url": "={{ $json.linkedin_url }}",
+          "message": "={{ 'Hi ' + $json.first_name + ', saw ' + $json.company + ' on LinkedIn. Do you work with any video creators?' }}"
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.wait",
+      "parameters": {
+        "amount": 2,
+        "unit": "days"
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "method": "POST",
+        "url": "http://agent-core:3001/api/linkedin/message",
+        "body": {
+          "template": "voice_note_followup"
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.wait",
+      "parameters": {
+        "amount": 3,
+        "unit": "days"
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "method": "POST",
+        "url": "http://agent-core:3001/api/email/send",
+        "body": {
+          "to": "={{ $json.email }}",
+          "subject": "{{ $json.company }} — short-form content question",
+          "template": "fusion-problem-recognition",
+          "variables": {
+            "first_name": "={{ $json.first_name }}",
+            "company": "={{ $json.company }}"
+          }
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.wait",
+      "parameters": {
+        "amount": 5,
+        "unit": "days"
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "method": "POST",
+        "url": "http://agent-core:3001/api/email/send",
+        "body": {
+          "to": "={{ $json.email }}",
+          "subject": "Re: {{ $json.company }} — results from similar client",
+          "template": "fusion-social-proof",
+          "variables": {
+            "first_name": "={{ $json.first_name }}",
+            "result_stat": "2.6M views in 60 days"
+          }
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.wait",
+      "parameters": {
+        "amount": 5,
+        "unit": "days"
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "method": "POST",
+        "url": "http://agent-core:3001/api/linkedin/message",
+        "body": {
+          "message": "={{ 'Hey ' + $json.first_name + ', final follow-up — if video content isn't a priority right now, totally get it. Worth a quick chat next week?' }}"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Qualified Lead": ["Create Sequence"],
+    "Create Sequence": ["Touch 1 - LinkedIn Connect"],
+    "Touch 1": ["Wait 2 Days"],
+    "Wait 2 Days": ["Touch 2 - Voice Note"],
+    "Touch 2": ["Wait 3 Days"],
+    "Wait 3 Days": ["Touch 3 - Email Problem"],
+    "Touch 3": ["Wait 5 Days"],
+    "Wait 5 Days": ["Touch 4 - Email Social Proof"],
+    "Touch 4": ["Wait 5 Days"],
+    "Wait 5 Days": ["Touch 5 - Final Follow-up"]
+  }
+}

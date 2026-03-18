@@ -1,0 +1,34 @@
+{
+  "id": "fusion-creative",
+  "name": "Fusion Creative",
+  "description": "Marketing agency stack for short-form video content and client acquisition",
+  "version": "1.0.0",
+  "modules": [
+    "lead-agent",
+    "email-agent",
+    "content-agent",
+    "analytics-agent"
+  ],
+  "integrations": [
+    "gohighlevel",
+    "apollo",
+    "linkedin",
+    "instagram",
+    "tiktok"
+  ],
+  "hardware_tier": "growth",
+  "estimated_setup_time": "2 hours",
+  "target_verticals": [
+    "restaurants",
+    "dental_practices",
+    "tradespeople",
+    "local_businesses"
+  ],
+  "post_deploy_steps": [
+    "Connect GHL account",
+    "Import Apollo list (Newcastle hospitality)",
+    "Configure email domain (fusioncreative.co.uk)",
+    "Link TikTok/Instagram accounts",
+    "Test content calendar"
+  ]
+}

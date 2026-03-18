@@ -1,0 +1,68 @@
+{
+  "name": "Fusion Creative - Apollo Import",
+  "nodes": [
+    {
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "parameters": {
+        "rule": {"interval": [{"field": "hours", "value": 1}]}
+      }
+    },
+    {
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apollo.io/v1/contacts/search",
+        "authentication": "headerAuth",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{ $env.APOLLO_API_KEY }}"
+            }
+          ]
+        },
+        "body": {
+          "person_titles": ["Owner", "Director", "Manager"],
+          "organization_locations": ["Newcastle", "Gateshead", "North Shields"],
+          "organization_keywords": ["restaurant", "cafe", "takeaway"],
+          "per_page": 100
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.set",
+      "parameters": {
+        "values": {
+          "email": "={{ $json.email }}",
+          "firstName": "={{ $json.first_name }}",
+          "lastName": "={{ $json.last_name }}",
+          "company": "={{ $json.organization.name }}",
+          "title": "={{ $json.title }}",
+          "linkedinUrl": "={{ $json.linkedin_url }}",
+          "vertical": "restaurant"
+        }
+      }
+    },
+    {
+      "type": "n8n-nodes-base.postgres",
+      "parameters": {
+        "operation": "upsert",
+        "table": "prospects",
+        "columns": "email,first_name,last_name,company,title,linkedin_url,vertical"
+      }
+    },
+    {
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "qualify-fusion",
+        "responseMode": "responseNode"
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": ["Apollo Search"],
+    "Apollo Search": ["Format Data"],
+    "Format Data": ["Save to DB"],
+    "Save to DB": ["Trigger Qualification"]
+  }
+}

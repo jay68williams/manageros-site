@@ -1,0 +1,19 @@
+{
+  "templates": {
+    "fusion-problem-recognition": {
+      "subject": "{{ company }} — short-form content question",
+      "body": "Hi {{ first_name }},\n\nQuick question — what happens to your social media on weeks when you're flat out running {{ company }}?\n\nMost restaurants we speak to post 1-2x a week when they mean to post daily. The algorithm punishes inconsistency, so reach drops, then engagement drops, then it's a slog to rebuild.\n\nWe set up a system for Chillingham Road's New Greek. They now have 2.6M views across TikTok/Instagram, 39K followers, all from content shot on an iPhone and edited same-day.\n\nWorth a 15-minute call to show you what that looks like for {{ company }}?\n\nBest,\nJay\nFusion Creative",
+      "variables": ["first_name", "company"]
+    },
+    "fusion-social-proof": {
+      "subject": "Re: {{ company }} — results from similar client",
+      "body": "{{ first_name }} — following up on my email last week.\n\nWe just wrapped a 60-day push for New Greek (Greek street food on Chillingham Road).\n\nThe numbers:\n• 2.6M combined views\n• 39K TikTok likes\n• 178K Instagram accounts reached\n• 4-5 videos per week, shot on iPhone, turned around same day\n\nThe difference: they stopped trying to be 'professional' and started posting what actually gets watched.\n\nHappy to show you the exact format on a 15-minute call this week?\n\nJay",
+      "variables": ["first_name", "result_stat"]
+    },
+    "fusion-final-follow-up": {
+      "subject": "Last follow-up — {{ company }}",
+      "body": "{{ first_name }},\n\nFinal follow-up from me.\n\nIf short-form content isn't the priority right now, I totally get it. Most restaurant owners are drowning in operations.\n\nIf it does become a priority in the next few months, here's my number: [PHONE]\n\nOr reply here — either way, no hard sell, just wanted to check in one last time.\n\nJay\nFusion Creative",
+      "variables": ["first_name", "company"]
+    }
+  }
+}

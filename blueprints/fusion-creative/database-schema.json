@@ -1,0 +1,75 @@
+{
+  "name": "Fusion Creative Database Schema",
+  "description": "PostgreSQL schema for Fusion Creative lead management",
+  "tables": [
+    {
+      "name": "prospects",
+      "columns": [
+        {"name": "id", "type": "SERIAL PRIMARY KEY"},
+        {"name": "email", "type": "VARCHAR(255) UNIQUE NOT NULL"},
+        {"name": "first_name", "type": "VARCHAR(100)"},
+        {"name": "last_name", "type": "VARCHAR(100)"},
+        {"name": "company", "type": "VARCHAR(200)"},
+        {"name": "title", "type": "VARCHAR(150)"},
+        {"name": "linkedin_url", "type": "VARCHAR(500)"},
+        {"name": "vertical", "type": "VARCHAR(50)"},
+        {"name": "source", "type": "VARCHAR(50)", "default": "'apollo'"},
+        {"name": "status", "type": "VARCHAR(50)", "default": "'new'"},
+        {"name": "ai_score", "type": "INTEGER"},
+        {"name": "qualification_reason", "type": "TEXT"},
+        {"name": "ghl_contact_id", "type": "VARCHAR(100)"},
+        {"name": "created_at", "type": "TIMESTAMP DEFAULT NOW()"},
+        {"name": "updated_at", "type": "TIMESTAMP DEFAULT NOW()"}
+      ]
+    },
+    {
+      "name": "sequences",
+      "columns": [
+        {"name": "id", "type": "SERIAL PRIMARY KEY"},
+        {"name": "prospect_email", "type": "VARCHAR(255) REFERENCES prospects(email)"},
+        {"name": "sequence_id", "type": "VARCHAR(100) UNIQUE"},
+        {"name": "touch_count", "type": "INTEGER DEFAULT 0"},
+        {"name": "next_touch_date", "type": "TIMESTAMP"},
+        {"name": "status", "type": "VARCHAR(50)", "default": "'active'"},
+        {"name": "created_at", "type": "TIMESTAMP DEFAULT NOW()"}
+      ]
+    },
+    {
+      "name": "touch_events",
+      "columns": [
+        {"name": "id", "type": "SERIAL PRIMARY KEY"},
+        {"name": "sequence_id", "type": "VARCHAR(100) REFERENCES sequences(sequence_id)"},
+        {"name": "touch_number", "type": "INTEGER"},
+        {"name": "channel", "type": "VARCHAR(50)"},
+        {"name": "status", "type": "VARCHAR(50)", "default": "'pending'"},
+        {"name": "sent_at", "type": "TIMESTAMP"},
+        {"name": "opened_at", "type": "TIMESTAMP"},
+        {"name": "clicked_at", "type": "TIMESTAMP"},
+        {"name": "replied_at", "type": "TIMESTAMP"}
+      ]
+    },
+    {
+      "name": "content_posts",
+      "columns": [
+        {"name": "id", "type": "SERIAL PRIMARY KEY"},
+        {"name": "platform", "type": "VARCHAR(50)"},
+        {"name": "content_type", "type": "VARCHAR(50)"},
+        {"name": "caption", "type": "TEXT"},
+        {"name": "scheduled_at", "type": "TIMESTAMP"},
+        {"name": "posted_at", "type": "TIMESTAMP"},
+        {"name": "status", "type": "VARCHAR(50)", "default": "'draft'"},
+        {"name": "views", "type": "INTEGER"},
+        {"name": "likes", "type": "INTEGER"},
+        {"name": "shares", "type": "INTEGER"},
+        {"name": "comments", "type": "INTEGER"}
+      ]
+    }
+  ],
+  "indexes": [
+    "CREATE INDEX idx_prospects_status ON prospects(status)",
+    "CREATE INDEX idx_prospects_score ON prospects(ai_score DESC)",
+    "CREATE INDEX idx_prospects_vertical ON prospects(vertical)",
+    "CREATE INDEX idx_sequences_status ON sequences(status)",
+    "CREATE INDEX idx_touch_events_sequence ON touch_events(sequence_id)"
+  ]
+}
