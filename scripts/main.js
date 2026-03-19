@@ -536,26 +536,27 @@ function animateLeadNetwork() {
 
       const target = nodes[idx];
 
-      // Create line
+      // Create line — only extends 60% of the way to avoid overlapping icons
+      const lineEnd = 0.6;
       const line = document.createElementNS(ns, 'line');
       line.setAttribute('x1', cx);
       line.setAttribute('y1', cy);
       line.setAttribute('x2', cx);
       line.setAttribute('y2', cy);
       line.setAttribute('stroke', 'var(--cherry-red)');
-      line.setAttribute('stroke-width', '1.5');
-      line.setAttribute('opacity', '0.6');
+      line.setAttribute('stroke-width', '1');
+      line.setAttribute('opacity', '0.25');
       line.setAttribute('stroke-linecap', 'round');
       linesGroup.appendChild(line);
 
-      // Animate line growing from center to node
+      // Animate line growing from center to ~60% of distance
       const dx = target.x - cx;
       const dy = target.y - cy;
       let t = 0;
       const grow = setInterval(() => {
         t += 0.05;
-        if (t >= 1) {
-          t = 1;
+        if (t >= lineEnd) {
+          t = lineEnd;
           clearInterval(grow);
           // Show node when line arrives
           target.el.style.transition = 'opacity 0.3s ease';
