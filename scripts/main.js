@@ -862,6 +862,7 @@ function animatePlatformDemo() {
   const sendBtn = document.getElementById('demoSendBtn');
   const popup = document.getElementById('demoResultsPopup');
   const suggestions = document.querySelector('.demo-suggestions');
+  const pills = document.querySelector('.demo-pills');
 
   if (!cursor || !inputArea || !inputText) return;
 
@@ -881,6 +882,7 @@ function animatePlatformDemo() {
     sendBtn.classList.remove('active');
     popup.classList.remove('visible');
     if (suggestions) { suggestions.style.opacity = '1'; suggestions.style.visibility = 'visible'; }
+    if (pills) { pills.style.opacity = '1'; pills.style.visibility = 'visible'; }
   }
 
   function moveCursor(targetX, targetY, duration) {
@@ -948,6 +950,7 @@ function animatePlatformDemo() {
     // 7. Caret disappears, results popup slides in
     caret.style.display = 'none';
     if (suggestions) { suggestions.style.opacity = '0'; suggestions.style.visibility = 'hidden'; }
+    if (pills) { pills.style.opacity = '0'; pills.style.visibility = 'hidden'; }
     popup.classList.add('visible');
     await new Promise(r => setTimeout(r, 3500));
 

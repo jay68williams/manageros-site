@@ -1390,6 +1390,7 @@ section {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .demo-pill {
@@ -1441,6 +1442,7 @@ section {
 /* Results Popup */
 .demo-results-popup {
   position: absolute;
+  top: 160px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -1455,6 +1457,9 @@ section {
   transition: opacity 0.5s ease, transform 0.5s ease;
   z-index: 10;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .demo-results-popup.visible {
