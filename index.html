@@ -730,139 +730,19 @@
   </div>
   <div class="diamond-divider"></div>
 
-  <!-- ===== SOLUTIONS (What We Build) ===== -->
-  <section class="solutions-section" id="solutions">
+  <!-- ===== WHAT WE BUILD (Agent Cards) ===== -->
+  <section class="agent-cards-section" id="what-we-build">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-badge">
-          <i data-lucide="layout-grid" style="width:14px;height:14px"></i>
+        <div class="section-badge agent-badge">
+          <i data-lucide="cpu" style="width:14px;height:14px"></i>
           WHAT WE BUILD
         </div>
-        <h2 class="section-title"><span class="highlight">Solutions</span> that deliver</h2>
-        <p class="section-subtitle">AI systems built for your specific business needs</p>
+        <h2 class="section-title agent-title"><span class="highlight">AI Agents</span> for every workflow</h2>
+        <p class="section-subtitle agent-subtitle">Purpose-built agents that integrate with your existing tools and processes</p>
       </div>
 
-      <div class="solutions-grid reveal-stagger">
-        <!-- Lead Generation -->
-        <div class="solution-card">
-          <div class="solution-card-preview">
-            <div class="solution-anim-container" id="lead-gen-anim">
-              <svg viewBox="0 0 300 180" class="solution-svg">
-                <!-- Lines layer (drawn by JS behind everything) -->
-                <g class="network-lines"></g>
-                <!-- Central person: large, clear head + shoulders -->
-                <circle cx="150" cy="90" r="28" fill="var(--cherry-red)" opacity="0.08" class="central-pulse"/>
-                <circle cx="150" cy="80" r="10" fill="none" stroke="var(--cherry-red)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M132 104 a18 14 0 0 1 36 0" fill="none" stroke="var(--cherry-red)" stroke-width="2" stroke-linecap="round"/>
-                <!-- Outer person nodes (created by JS) -->
-                <g class="network-nodes"></g>
-              </svg>
-            </div>
-          </div>
-          <div class="solution-card-body">
-            <div class="solution-card-meta">
-              <span class="solution-card-tag">SMB</span>
-              <span class="solution-card-tag">✦ 2-3 weeks</span>
-            </div>
-            <h3>Lead Generation</h3>
-            <p>Capture and qualify leads instantly</p>
-            <ul class="solution-card-features">
-              <li>Form capture</li>
-              <li>Lead scoring</li>
-              <li>CRM sync</li>
-            </ul>
-            <div class="solution-card-tech">
-              <span class="tech-badge">GoHighLevel</span>
-              <span class="tech-badge">Zapier</span>
-              <span class="tech-badge">Slack</span>
-            </div>
-            <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-dark btn-full">Learn More</a>
-          </div>
-        </div>
-
-        <!-- Document Processing -->
-        <div class="solution-card">
-          <div class="solution-card-preview">
-            <div class="solution-anim-container" id="doc-process-anim">
-              <svg viewBox="0 0 300 180" class="solution-svg">
-                <!-- Spawned documents (created by JS) -->
-                <g class="burst-files"></g>
-                <!-- Central folder/file -->
-                <g class="central-doc">
-                  <rect x="125" y="50" width="50" height="60" rx="4" fill="var(--cherry-red)" opacity="0.1" class="central-file-bg"/>
-                  <!-- Folder tab -->
-                  <path d="M129 56 L129 50 Q129 46 133 46 L145 46 L149 50 L171 50 Q175 50 175 54 L175 106 Q175 110 171 110 L133 110 Q129 110 129 106 Z" fill="none" stroke="var(--cherry-red)" stroke-width="1.8" stroke-linejoin="round"/>
-                  <!-- Document lines inside -->
-                  <line x1="138" y1="62" x2="166" y2="62" stroke="var(--cherry-red)" stroke-width="1.2" opacity="0.4" stroke-linecap="round"/>
-                  <line x1="138" y1="70" x2="162" y2="70" stroke="var(--cherry-red)" stroke-width="1.2" opacity="0.4" stroke-linecap="round"/>
-                  <line x1="138" y1="78" x2="158" y2="78" stroke="var(--cherry-red)" stroke-width="1.2" opacity="0.4" stroke-linecap="round"/>
-                  <line x1="138" y1="86" x2="160" y2="86" stroke="var(--cherry-red)" stroke-width="1.2" opacity="0.4" stroke-linecap="round"/>
-                  <line x1="138" y1="94" x2="154" y2="94" stroke="var(--cherry-red)" stroke-width="1.2" opacity="0.4" stroke-linecap="round"/>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <div class="solution-card-body">
-            <div class="solution-card-meta">
-              <span class="solution-card-tag">Enterprise</span>
-              <span class="solution-card-tag">✦ 2-4 weeks</span>
-            </div>
-            <h3>Document Processing</h3>
-            <p>Extract, analyse, and act on your documents</p>
-            <ul class="solution-card-features">
-              <li>Contract analysis</li>
-              <li>Data extraction</li>
-              <li>Automated filing</li>
-            </ul>
-            <div class="solution-card-tech">
-              <span class="tech-badge">Llama 3.1</span>
-              <span class="tech-badge">Local Storage</span>
-            </div>
-            <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-dark btn-full">Learn More</a>
-          </div>
-        </div>
-
-        <!-- Client Reporting -->
-        <div class="solution-card">
-          <div class="solution-card-preview">
-            <div class="solution-anim-container" id="client-report-anim">
-              <svg viewBox="0 0 300 180" class="solution-svg">
-                <!-- Connection lines (drawn by JS) -->
-                <g class="report-lines"></g>
-                <!-- Source icon nodes (created by JS) -->
-                <g class="report-sources"></g>
-                <!-- Central report output -->
-                <g class="report-center">
-                  <circle cx="150" cy="145" r="20" fill="var(--cherry-red)" opacity="0.08" class="central-pulse"/>
-                  <!-- Clipboard/report icon -->
-                  <rect x="139" y="133" width="22" height="28" rx="2" fill="none" stroke="var(--cherry-red)" stroke-width="1.8"/>
-                  <rect x="145" y="130" width="10" height="6" rx="1.5" fill="none" stroke="var(--cherry-red)" stroke-width="1.3"/>
-                  <line x1="145" y1="143" x2="155" y2="143" stroke="var(--cherry-red)" stroke-width="1" opacity="0.5" stroke-linecap="round"/>
-                  <line x1="145" y1="148" x2="157" y2="148" stroke="var(--cherry-red)" stroke-width="1" opacity="0.5" stroke-linecap="round"/>
-                  <line x1="145" y1="153" x2="153" y2="153" stroke="var(--cherry-red)" stroke-width="1" opacity="0.5" stroke-linecap="round"/>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <div class="solution-card-body">
-            <div class="solution-card-meta">
-              <span class="solution-card-tag">SMB</span>
-              <span class="solution-card-tag">✦ 1-2 weeks</span>
-            </div>
-            <h3>Client Reporting</h3>
-            <p>Automated weekly reports and KPI tracking</p>
-            <ul class="solution-card-features">
-              <li>Weekly reports</li>
-              <li>KPI dashboards</li>
-              <li>Anomaly alerts</li>
-            </ul>
-            <div class="solution-card-tech">
-              <span class="tech-badge">Analytics</span>
-              <span class="tech-badge">Email</span>
-              <span class="tech-badge">Slack</span>
-            </div>
-            <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-dark btn-full">Learn More</a>
-          </div>
+      <div class="agent-cards-grid reveal-stagger">
         <!-- Voice Agent -->
         <div class="solution-card">
           <div class="solution-card-preview">
@@ -1025,6 +905,151 @@
             <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-dark btn-full">Learn More</a>
           </div>
         </div>
+
+      </div>
+
+      <div class="agent-cards-footer reveal">
+        <a href="#solutions" class="view-all-link">View all solutions <i data-lucide="arrow-right" style="width:16px;height:16px"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diamond Divider -->
+  <div class="diamond-divider"></div>
+
+  <!-- ===== SOLUTIONS (What We Build) ===== -->
+  <section class="solutions-section" id="solutions">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-badge">
+          <i data-lucide="layout-grid" style="width:14px;height:14px"></i>
+          WHAT WE BUILD
+        </div>
+        <h2 class="section-title"><span class="highlight">Solutions</span> that deliver</h2>
+        <p class="section-subtitle">AI systems built for your specific business needs</p>
+      </div>
+
+      <div class="solutions-grid reveal-stagger">
+        <!-- Lead Generation -->
+        <div class="solution-card">
+          <div class="solution-card-preview">
+            <div class="solution-anim-container" id="lead-gen-anim">
+              <svg viewBox="0 0 300 180" class="solution-svg">
+                <!-- Lines layer (drawn by JS behind everything) -->
+                <g class="network-lines"></g>
+                <!-- Central person: large, clear head + shoulders -->
+                <circle cx="150" cy="90" r="28" fill="var(--cherry-red)" opacity="0.08" class="central-pulse"/>
+                <circle cx="150" cy="80" r="10" fill="none" stroke="var(--cherry-red)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M132 104 a18 14 0 0 1 36 0" fill="none" stroke="var(--cherry-red)" stroke-width="2" stroke-linecap="round"/>
+                <!-- Outer person nodes (created by JS) -->
+                <g class="network-nodes"></g>
+              </svg>
+            </div>
+          </div>
+          <div class="solution-card-body">
+            <div class="solution-card-meta">
+              <span class="solution-card-tag">SMB</span>
+              <span class="solution-card-tag">✦ 2-3 weeks</span>
+            </div>
+            <h3>Lead Generation</h3>
+            <p>Capture and qualify leads instantly</p>
+            <ul class="solution-card-features">
+              <li>Form capture</li>
+              <li>Lead scoring</li>
+              <li>CRM sync</li>
+            </ul>
+            <div class="solution-card-tech">
+              <span class="tech-badge">GoHighLevel</span>
+              <span class="tech-badge">Zapier</span>
+              <span class="tech-badge">Slack</span>
+            </div>
+            <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-dark btn-full">Learn More</a>
+          </div>
+        </div>
+
+        <!-- Document Processing -->
+        <div class="solution-card">
+          <div class="solution-card-preview">
+            <div class="solution-anim-container" id="doc-process-anim">
+              <svg viewBox="0 0 300 180" class="solution-svg">
+                <!-- Spawned documents (created by JS) -->
+                <g class="burst-files"></g>
+                <!-- Central folder/file -->
+                <g class="central-doc">
+                  <rect x="125" y="50" width="50" height="60" rx="4" fill="var(--cherry-red)" opacity="0.1" class="central-file-bg"/>
+                  <!-- Folder tab -->
+                  <path d="M129 56 L129 50 Q129 46 133 46 L145 46 L149 50 L171 50 Q175 50 175 54 L175 106 Q175 110 171 110 L133 110 Q129 110 129 106 Z" fill="none" stroke="var(--cherry-red)" stroke-width="1.8" stroke-linejoin="round"/>
+                  <!-- Document lines inside -->
+                  <line x1="138" y1="62" x2="166" y2="62" stroke="var(--cherry-red)" stroke-width="1.2" opacity="0.4" stroke-linecap="round"/>
+                  <line x1="138" y1="70" x2="162" y2="70" stroke="var(--cherry-red)" stroke-width="1.2" opacity="0.4" stroke-linecap="round"/>
+                  <line x1="138" y1="78" x2="158" y2="78" stroke="var(--cherry-red)" stroke-width="1.2" opacity="0.4" stroke-linecap="round"/>
+                  <line x1="138" y1="86" x2="160" y2="86" stroke="var(--cherry-red)" stroke-width="1.2" opacity="0.4" stroke-linecap="round"/>
+                  <line x1="138" y1="94" x2="154" y2="94" stroke="var(--cherry-red)" stroke-width="1.2" opacity="0.4" stroke-linecap="round"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <div class="solution-card-body">
+            <div class="solution-card-meta">
+              <span class="solution-card-tag">Enterprise</span>
+              <span class="solution-card-tag">✦ 2-4 weeks</span>
+            </div>
+            <h3>Document Processing</h3>
+            <p>Extract, analyse, and act on your documents</p>
+            <ul class="solution-card-features">
+              <li>Contract analysis</li>
+              <li>Data extraction</li>
+              <li>Automated filing</li>
+            </ul>
+            <div class="solution-card-tech">
+              <span class="tech-badge">Llama 3.1</span>
+              <span class="tech-badge">Local Storage</span>
+            </div>
+            <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-dark btn-full">Learn More</a>
+          </div>
+        </div>
+
+        <!-- Client Reporting -->
+        <div class="solution-card">
+          <div class="solution-card-preview">
+            <div class="solution-anim-container" id="client-report-anim">
+              <svg viewBox="0 0 300 180" class="solution-svg">
+                <!-- Connection lines (drawn by JS) -->
+                <g class="report-lines"></g>
+                <!-- Source icon nodes (created by JS) -->
+                <g class="report-sources"></g>
+                <!-- Central report output -->
+                <g class="report-center">
+                  <circle cx="150" cy="145" r="20" fill="var(--cherry-red)" opacity="0.08" class="central-pulse"/>
+                  <!-- Clipboard/report icon -->
+                  <rect x="139" y="133" width="22" height="28" rx="2" fill="none" stroke="var(--cherry-red)" stroke-width="1.8"/>
+                  <rect x="145" y="130" width="10" height="6" rx="1.5" fill="none" stroke="var(--cherry-red)" stroke-width="1.3"/>
+                  <line x1="145" y1="143" x2="155" y2="143" stroke="var(--cherry-red)" stroke-width="1" opacity="0.5" stroke-linecap="round"/>
+                  <line x1="145" y1="148" x2="157" y2="148" stroke="var(--cherry-red)" stroke-width="1" opacity="0.5" stroke-linecap="round"/>
+                  <line x1="145" y1="153" x2="153" y2="153" stroke="var(--cherry-red)" stroke-width="1" opacity="0.5" stroke-linecap="round"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <div class="solution-card-body">
+            <div class="solution-card-meta">
+              <span class="solution-card-tag">SMB</span>
+              <span class="solution-card-tag">✦ 1-2 weeks</span>
+            </div>
+            <h3>Client Reporting</h3>
+            <p>Automated weekly reports and KPI tracking</p>
+            <ul class="solution-card-features">
+              <li>Weekly reports</li>
+              <li>KPI dashboards</li>
+              <li>Anomaly alerts</li>
+            </ul>
+            <div class="solution-card-tech">
+              <span class="tech-badge">Analytics</span>
+              <span class="tech-badge">Email</span>
+              <span class="tech-badge">Slack</span>
+            </div>
+            <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-dark btn-full">Learn More</a>
+          </div>
       </div>
     </div>
   </section>
