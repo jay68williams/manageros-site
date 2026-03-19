@@ -16,11 +16,644 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
   <link rel="stylesheet" href="../styles/main.css" />
+  <style>
+    /* ===== PRICING PAGE LIGHT THEME (OperatorOS Style) ===== */
+    .pricing-hero-light {
+      padding: 8rem 0 3rem;
+      background: #fafafa;
+      text-align: center;
+    }
+    .pricing-hero-light .pricing-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+    }
+    .pricing-hero-light .pricing-label span {
+      color: #cbd5e1;
+    }
+    .pricing-hero-light .pricing-tabs {
+      display: inline-flex;
+      gap: 0.25rem;
+      background: #f1f5f9;
+      border-radius: 999px;
+      padding: 0.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .pricing-hero-light .pricing-tab {
+      padding: 0.5rem 1.25rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #64748b;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pricing-hero-light .pricing-tab.active {
+      background: #fff;
+      color: #1a1a2e;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .pricing-hero-light h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #1a1a2e;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+    .pricing-hero-light .hero-subtitle {
+      font-size: 1.1rem;
+      color: #64748b;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    /* Light pricing section */
+    .pricing-section-light {
+      padding: 3rem 0 4rem;
+      background: #fafafa;
+    }
+
+    .pricing-grid-light {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .pricing-card-light {
+      background: #fff;
+      border-radius: 1rem;
+      border: 1px solid rgba(0,0,0,0.06);
+      padding: 2rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .pricing-card-light:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    }
+
+    .pricing-card-light.popular {
+      border: 2px solid #1a1a2e;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .pricing-popular-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--cherry-red, #dc2626);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .pricing-card-light .plan-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-card-light .plan-desc {
+      font-size: 0.85rem;
+      color: #64748b;
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+    }
+
+    .pricing-card-light .plan-price {
+      margin-bottom: 0.25rem;
+    }
+
+    .pricing-card-light .plan-price .amount {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #1a1a2e;
+      letter-spacing: -0.02em;
+    }
+
+    .pricing-card-light .plan-price .period {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      font-weight: 400;
+    }
+
+    .pricing-card-light .plan-setup {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-card-light .plan-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem 0;
+      flex: 1;
+    }
+
+    .pricing-card-light .plan-features li {
+      padding: 0.4rem 0;
+      font-size: 0.875rem;
+      color: #475569;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      line-height: 1.4;
+    }
+
+    .pricing-card-light .plan-features li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #1a1a2e;
+      flex-shrink: 0;
+      margin-top: 0.45rem;
+    }
+
+    .pricing-card-light.popular .plan-features li::before {
+      background: var(--cherry-red, #dc2626);
+    }
+
+    .pricing-card-light .plan-cta {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .pricing-card-light .plan-cta.cta-outline {
+      background: #fff;
+      color: #1a1a2e;
+      border: 1px solid #e2e8f0;
+    }
+    .pricing-card-light .plan-cta.cta-outline:hover {
+      border-color: #1a1a2e;
+    }
+
+    .pricing-card-light .plan-cta.cta-primary {
+      background: var(--cherry-red, #dc2626);
+      color: #fff;
+    }
+    .pricing-card-light .plan-cta.cta-primary:hover {
+      opacity: 0.9;
+    }
+
+    .pricing-card-light .plan-cta.cta-dark {
+      background: #1a1a2e;
+      color: #fff;
+    }
+    .pricing-card-light .plan-cta.cta-dark:hover {
+      background: #2d2d4e;
+    }
+
+    .pricing-note {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    /* Compare All Features */
+    .compare-section {
+      padding: 5rem 0;
+      background: #fff;
+    }
+
+    .compare-section .compare-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .compare-section .compare-header h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+    }
+
+    .compare-section .compare-header p {
+      font-size: 1rem;
+      color: #64748b;
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .compare-table thead th {
+      text-align: center;
+      padding: 1rem 1.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .compare-table thead th:first-child {
+      text-align: left;
+      color: #94a3b8;
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    .compare-table tbody tr {
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .compare-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .compare-table .category-row td {
+      padding: 1.25rem 1.5rem 0.5rem;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #1a1a2e;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .compare-table tbody td {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.875rem;
+      color: #475569;
+      text-align: center;
+    }
+
+    .compare-table tbody td:first-child {
+      text-align: left;
+      color: #475569;
+    }
+
+    .compare-table .check-icon {
+      color: #1a1a2e;
+      font-weight: 700;
+    }
+
+    .compare-table .dash-icon {
+      color: #cbd5e1;
+    }
+
+    .compare-table .priority-text {
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+
+    /* FAQ Light */
+    .faq-section-light {
+      padding: 5rem 0;
+      background: #fafafa;
+    }
+
+    .faq-section-light .faq-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .faq-section-light .faq-header h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1a1a2e;
+    }
+
+    .faq-list-light {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .faq-item-light {
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .faq-item-light .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #1a1a2e;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    .faq-item-light .faq-q .faq-chevron {
+      transition: transform 0.3s;
+      color: #94a3b8;
+    }
+
+    .faq-item-light.open .faq-q .faq-chevron {
+      transform: rotate(180deg);
+    }
+
+    .faq-item-light .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-item-light.open .faq-a {
+      max-height: 200px;
+    }
+
+    .faq-item-light .faq-a-content {
+      padding: 0 1.5rem 1.25rem;
+      font-size: 0.875rem;
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    /* Stats Bar Light */
+    .stats-bar-light {
+      padding: 4rem 0;
+      background: #1a1a2e;
+    }
+
+    .stats-grid-light {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-item-light .stat-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.75rem;
+    }
+
+    .stat-item-light .stat-icon.red { background: rgba(220,38,38,0.15); color: var(--cherry-red, #dc2626); }
+    .stat-item-light .stat-icon.blue { background: rgba(59,130,246,0.15); color: #3b82f6; }
+    .stat-item-light .stat-icon.green { background: rgba(34,197,94,0.15); color: #22c55e; }
+    .stat-item-light .stat-icon.purple { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+
+    .stat-item-light .stat-value {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-item-light .stat-label {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+
+    /* Bottom CTA Light */
+    .cta-section-light {
+      padding: 5rem 0;
+      background: #fafafa;
+      text-align: center;
+    }
+
+    .cta-section-light h2 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #1a1a2e;
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-section-light p {
+      font-size: 1rem;
+      color: #64748b;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-section-light .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #1a1a2e;
+      color: #fff;
+      padding: 0.875rem 2rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .cta-section-light .cta-btn:hover {
+      background: #2d2d4e;
+    }
+
+    .cta-section-light .cta-note {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin-top: 1rem;
+    }
+
+    /* Footer Light */
+    .footer-light {
+      background: #fff;
+      border-top: 1px solid #e2e8f0;
+      padding: 3rem 0 2rem;
+    }
+
+    .footer-light .footer-main {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-light .nav-logo {
+      color: #1a1a2e;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-light .logo-icon {
+      background: var(--cherry-red, #dc2626);
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.8rem;
+    }
+
+    .footer-light .footer-tagline {
+      color: #64748b;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .footer-light .footer-badges {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .footer-light .footer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #475569;
+      padding: 0.3rem 0.75rem;
+      background: #f1f5f9;
+      border-radius: 999px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .footer-light h4 {
+      color: #1a1a2e;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .footer-light .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-light .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-light .footer-links a {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .footer-light .footer-links a:hover {
+      color: #1a1a2e;
+    }
+
+    .footer-light .footer-bottom {
+      border-top: 1px solid #f1f5f9;
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-light .footer-bottom span {
+      color: #94a3b8;
+      font-size: 0.8rem;
+    }
+
+    .footer-light .footer-social a {
+      color: #94a3b8;
+      transition: color 0.2s;
+    }
+
+    .footer-light .footer-social a:hover {
+      color: #1a1a2e;
+    }
+
+    /* Navbar overrides for light pricing page */
+    .navbar-light {
+      background: #fafafa !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+    }
+    .navbar-light .nav-logo {
+      color: #1a1a2e !important;
+    }
+    .navbar-light .nav-links a {
+      color: #475569 !important;
+    }
+    .navbar-light .nav-links a:hover {
+      color: #1a1a2e !important;
+    }
+    .navbar-light .btn-dark {
+      background: #fff !important;
+      color: #1a1a2e !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+    .navbar-light .btn-primary {
+      background: var(--cherry-red, #dc2626) !important;
+      color: #fff !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .pricing-grid-light {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+        margin: 0 auto;
+      }
+      .pricing-hero-light h1 {
+        font-size: 2rem;
+      }
+      .compare-table {
+        font-size: 0.75rem;
+      }
+      .compare-table thead th,
+      .compare-table tbody td {
+        padding: 0.5rem 0.75rem;
+      }
+      .stats-grid-light {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-light .footer-main {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <!-- ===== NAVBAR ===== -->
-  <nav class="navbar" id="navbar">
+  <nav class="navbar navbar-light" id="navbar">
     <div class="container">
       <a href="/" class="nav-logo">
         <div class="logo-icon">M</div>
@@ -36,10 +669,6 @@
           <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-primary">Get Started</a>
         </li>
       </ul>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-        <i data-lucide="sun" class="theme-icon sun-icon" style="width:18px;height:18px"></i>
-        <i data-lucide="moon" class="theme-icon moon-icon" style="width:18px;height:18px"></i>
-      </button>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
         <span></span><span></span><span></span>
       </button>
@@ -47,74 +676,79 @@
   </nav>
 
   <!-- ===== PRICING HERO ===== -->
-  <section class="about-hero">
+  <section class="pricing-hero-light">
     <div class="container">
-      <div class="section-badge">
-        <i data-lucide="credit-card" style="width:14px;height:14px"></i>
-        PRICING
+      <div class="pricing-label">
+        Flexible Plans <span>|</span> Priced for your needs
       </div>
-      <h1>Straightforward pricing. <span class="highlight">No surprises.</span></h1>
-      <p>Hardware, setup, training, and support, all included. Choose the plan that fits your team.</p>
+      <div class="pricing-tabs">
+        <button class="pricing-tab active">Monthly</button>
+        <button class="pricing-tab">Annual (Save 15%)</button>
+      </div>
+      <h1>Straightforward pricing.<br>No surprises.</h1>
+      <p class="hero-subtitle">Hardware, setup, training, and support — all included. Choose the plan that fits your team.</p>
     </div>
   </section>
 
   <!-- ===== PRICING CARDS ===== -->
-  <section class="pricing-section" style="padding-top:3rem">
+  <section class="pricing-section-light">
     <div class="container">
-      <div class="pricing-grid reveal-stagger">
+      <div class="pricing-grid-light">
         <!-- Starter -->
-        <div class="pricing-card">
-          <div class="pricing-card-name">Starter</div>
-          <p class="pricing-card-desc">For solo operators testing the power of on-premise AI</p>
-          <div class="pricing-card-price">
+        <div class="pricing-card-light">
+          <div class="plan-name">Starter</div>
+          <p class="plan-desc">For solo operators testing the power of on-premise AI with a single workflow.</p>
+          <div class="plan-price">
             <span class="amount">&pound;400</span>
-            <span class="period">/month</span>
+            <span class="period">/mo</span>
           </div>
-          <div class="pricing-card-setup">&pound;1,000 one-time setup</div>
-          <ul class="pricing-card-features">
+          <div class="plan-setup">&pound;1,000 one-time setup fee</div>
+          <ul class="plan-features">
             <li>Dedicated AI Station, 16GB RAM</li>
             <li>Single AI workflow</li>
             <li>GoHighLevel integration</li>
             <li>Email support (24hr response)</li>
             <li>12-month hardware warranty</li>
+            <li>30-day money-back guarantee</li>
           </ul>
-          <p class="pricing-card-best">Best for: Solo operators testing AI</p>
-          <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-dark btn-full">Get Started</a>
+          <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="plan-cta cta-outline">Get Started &rarr;</a>
         </div>
 
-        <!-- Growth -->
-        <div class="pricing-card popular">
-          <div class="pricing-badge">Most Popular</div>
-          <div class="pricing-card-name">Growth</div>
-          <p class="pricing-card-desc">For teams automating serious volume across multiple workflows</p>
-          <div class="pricing-card-price">
+        <!-- Growth (Most Popular) -->
+        <div class="pricing-card-light popular">
+          <div class="pricing-popular-badge">Most Popular</div>
+          <div class="plan-name">Growth</div>
+          <p class="plan-desc">For teams automating serious volume across multiple workflows.</p>
+          <div class="plan-price">
             <span class="amount">&pound;800</span>
-            <span class="period">/month</span>
+            <span class="period">/mo</span>
           </div>
-          <div class="pricing-card-setup">&pound;2,000 one-time setup</div>
-          <ul class="pricing-card-features">
-            <li>High-Performance AI Station, 16GB RAM</li>
+          <div class="plan-setup">&pound;2,000 one-time setup fee</div>
+          <ul class="plan-features">
+            <li>Everything in Starter, plus:</li>
+            <li>High-Performance AI Station</li>
             <li>Up to 5 AI workflows</li>
             <li>GoHighLevel + custom integrations</li>
             <li>Voice agent (VAPI.ai)</li>
             <li>Priority support + remote monitoring</li>
             <li>Monthly strategy call</li>
+            <li>Discounted rates on additional workflows</li>
           </ul>
-          <p class="pricing-card-best">Best for: Growing teams with multiple automation needs</p>
-          <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-primary btn-full">Get Started</a>
+          <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="plan-cta cta-primary">Book a Call &rarr;</a>
         </div>
 
         <!-- Scale -->
-        <div class="pricing-card">
-          <div class="pricing-card-name">Scale</div>
-          <p class="pricing-card-desc">For multi-site operations needing enterprise-grade AI</p>
-          <div class="pricing-card-price">
+        <div class="pricing-card-light">
+          <div class="plan-name">Scale</div>
+          <p class="plan-desc">For multi-site operations needing enterprise-grade AI infrastructure.</p>
+          <div class="plan-price">
             <span class="amount">&pound;1,200</span>
-            <span class="period">/month</span>
+            <span class="period">/mo</span>
           </div>
-          <div class="pricing-card-setup">&pound;3,500 one-time setup</div>
-          <ul class="pricing-card-features">
-            <li>High-Performance AI Station, 32GB RAM</li>
+          <div class="plan-setup">&pound;3,500 one-time setup fee</div>
+          <ul class="plan-features">
+            <li>Everything in Growth, plus:</li>
+            <li>32GB RAM AI Station</li>
             <li>Unlimited AI workflows</li>
             <li>Full API access</li>
             <li>Multi-location VPN (Tailscale)</li>
@@ -122,110 +756,274 @@
             <li>Quarterly strategy reviews</li>
             <li>Custom model fine-tuning</li>
           </ul>
-          <p class="pricing-card-best">Best for: Multi-site operations</p>
-          <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-dark btn-full">Get Started</a>
+          <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="plan-cta cta-dark">Contact Sales &rarr;</a>
+        </div>
+      </div>
+      <p class="pricing-note">All prices are exclusive of VAT. Setup fee covers configuration, delivery, installation, and training.</p>
+    </div>
+  </section>
+
+  <!-- ===== COMPARE ALL FEATURES ===== -->
+  <section class="compare-section">
+    <div class="container">
+      <div class="compare-header">
+        <h2>Compare all features</h2>
+        <p>See exactly what you get with each plan</p>
+      </div>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Starter</th>
+            <th>Growth</th>
+            <th>Scale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- PLATFORM -->
+          <tr class="category-row">
+            <td colspan="4">Platform</td>
+          </tr>
+          <tr>
+            <td>AI Station hardware</td>
+            <td>16GB RAM</td>
+            <td>16GB RAM</td>
+            <td>32GB RAM</td>
+          </tr>
+          <tr>
+            <td>AI workflows</td>
+            <td>1</td>
+            <td>Up to 5</td>
+            <td>Unlimited</td>
+          </tr>
+          <tr>
+            <td>Knowledge base storage</td>
+            <td>10GB</td>
+            <td>50GB</td>
+            <td>Unlimited</td>
+          </tr>
+          <tr>
+            <td>Data retention</td>
+            <td>30 days</td>
+            <td>90 days</td>
+            <td>Unlimited</td>
+          </tr>
+          <tr>
+            <td>Team members</td>
+            <td>Up to 3</td>
+            <td>Up to 10</td>
+            <td>Unlimited</td>
+          </tr>
+          <tr>
+            <td>API access</td>
+            <td class="dash-icon">—</td>
+            <td class="check-icon">✓</td>
+            <td class="priority-text">Priority</td>
+          </tr>
+
+          <!-- AI & AUTOMATION -->
+          <tr class="category-row">
+            <td colspan="4">AI &amp; Automation</td>
+          </tr>
+          <tr>
+            <td>AI-generated tasks</td>
+            <td>500/mo</td>
+            <td>Unlimited</td>
+            <td>Unlimited</td>
+          </tr>
+          <tr>
+            <td>Voice agent minutes</td>
+            <td class="dash-icon">—</td>
+            <td>500/mo</td>
+            <td>Unlimited</td>
+          </tr>
+          <tr>
+            <td>Custom workflows</td>
+            <td class="dash-icon">—</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+          </tr>
+          <tr>
+            <td>Scheduled automations</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+          </tr>
+          <tr>
+            <td>Custom model fine-tuning</td>
+            <td class="dash-icon">—</td>
+            <td class="dash-icon">—</td>
+            <td class="check-icon">✓</td>
+          </tr>
+
+          <!-- INTEGRATIONS -->
+          <tr class="category-row">
+            <td colspan="4">Integrations</td>
+          </tr>
+          <tr>
+            <td>GoHighLevel</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+          </tr>
+          <tr>
+            <td>Email &amp; Google Calendar</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+          </tr>
+          <tr>
+            <td>Slack &amp; Microsoft Teams</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+          </tr>
+          <tr>
+            <td>Zapier &amp; Make</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+          </tr>
+          <tr>
+            <td>Custom integrations</td>
+            <td class="dash-icon">—</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+          </tr>
+
+          <!-- SUPPORT & SECURITY -->
+          <tr class="category-row">
+            <td colspan="4">Support &amp; Delivery</td>
+          </tr>
+          <tr>
+            <td>Email support</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+          </tr>
+          <tr>
+            <td>Priority support</td>
+            <td class="dash-icon">—</td>
+            <td>24 hours</td>
+            <td>4 hours</td>
+          </tr>
+          <tr>
+            <td>Remote monitoring</td>
+            <td class="dash-icon">—</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+          </tr>
+          <tr>
+            <td>Dedicated account manager</td>
+            <td class="dash-icon">—</td>
+            <td class="dash-icon">—</td>
+            <td class="check-icon">✓</td>
+          </tr>
+          <tr>
+            <td>Strategy reviews</td>
+            <td class="dash-icon">—</td>
+            <td>Monthly</td>
+            <td>Quarterly</td>
+          </tr>
+          <tr>
+            <td>Hardware warranty</td>
+            <td>12 months</td>
+            <td>24 months</td>
+            <td>36 months</td>
+          </tr>
+          <tr>
+            <td>Multi-location VPN</td>
+            <td class="dash-icon">—</td>
+            <td class="dash-icon">—</td>
+            <td class="check-icon">✓</td>
+          </tr>
+          <tr>
+            <td>30-day money-back guarantee</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+            <td class="check-icon">✓</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== STATS BAR ===== -->
+  <section class="stats-bar-light">
+    <div class="container">
+      <div class="stats-grid-light">
+        <div class="stat-item-light">
+          <div class="stat-icon red"><i data-lucide="server" style="width:20px;height:20px"></i></div>
+          <div class="stat-value">100%</div>
+          <div class="stat-label">On-Premise</div>
+        </div>
+        <div class="stat-item-light">
+          <div class="stat-icon blue"><i data-lucide="zap" style="width:20px;height:20px"></i></div>
+          <div class="stat-value">48hr</div>
+          <div class="stat-label">Deployment Time</div>
+        </div>
+        <div class="stat-item-light">
+          <div class="stat-icon green"><i data-lucide="shield-check" style="width:20px;height:20px"></i></div>
+          <div class="stat-value">ICO</div>
+          <div class="stat-label">Registered</div>
+        </div>
+        <div class="stat-item-light">
+          <div class="stat-icon purple"><i data-lucide="refresh-cw" style="width:20px;height:20px"></i></div>
+          <div class="stat-value">30-Day</div>
+          <div class="stat-label">Money-Back Guarantee</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Diamond Divider -->
-  <div class="diamond-divider"></div>
-
-  <!-- ===== ALL PLANS INCLUDE ===== -->
-  <section class="all-plans-section">
+  <!-- ===== FAQ ===== -->
+  <section class="faq-section-light">
     <div class="container">
-      <div class="section-header reveal">
-        <h2 class="section-title">All plans include</h2>
+      <div class="faq-header">
+        <h2>Frequently asked questions</h2>
       </div>
-      <div class="all-plans-grid reveal-stagger">
-        <div class="all-plans-item">
-          <div class="all-plans-icon">
-            <i data-lucide="server" style="width:22px;height:22px"></i>
-          </div>
-          <h4>Physical Hardware</h4>
-          <p>Dedicated hardware delivered and installed in your office</p>
-        </div>
-        <div class="all-plans-item">
-          <div class="all-plans-icon">
-            <i data-lucide="shield-check" style="width:22px;height:22px"></i>
-          </div>
-          <h4>Data Privacy</h4>
-          <p>Zero cloud processing. Your data stays on-site</p>
-        </div>
-        <div class="all-plans-item">
-          <div class="all-plans-icon">
-            <i data-lucide="wrench" style="width:22px;height:22px"></i>
-          </div>
-          <h4>Full Setup</h4>
-          <p>We configure everything and train your team</p>
-        </div>
-        <div class="all-plans-item">
-          <div class="all-plans-icon">
-            <i data-lucide="refresh-cw" style="width:22px;height:22px"></i>
-          </div>
-          <h4>30-Day Guarantee</h4>
-          <p>Not satisfied? Full refund, no questions asked</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Diamond Divider -->
-  <div class="diamond-divider"></div>
-
-  <!-- ===== PRICING FAQ ===== -->
-  <section class="faq-section">
-    <div class="container">
-      <div class="section-header reveal">
-        <div class="section-badge">
-          <i data-lucide="help-circle" style="width:14px;height:14px"></i>
-          PRICING FAQ
-        </div>
-        <h2 class="section-title">Questions about pricing</h2>
-      </div>
-      <div class="faq-list reveal">
-        <div class="faq-item">
-          <button class="faq-question">
+      <div class="faq-list-light">
+        <div class="faq-item-light">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             Are there any hidden costs?
-            <span class="faq-icon"></span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="faq-answer">
-            <div class="faq-answer-content">
+          <div class="faq-a">
+            <div class="faq-a-content">
               No. The monthly fee covers everything: hardware lease, software, updates, support, and monitoring. The one-time setup fee covers configuration, delivery, installation, and training.
             </div>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-question">
+        <div class="faq-item-light">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             What happens if I want to cancel?
-            <span class="faq-icon"></span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="faq-answer">
-            <div class="faq-answer-content">
+          <div class="faq-a">
+            <div class="faq-a-content">
               You can cancel anytime with 30 days' notice. Within the first 30 days you get a full refund. After that, we simply collect the hardware. No penalties, no long-term contracts.
             </div>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-question">
+        <div class="faq-item-light">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             Can I upgrade my plan later?
-            <span class="faq-icon"></span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="faq-answer">
-            <div class="faq-answer-content">
+          <div class="faq-a">
+            <div class="faq-a-content">
               Yes. Upgrading is seamless. We can upgrade your hardware remotely or ship enhanced equipment. You only pay the difference in setup costs, and your new monthly rate starts immediately.
             </div>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-question">
-            Do you offer custom enterprise pricing?
-            <span class="faq-icon"></span>
+        <div class="faq-item-light">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            How quickly can you deploy?
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="faq-answer">
-            <div class="faq-answer-content">
-              Yes. For deployments of 5+ stations or highly specialised requirements, we offer custom pricing and dedicated engineering support. Book a call to discuss.
+          <div class="faq-a">
+            <div class="faq-a-content">
+              Most deployments are completed within 48 hours of signing. We configure the hardware, deliver it to your office, and train your team on-site. You're up and running the same day.
             </div>
           </div>
         </div>
@@ -233,20 +1031,18 @@
     </div>
   </section>
 
-  <!-- ===== FINAL CTA ===== -->
-  <section class="final-cta">
-    <div class="container reveal">
+  <!-- ===== BOTTOM CTA ===== -->
+  <section class="cta-section-light">
+    <div class="container">
       <h2>Ready to get started?</h2>
-      <p>Book a 30-minute discovery call. No hard sell, just an honest conversation about whether Manager OS is right for your business.</p>
-      <div class="final-cta-buttons">
-        <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-dark btn-lg">Book a Call &rarr;</a>
-        <a href="/#platform" class="btn btn-secondary btn-lg">Learn More</a>
-      </div>
+      <p>Book a 30-minute discovery call. We'll scope your project and give you a clear quote within 48 hours.</p>
+      <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="cta-btn">Book a Call <span>&rarr;</span></a>
+      <div class="cta-note">No commitment required. Just a conversation.</div>
     </div>
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer">
+  <footer class="footer-light">
     <div class="container">
       <div class="footer-main">
         <div class="footer-brand">
@@ -311,5 +1107,6 @@
       lucide.createIcons();
     }
   </script>
+
 </body>
 </html>
