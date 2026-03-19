@@ -2087,15 +2087,18 @@ section {
   font-size: 0.875rem;
   color: var(--text-secondary);
   padding: 0.25rem 0;
-  padding-left: 1rem;
-  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .solution-card-features li::before {
-  content: '•';
-  position: absolute;
-  left: 0;
-  color: var(--red);
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--cherry-red, #c2031f);
+  flex-shrink: 0;
 }
 
 .solution-card-tech {
