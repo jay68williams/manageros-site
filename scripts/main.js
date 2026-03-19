@@ -881,8 +881,8 @@ function animatePlatformDemo() {
     caret.style.display = 'none';
     sendBtn.classList.remove('active');
     popup.classList.remove('visible');
-    if (suggestions) { suggestions.style.opacity = '1'; suggestions.style.visibility = 'visible'; }
-    if (pills) { pills.style.opacity = '1'; pills.style.visibility = 'visible'; }
+    if (suggestions) { suggestions.style.display = ''; }
+    if (pills) { pills.style.display = ''; }
   }
 
   function moveCursor(targetX, targetY, duration) {
@@ -949,8 +949,8 @@ function animatePlatformDemo() {
 
     // 7. Caret disappears, results popup slides in
     caret.style.display = 'none';
-    if (suggestions) { suggestions.style.opacity = '0'; suggestions.style.visibility = 'hidden'; }
-    if (pills) { pills.style.opacity = '0'; pills.style.visibility = 'hidden'; }
+    if (suggestions) { suggestions.style.display = 'none'; }
+    if (pills) { pills.style.display = 'none'; }
     popup.classList.add('visible');
     await new Promise(r => setTimeout(r, 3500));
 

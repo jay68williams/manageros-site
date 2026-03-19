@@ -1441,31 +1441,29 @@ section {
 
 /* Results Popup */
 .demo-results-popup {
-  position: absolute;
-  top: 115px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  border-radius: 0 0 20px 20px;
-  box-shadow: 0 -4px 32px rgba(0,0,0,0.08);
+  display: none;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
   padding: 0;
-  opacity: 0;
-  transform: translateY(20px);
-  pointer-events: none;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  z-index: 10;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  animation: popupSlideIn 0.5s ease forwards;
 }
 
 .demo-results-popup.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+  display: block;
+}
+
+@keyframes popupSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .demo-results-header {
