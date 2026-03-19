@@ -881,8 +881,7 @@ function animatePlatformDemo() {
     caret.style.display = 'none';
     sendBtn.classList.remove('active');
     popup.classList.remove('visible');
-    if (suggestions) { suggestions.style.display = ''; }
-    if (pills) { pills.style.display = ''; }
+    /* suggestions & pills stay visible — popup overlays them via absolute positioning */
   }
 
   function moveCursor(targetX, targetY, duration) {
@@ -949,8 +948,7 @@ function animatePlatformDemo() {
 
     // 7. Caret disappears, results popup slides in
     caret.style.display = 'none';
-    if (suggestions) { suggestions.style.display = 'none'; }
-    if (pills) { pills.style.display = 'none'; }
+    /* popup overlays suggestions & pills via absolute positioning — no need to hide them */
     popup.classList.add('visible');
     await new Promise(r => setTimeout(r, 3500));
 
