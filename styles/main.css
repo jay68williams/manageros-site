@@ -3215,67 +3215,139 @@ section {
 /* ============================================
    THEME TOGGLE BUTTON
    ============================================ */
+/* ===== THEME TOGGLE SWITCH ===== */
 .theme-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-full);
-  border: 1.5px solid var(--border-grey);
-  background: var(--white);
+  border: none;
+  background: none;
   cursor: pointer;
-  transition: all var(--duration) var(--ease);
-  position: relative;
-  margin-left: 0.5rem;
+  padding: 0;
+  margin-left: 0.75rem;
   flex-shrink: 0;
 }
 
-.theme-toggle:hover {
-  border-color: var(--red);
-  background: var(--red-light);
+.toggle-track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 56px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #e8e8ed;
+  border: 1.5px solid rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
 }
 
-.theme-icon {
+.toggle-track:hover {
+  border-color: rgba(0,0,0,0.15);
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.04);
+}
+
+.toggle-thumb {
   position: absolute;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18), 0 0 0 0.5px rgba(0,0,0,0.04);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+}
+
+.toggle-icon {
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+/* Light mode: moon is active (shows what you'll switch TO) */
+.toggle-icon.sun-icon {
+  color: #999;
+  opacity: 0.5;
+}
+
+.toggle-icon.moon-icon {
+  color: #555;
+  opacity: 1;
+}
+
+/* Dark mode */
+[data-theme="dark"] .toggle-track {
+  background: #2a2a2e;
+  border-color: rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .toggle-track:hover {
+  border-color: rgba(255,255,255,0.2);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.05);
+}
+
+[data-theme="dark"] .toggle-thumb {
+  transform: translateX(28px);
+  background: #444;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+[data-theme="dark"] .toggle-icon.sun-icon {
+  color: #fbbf24;
+  opacity: 1;
+}
+
+[data-theme="dark"] .toggle-icon.moon-icon {
+  color: #666;
+  opacity: 0.5;
+}
+
+/* ===== NAV CTA BUTTON UPGRADES ===== */
+.nav-cta .btn-dark {
+  background: transparent;
   color: var(--text-primary);
+  border: 1.5px solid var(--border-grey);
+  position: relative;
+  font-weight: 500;
 }
 
-/* Light mode: show moon (switch to dark), hide sun */
-.sun-icon {
-  opacity: 0;
-  transform: rotate(90deg) scale(0.5);
-}
-
-.moon-icon {
-  opacity: 1;
-  transform: rotate(0deg) scale(1);
-}
-
-/* Dark mode: show sun (switch to light), hide moon */
-[data-theme="dark"] .sun-icon {
-  opacity: 1;
-  transform: rotate(0deg) scale(1);
-}
-
-[data-theme="dark"] .moon-icon {
-  opacity: 0;
-  transform: rotate(-90deg) scale(0.5);
-}
-
-[data-theme="dark"] .theme-toggle {
-  border-color: #333;
-  background: #222;
-}
-
-[data-theme="dark"] .theme-toggle:hover {
+.nav-cta .btn-dark:hover {
   border-color: var(--red);
-  background: rgba(194, 3, 31, 0.15);
+  color: var(--red);
+  background: var(--red-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px var(--red-glow);
 }
 
-[data-theme="dark"] .theme-icon {
+.nav-cta .btn-primary {
+  position: relative;
+  background: linear-gradient(135deg, var(--red), #e41030);
+  box-shadow: 0 2px 12px var(--red-glow);
+  animation: nav-cta-glow 3s ease-in-out infinite;
+}
+
+.nav-cta .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px var(--red-glow);
+}
+
+@keyframes nav-cta-glow {
+  0%, 100% { box-shadow: 0 2px 12px var(--red-glow); }
+  50% { box-shadow: 0 4px 20px var(--red-glow); }
+}
+
+[data-theme="dark"] .nav-cta .btn-dark {
   color: #e5e5e5;
+  border-color: #444;
+  background: transparent;
+}
+
+[data-theme="dark"] .nav-cta .btn-dark:hover {
+  border-color: var(--red);
+  color: var(--red);
+  background: rgba(194, 3, 31, 0.1);
 }
 
 /* ============================================
