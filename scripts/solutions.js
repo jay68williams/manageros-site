@@ -169,6 +169,11 @@ function initMeetingDemo() {
 }
 
 /* --- Knowledge Base Demo --- */
+
+// ⚡ SET YOUR CLOUDFLARE WORKER URL HERE AFTER DEPLOYMENT
+// Leave as empty string to use mock/demo mode
+const KB_API_URL = '';
+
 function initKBDemo() {
   const input = document.getElementById('kbInput');
   const btn = document.getElementById('kbSearchBtn');
@@ -176,7 +181,8 @@ function initKBDemo() {
   const responseBody = document.getElementById('kbResponseBody');
   if (!input || !btn || !response) return;
 
-  const answers = {
+  // Fallback mock answers (used when API is not configured)
+  const mockAnswers = {
     default: {
       text: 'Based on your company documentation, the standard onboarding process takes 5-7 business days. This includes account setup (Day 1), system configuration (Days 2-3), team training (Days 4-5), and go-live support (Days 6-7). The process can be expedited to 3 days for urgent deployments with an additional setup fee.',
       sources: ['onboarding-guide.pdf', 'sla-terms.docx', 'training-manual.pdf']
@@ -191,30 +197,84 @@ function initKBDemo() {
     }
   };
 
-  function search() {
-    const query = input.value.trim().toLowerCase();
-    if (!query) return;
+  let isLoading = false;
 
-    let answer = answers.default;
-    if (query.includes('leave') || query.includes('holiday') || query.includes('vacation')) answer = answers.leave;
-    if (query.includes('refund') || query.includes('return') || query.includes('money back')) answer = answers.refund;
+  async function search() {
+    const query = input.value.trim();
+    if (!query || isLoading) return;
 
+    // Show loading state
+    isLoading = true;
+    btn.disabled = true;
+    btn.textContent = 'Thinking...';
     responseBody.textContent = '';
     response.classList.add('visible');
 
-    // Typewriter effect
+    const sourcesDiv = response.querySelector('.kb-sources');
+    if (sourcesDiv) sourcesDiv.innerHTML = '';
+
+    // Add loading animation
+    responseBody.innerHTML = '<span class="kb-loading-dots"><span>●</span><span>●</span><span>●</span></span>';
+
+    // Try real API first, fall back to mock
+    if (KB_API_URL) {
+      try {
+        const res = await fetch(KB_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question: query, demo: 'knowledge-base' })
+        });
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error || 'API request failed');
+        }
+
+        const data = await res.json();
+        responseBody.textContent = '';
+        typewriterEffect(responseBody, data.answer, () => {
+          if (sourcesDiv) {
+            sourcesDiv.innerHTML = '<span class="kb-source-tag">✦ Powered by AI</span>';
+          }
+        });
+      } catch (err) {
+        console.warn('KB API error, falling back to mock:', err.message);
+        responseBody.textContent = '';
+        useMockAnswer(query, responseBody, sourcesDiv);
+      }
+    } else {
+      // No API configured — use mock
+      responseBody.textContent = '';
+      useMockAnswer(query, responseBody, sourcesDiv);
+    }
+
+    // Reset button
+    isLoading = false;
+    btn.disabled = false;
+    btn.textContent = 'Ask AI';
+  }
+
+  function useMockAnswer(query, bodyEl, sourcesEl) {
+    const q = query.toLowerCase();
+    let answer = mockAnswers.default;
+    if (q.includes('leave') || q.includes('holiday') || q.includes('vacation')) answer = mockAnswers.leave;
+    if (q.includes('refund') || q.includes('return') || q.includes('money back')) answer = mockAnswers.refund;
+
+    typewriterEffect(bodyEl, answer.text, () => {
+      if (sourcesEl) {
+        sourcesEl.innerHTML = answer.sources.map(s => '<span class="kb-source-tag">📄 ' + s + '</span>').join('');
+      }
+    });
+  }
+
+  function typewriterEffect(el, text, onComplete) {
     let charIdx = 0;
-    const text = answer.text;
     function typeChar() {
       if (charIdx >= text.length) {
-        // Show sources
-        const sourcesDiv = response.querySelector('.kb-sources');
-        if (sourcesDiv) {
-          sourcesDiv.innerHTML = answer.sources.map(s => '<span class="kb-source-tag">📄 ' + s + '</span>').join('');
-        }
+        if (onComplete) onComplete();
         return;
       }
-      responseBody.textContent += text[charIdx];
+      el.textContent += text[charIdx];
       charIdx++;
       setTimeout(typeChar, 12);
     }
