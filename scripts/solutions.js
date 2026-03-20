@@ -172,7 +172,7 @@ function initMeetingDemo() {
 
 // ⚡ SET YOUR CLOUDFLARE WORKER URL HERE AFTER DEPLOYMENT
 // Leave as empty string to use mock/demo mode
-const KB_API_URL = '';
+const KB_API_URL = 'https://manageros-kb-proxy-worker.jason-williams140100.workers.dev';
 
 function initKBDemo() {
   const input = document.getElementById('kbInput');
