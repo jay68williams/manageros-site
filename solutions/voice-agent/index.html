@@ -65,7 +65,6 @@
 
   <div class="diamond-divider"></div>
 
-  <!-- ===== INTERACTIVE DEMO ===== -->
   <section class="solution-demo-section">
     <div class="container">
       <div class="solution-demo-card reveal">
@@ -77,19 +76,50 @@
         </div>
         <div class="demo-card-body">
           <div class="voice-demo-container">
-            <div class="voice-wave-display" id="voiceWaveDisplay">
-              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+
+            <!-- Step 1: Email/Name Gate -->
+            <div class="voice-gate" id="voiceGate">
+              <h4 style="margin-bottom:0.5rem;font-size:1rem;color:var(--text-primary);">Try a live call with our AI agent</h4>
+              <p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:1rem;">Enter your details to start a 3-minute demo call. Your browser microphone will be used.</p>
+              <div style="display:flex;flex-direction:column;gap:0.6rem;max-width:320px;margin:0 auto;">
+                <input type="text" id="voiceGateName" placeholder="Your name" class="voice-gate-input" required />
+                <input type="email" id="voiceGateEmail" placeholder="Your email" class="voice-gate-input" required />
+                <button class="voice-call-btn" id="voiceStartBtn" style="width:100%;margin-top:0.25rem;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                  Start Live Call
+                </button>
+              </div>
+              <p style="font-size:0.7rem;color:var(--text-tertiary);margin-top:0.75rem;">🔒 We'll never share your details. Call limited to 3 minutes.</p>
             </div>
-            <button class="voice-call-btn" id="voiceCallBtn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-              Start Call
-            </button>
-            <div class="voice-status" id="voiceStatus">Click to simulate a live call</div>
-            <div class="voice-transcript" id="voiceTranscript"></div>
+
+            <!-- Step 2: Active Call UI (hidden until call starts) -->
+            <div class="voice-call-active" id="voiceCallActive" style="display:none;">
+              <div class="voice-call-timer" id="voiceCallTimer">0:00 / 3:00</div>
+              <div class="voice-wave-display active" id="voiceWaveDisplay">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+              </div>
+              <button class="voice-call-btn active" id="voiceEndBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                End Call
+              </button>
+              <div class="voice-status active" id="voiceStatus">Call in progress...</div>
+              <div class="voice-transcript" id="voiceTranscript" class="visible"></div>
+            </div>
+
+            <!-- Step 3: Call Ended Summary (hidden until call ends) -->
+            <div class="voice-call-ended" id="voiceCallEnded" style="display:none;">
+              <div class="voice-status">Call ended • Transcript saved</div>
+              <div class="voice-transcript visible" id="voiceTranscriptFinal"></div>
+              <button class="voice-call-btn" id="voiceRestartBtn" style="margin-top:1rem;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                Try Another Call
+              </button>
+            </div>
+
           </div>
         </div>
       </div>
@@ -243,7 +273,8 @@
     Cal("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
   </script>
   <script src="../../scripts/main.js"></script>
-  <script src="../../scripts/solutions.js?v=3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/dist/vapi.min.js"></script>
+  <script src="../../scripts/solutions.js?v=4"></script>
   <script>if (typeof lucide !== 'undefined') { lucide.createIcons(); }</script>
 </body>
 </html>

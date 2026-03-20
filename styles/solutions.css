@@ -203,6 +203,47 @@
   color: var(--cherry-red);
 }
 
+/* Voice Gate Form */
+.voice-gate {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+.voice-gate-input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-grey);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-family: var(--font-sans);
+  transition: border-color 0.2s;
+}
+.voice-gate-input:focus {
+  outline: none;
+  border-color: var(--cherry-red);
+}
+.voice-gate-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* Call Timer */
+.voice-call-timer {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--cherry-red);
+  text-align: center;
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+/* Call Active / Ended Views */
+.voice-call-active,
+.voice-call-ended {
+  text-align: center;
+}
+
 .voice-transcript {
   width: 100%;
   max-width: 500px;

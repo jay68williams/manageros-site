@@ -19,59 +19,200 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-/* --- Voice Agent Demo --- */
+/* --- Voice Agent Demo (Vapi.ai Integration) --- */
+
+// ⚡ SET YOUR VAPI CREDENTIALS HERE
+const VAPI_PUBLIC_KEY = '';   // Your Vapi Public Key
+const VAPI_ASSISTANT_ID = ''; // Your Vapi Assistant ID
+const VAPI_MAX_CALL_SECONDS = 180; // 3 minutes
+
 function initVoiceDemo() {
-  const btn = document.getElementById('voiceCallBtn');
-  const display = document.getElementById('voiceWaveDisplay');
-  const status = document.getElementById('voiceStatus');
-  const transcript = document.getElementById('voiceTranscript');
-  if (!btn || !display) return;
+  const gate = document.getElementById('voiceGate');
+  const callActive = document.getElementById('voiceCallActive');
+  const callEnded = document.getElementById('voiceCallEnded');
+  const startBtn = document.getElementById('voiceStartBtn');
+  const endBtn = document.getElementById('voiceEndBtn');
+  const restartBtn = document.getElementById('voiceRestartBtn');
+  const nameInput = document.getElementById('voiceGateName');
+  const emailInput = document.getElementById('voiceGateEmail');
+  const timerEl = document.getElementById('voiceCallTimer');
+  const statusEl = document.getElementById('voiceStatus');
+  const transcriptEl = document.getElementById('voiceTranscript');
+  const transcriptFinalEl = document.getElementById('voiceTranscriptFinal');
+  const waveDisplay = document.getElementById('voiceWaveDisplay');
 
-  let isActive = false;
-  const transcriptLines = [
-    '<strong>AI Agent:</strong> Good morning! This is Manager OS calling on behalf of Jason Williams. How are you today?',
-    '<strong>Client:</strong> Hi, yes I\'m good thanks. What can I help with?',
-    '<strong>AI Agent:</strong> Jason wanted to follow up on the proposal sent last Thursday. Have you had a chance to review it?',
-    '<strong>Client:</strong> Yes, we\'ve reviewed it internally. We have a few questions about the implementation timeline.',
-    '<strong>AI Agent:</strong> Of course. I\'ll schedule a follow-up call between you and Jason to discuss the timeline in detail. Would Thursday at 2pm work?',
-  ];
+  if (!gate || !startBtn) return;
 
-  btn.addEventListener('click', function() {
-    if (!isActive) {
-      isActive = true;
-      btn.classList.add('active');
-      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg> End Call';
-      display.classList.add('active');
-      status.textContent = 'Call in progress...';
-      status.classList.add('active');
+  let vapiInstance = null;
+  let callTimerInterval = null;
+  let callSeconds = 0;
+  let transcriptLines = [];
 
-      // Show transcript lines one by one
-      let lineIdx = 0;
-      transcript.innerHTML = '';
-      transcript.classList.add('visible');
+  // -- Validate email format --
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
 
-      function showLine() {
-        if (lineIdx >= transcriptLines.length || !isActive) return;
-        const div = document.createElement('div');
-        div.style.cssText = 'padding:0.4rem 0;border-bottom:1px solid var(--border-grey);font-size:0.85rem;line-height:1.6;';
-        div.innerHTML = transcriptLines[lineIdx];
-        transcript.appendChild(div);
-        transcript.scrollTop = transcript.scrollHeight;
-        lineIdx++;
-        if (lineIdx < transcriptLines.length) {
-          setTimeout(showLine, 2800);
-        }
-      }
-      setTimeout(showLine, 1200);
-    } else {
-      isActive = false;
-      btn.classList.remove('active');
-      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Start Call';
-      display.classList.remove('active');
-      status.textContent = 'Call ended • Transcript saved';
-      status.classList.remove('active');
+  // -- Format seconds to M:SS --
+  function formatTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  // -- Update timer display --
+  function updateTimer() {
+    callSeconds++;
+    timerEl.textContent = formatTime(callSeconds) + ' / 3:00';
+
+    // Auto-end at 3 minutes
+    if (callSeconds >= VAPI_MAX_CALL_SECONDS) {
+      endCall('Time limit reached');
     }
-  });
+  }
+
+  // -- Show a view (gate / active / ended) --
+  function showView(view) {
+    gate.style.display = view === 'gate' ? '' : 'none';
+    callActive.style.display = view === 'active' ? '' : 'none';
+    callEnded.style.display = view === 'ended' ? '' : 'none';
+  }
+
+  // -- Add transcript line --
+  function addTranscriptLine(role, text) {
+    const label = role === 'assistant' ? 'AI Agent' : 'You';
+    const line = '<strong>' + label + ':</strong> ' + text;
+    transcriptLines.push(line);
+
+    const div = document.createElement('div');
+    div.style.cssText = 'padding:0.4rem 0;border-bottom:1px solid var(--border-grey);font-size:0.85rem;line-height:1.6;';
+    div.innerHTML = line;
+    transcriptEl.appendChild(div);
+    transcriptEl.classList.add('visible');
+    transcriptEl.scrollTop = transcriptEl.scrollHeight;
+  }
+
+  // -- Start the call --
+  async function startCall() {
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+
+    if (!name) { nameInput.focus(); nameInput.style.borderColor = 'var(--cherry-red)'; return; }
+    if (!email || !isValidEmail(email)) { emailInput.focus(); emailInput.style.borderColor = 'var(--cherry-red)'; return; }
+
+    // Reset styles
+    nameInput.style.borderColor = '';
+    emailInput.style.borderColor = '';
+
+    // Switch to active view
+    showView('active');
+    callSeconds = 0;
+    transcriptLines = [];
+    transcriptEl.innerHTML = '';
+    timerEl.textContent = '0:00 / 3:00';
+    statusEl.textContent = 'Connecting...';
+
+    // Start timer
+    callTimerInterval = setInterval(updateTimer, 1000);
+
+    // Use Vapi if configured, otherwise fall back to mock
+    if (VAPI_PUBLIC_KEY && VAPI_ASSISTANT_ID && typeof Vapi !== 'undefined') {
+      try {
+        vapiInstance = new Vapi(VAPI_PUBLIC_KEY);
+
+        vapiInstance.on('call-start', () => {
+          statusEl.textContent = 'Call in progress...';
+          waveDisplay.classList.add('active');
+        });
+
+        vapiInstance.on('speech-start', () => {
+          waveDisplay.classList.add('active');
+        });
+
+        vapiInstance.on('speech-end', () => {
+          // Keep wave active during call
+        });
+
+        vapiInstance.on('message', (msg) => {
+          if (msg.type === 'transcript' && msg.transcriptType === 'final') {
+            addTranscriptLine(msg.role, msg.transcript);
+          }
+        });
+
+        vapiInstance.on('call-end', () => {
+          endCall('Call completed');
+        });
+
+        vapiInstance.on('error', (err) => {
+          console.error('Vapi error:', err);
+          statusEl.textContent = 'Connection error — please try again';
+          setTimeout(() => endCall('Error'), 2000);
+        });
+
+        // Start the Vapi call
+        await vapiInstance.start(VAPI_ASSISTANT_ID, {
+          metadata: { userName: name, userEmail: email }
+        });
+
+      } catch (err) {
+        console.error('Vapi start error:', err);
+        statusEl.textContent = 'Could not start call — please try again';
+        setTimeout(() => endCall('Error'), 2000);
+      }
+    } else {
+      // -- Mock/demo mode (no Vapi credentials configured) --
+      statusEl.textContent = 'Call in progress...';
+      waveDisplay.classList.add('active');
+
+      const mockLines = [
+        { role: 'assistant', text: 'Good morning! This is the Manager OS AI assistant. I understand your name is ' + name + '. How can I help you today?' },
+        { role: 'user', text: 'Hi, I\'d like to learn more about your voice agent solution.' },
+        { role: 'assistant', text: 'Of course! Our voice agent handles calls 24/7 — qualifying leads, answering FAQs, and booking meetings. It sounds completely natural and integrates with your CRM.' },
+        { role: 'user', text: 'That sounds great. How quickly can it be set up?' },
+        { role: 'assistant', text: 'Typical setup is 2-4 weeks. We configure the agent\'s personality, connect your phone system, and train it on your specific business needs. Shall I book a call with Jason to discuss your requirements?' },
+      ];
+
+      let i = 0;
+      function showMockLine() {
+        if (i >= mockLines.length) return;
+        addTranscriptLine(mockLines[i].role, mockLines[i].text);
+        i++;
+        if (i < mockLines.length) setTimeout(showMockLine, 3000);
+        else setTimeout(() => endCall('Demo call completed'), 3000);
+      }
+      setTimeout(showMockLine, 1500);
+    }
+  }
+
+  // -- End the call --
+  function endCall(reason) {
+    clearInterval(callTimerInterval);
+
+    // Stop Vapi if running
+    if (vapiInstance) {
+      try { vapiInstance.stop(); } catch(e) {}
+      vapiInstance = null;
+    }
+
+    waveDisplay.classList.remove('active');
+
+    // Copy transcript to final view
+    transcriptFinalEl.innerHTML = transcriptEl.innerHTML;
+    if (!transcriptFinalEl.innerHTML) {
+      transcriptFinalEl.innerHTML = '<div style="padding:0.4rem 0;font-size:0.85rem;color:var(--text-secondary);">No transcript recorded.</div>';
+    }
+
+    showView('ended');
+  }
+
+  // -- Event listeners --
+  startBtn.addEventListener('click', startCall);
+  endBtn.addEventListener('click', () => endCall('Call ended by user'));
+  restartBtn.addEventListener('click', () => showView('gate'));
+
+  // Allow Enter key to submit
+  emailInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') startCall(); });
+  nameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') emailInput.focus(); });
 }
 
 /* --- Meeting Assistant Demo --- */
