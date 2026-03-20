@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meeting Assistant | Manager OS</title>
+  <meta name="description" content="AI meeting assistant that transcribes, summarises, and extracts action items from every meeting automatically." />
+  <link rel="canonical" href="https://manageros.co.uk/solutions/meeting-assistant/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <link rel="stylesheet" href="../../styles/main.css" />
+  <link rel="stylesheet" href="../../styles/solutions.css" />
+</head>
+<body data-solution="meeting-assistant">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="/" class="nav-logo"><div class="logo-icon">M</div>Manager OS</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/#platform">Features</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li class="nav-cta"><a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-primary">Get Started</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span class="toggle-track"><i data-lucide="sun" class="toggle-icon sun-icon" style="width:14px;height:14px"></i><i data-lucide="moon" class="toggle-icon moon-icon" style="width:14px;height:14px"></i><span class="toggle-thumb"></span></span></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="solution-hero">
+    <div class="container">
+      <div class="section-badge"><i data-lucide="video" style="width:14px;height:14px"></i> MEETING ASSISTANT</div>
+      <h1>Never miss an <span class="highlight">action item</span> again</h1>
+      <p class="hero-subtitle">AI that joins your meetings, transcribes everything, extracts action items, and sends follow-ups — automatically.</p>
+      <div class="solution-hero-tags">
+        <span class="solution-card-tag">Small Business</span>
+        <span class="solution-card-tag">✦ 1-2 weeks</span>
+        <span class="tech-badge">Zoom</span>
+        <span class="tech-badge">Notion</span>
+        <span class="tech-badge">Slack</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="diamond-divider"></div>
+
+  <!-- ===== INTERACTIVE DEMO ===== -->
+  <section class="solution-demo-section">
+    <div class="container">
+      <div class="solution-demo-card reveal">
+        <div class="demo-card-header">
+          <span class="demo-card-dot"></span><span class="demo-card-dot"></span><span class="demo-card-dot"></span>
+          <span class="demo-card-title">meeting-assistant.app</span>
+        </div>
+        <div class="demo-card-body">
+          <div class="meeting-demo-container">
+            <div class="meeting-transcript-panel" id="meetingTranscript">
+              <h4>📝 Live Transcript</h4>
+            </div>
+            <div class="meeting-actions-panel" id="meetingActions">
+              <h4>⚡ Action Items</h4>
+              <div class="action-item"><div class="action-check"></div><span>Complete reporting module by Friday</span></div>
+              <div class="action-item"><div class="action-check"></div><span>Send welcome packs before Thursday</span></div>
+              <div class="action-item"><div class="action-check"></div><span>Book Q3 planning session</span></div>
+              <div class="action-item"><div class="action-check"></div><span>Schedule follow-up with new clients</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="diamond-divider"></div>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="solution-how-section">
+    <div class="container">
+      <div class="section-header reveal"><h2 class="section-title">How it <span class="highlight">works</span></h2></div>
+      <div class="how-steps reveal-stagger">
+        <div class="how-step"><div class="how-step-number">1</div><h4>Join</h4><p>The AI bot joins your Zoom, Teams, or Google Meet call automatically.</p></div>
+        <div class="how-step"><div class="how-step-number">2</div><h4>Transcribe</h4><p>Every word is captured with speaker identification and timestamps.</p></div>
+        <div class="how-step"><div class="how-step-number">3</div><h4>Extract</h4><p>Action items, decisions, and key topics are extracted by AI in real-time.</p></div>
+        <div class="how-step"><div class="how-step-number">4</div><h4>Distribute</h4><p>Summary and action items are sent to Slack, Notion, or email within minutes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="diamond-divider"></div>
+
+  <!-- ===== FEATURES ===== -->
+  <section class="solution-features-section">
+    <div class="container">
+      <div class="section-header reveal"><h2 class="section-title">Key <span class="highlight">features</span></h2></div>
+      <div class="solution-features-grid reveal-stagger">
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="mic" style="width:20px;height:20px"></i></div><h4>Speaker Detection</h4><p>Accurately identifies who said what, even in large group calls.</p></div>
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="check-square" style="width:20px;height:20px"></i></div><h4>Action Item Extraction</h4><p>AI detects commitments, deadlines, and tasks from natural conversation.</p></div>
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="mail" style="width:20px;height:20px"></i></div><h4>Auto Follow-Up</h4><p>Draft follow-up emails with meeting summary and next steps, ready to send.</p></div>
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="search" style="width:20px;height:20px"></i></div><h4>Searchable History</h4><p>Search across all meetings. "What did Sarah say about Q3 budget?"</p></div>
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="bar-chart-2" style="width:20px;height:20px"></i></div><h4>Meeting Analytics</h4><p>Track meeting duration, talk time ratios, and topic frequency trends.</p></div>
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="link" style="width:20px;height:20px"></i></div><h4>CRM Integration</h4><p>Auto-log meeting notes against contacts in your CRM system.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="final-cta">
+    <div class="container reveal">
+      <h2>Ready to automate your meeting notes?</h2>
+      <p>Book a call to see the Meeting Assistant in action with a live demo.</p>
+      <div class="final-cta-buttons">
+        <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-dark btn-lg">Book a Call &rarr;</a>
+        <a href="/pricing/" class="btn btn-secondary btn-lg">View Pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-brand"><a href="/" class="nav-logo"><div class="logo-icon">M</div>Manager OS</a><p class="footer-tagline">We deploy physical AI stations to UK businesses. Local hardware, local AI, full privacy.</p><div class="footer-badges"><span class="footer-badge"><i data-lucide="shield-check" style="width:12px;height:12px"></i> ICO Registered</span><span class="footer-badge"><i data-lucide="clock" style="width:12px;height:12px"></i> 2-Week Setup</span></div></div>
+        <div class="footer-column"><h4>Product</h4><ul class="footer-links"><li><a href="/#platform">Features</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/#how-it-works">How It Works</a></li><li><a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}'>Book a Call</a></li></ul></div>
+        <div class="footer-column"><h4>Company</h4><ul class="footer-links"><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="mailto:hello@manageros.co.uk">hello@manageros.co.uk</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>&copy; 2026 Manager OS. All rights reserved.</span><div class="footer-social"><a href="#" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:18px;height:18px"></i></a></div></div>
+    </div>
+  </footer>
+  <div class="mobile-cta"><a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-primary">Book a Demo</a></div>
+  <script type="text/javascript">(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");Cal("init", {origin:"https://app.cal.com"});Cal("ui", {"hideEventTypeDetails":false,"layout":"month_view"});</script>
+  <script src="../../scripts/main.js"></script>
+  <script src="../../scripts/solutions.js"></script>
+  <script>if (typeof lucide !== 'undefined') { lucide.createIcons(); }</script>
+</body>
+</html>

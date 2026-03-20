@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voice Agent | Manager OS</title>
+  <meta name="description" content="AI-powered voice agents for phone interactions. Natural speech, real-time calls, intelligent call routing." />
+  <link rel="canonical" href="https://manageros.co.uk/solutions/voice-agent/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <link rel="stylesheet" href="../../styles/main.css" />
+  <link rel="stylesheet" href="../../styles/solutions.css" />
+</head>
+<body data-solution="voice-agent">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <div class="logo-icon">M</div>
+        Manager OS
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/#platform">Features</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li class="nav-cta">
+          <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-primary">Get Started</a>
+        </li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="toggle-track">
+          <i data-lucide="sun" class="toggle-icon sun-icon" style="width:14px;height:14px"></i>
+          <i data-lucide="moon" class="toggle-icon moon-icon" style="width:14px;height:14px"></i>
+          <span class="toggle-thumb"></span>
+        </span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="solution-hero">
+    <div class="container">
+      <div class="section-badge">
+        <i data-lucide="phone" style="width:14px;height:14px"></i>
+        VOICE AGENT
+      </div>
+      <h1>AI-Powered <span class="highlight">Voice Agent</span></h1>
+      <p class="hero-subtitle">Intelligent phone agents that handle calls, qualify leads, and book meetings — sounding completely natural. Available 24/7.</p>
+      <div class="solution-hero-tags">
+        <span class="solution-card-tag">Enterprise</span>
+        <span class="solution-card-tag">✦ 2-4 weeks</span>
+        <span class="tech-badge">VAPI.ai</span>
+        <span class="tech-badge">Twilio</span>
+        <span class="tech-badge">OpenAI</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="diamond-divider"></div>
+
+  <!-- ===== INTERACTIVE DEMO ===== -->
+  <section class="solution-demo-section">
+    <div class="container">
+      <div class="solution-demo-card reveal">
+        <div class="demo-card-header">
+          <span class="demo-card-dot"></span>
+          <span class="demo-card-dot"></span>
+          <span class="demo-card-dot"></span>
+          <span class="demo-card-title">voice-agent-demo.app</span>
+        </div>
+        <div class="demo-card-body">
+          <div class="voice-demo-container">
+            <div class="voice-wave-display" id="voiceWaveDisplay">
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </div>
+            <button class="voice-call-btn" id="voiceCallBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              Start Call
+            </button>
+            <div class="voice-status" id="voiceStatus">Click to simulate a live call</div>
+            <div class="voice-transcript" id="voiceTranscript"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="diamond-divider"></div>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="solution-how-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">How it <span class="highlight">works</span></h2>
+      </div>
+      <div class="how-steps reveal-stagger">
+        <div class="how-step">
+          <div class="how-step-number">1</div>
+          <h4>Configure</h4>
+          <p>Define your agent's personality, script prompts, and call flow logic.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-number">2</div>
+          <h4>Connect</h4>
+          <p>Link your phone number via Twilio. Calls route to your AI agent automatically.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-number">3</div>
+          <h4>Converse</h4>
+          <p>The agent handles calls naturally — qualifying leads, answering FAQs, booking meetings.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-number">4</div>
+          <h4>Report</h4>
+          <p>Every call is transcribed and logged. Action items are sent to your CRM and Slack.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="diamond-divider"></div>
+
+  <!-- ===== FEATURES ===== -->
+  <section class="solution-features-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Key <span class="highlight">features</span></h2>
+      </div>
+      <div class="solution-features-grid reveal-stagger">
+        <div class="solution-feature-card">
+          <div class="solution-feature-icon"><i data-lucide="mic" style="width:20px;height:20px"></i></div>
+          <h4>Natural Speech</h4>
+          <p>Advanced text-to-speech that sounds human. Multiple voice options and accents available.</p>
+        </div>
+        <div class="solution-feature-card">
+          <div class="solution-feature-icon"><i data-lucide="phone-forwarded" style="width:20px;height:20px"></i></div>
+          <h4>Smart Routing</h4>
+          <p>Route calls based on intent. Sales enquiries go to sales, support goes to support — automatically.</p>
+        </div>
+        <div class="solution-feature-card">
+          <div class="solution-feature-icon"><i data-lucide="file-text" style="width:20px;height:20px"></i></div>
+          <h4>Live Transcription</h4>
+          <p>Every call is transcribed in real-time. Searchable history of all conversations.</p>
+        </div>
+        <div class="solution-feature-card">
+          <div class="solution-feature-icon"><i data-lucide="calendar" style="width:20px;height:20px"></i></div>
+          <h4>Meeting Booking</h4>
+          <p>The agent checks your calendar availability and books meetings directly during the call.</p>
+        </div>
+        <div class="solution-feature-card">
+          <div class="solution-feature-icon"><i data-lucide="globe" style="width:20px;height:20px"></i></div>
+          <h4>Multi-Language</h4>
+          <p>Support calls in multiple languages. Auto-detect and switch languages mid-conversation.</p>
+        </div>
+        <div class="solution-feature-card">
+          <div class="solution-feature-icon"><i data-lucide="shield" style="width:20px;height:20px"></i></div>
+          <h4>Compliance Ready</h4>
+          <p>GDPR compliant call handling. Call recording consent, data retention policies built in.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="final-cta">
+    <div class="container reveal">
+      <h2>Ready to deploy your Voice Agent?</h2>
+      <p>Book a 30-minute call and we'll show you a live demo with your business scripts.</p>
+      <div class="final-cta-buttons">
+        <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-dark btn-lg">Book a Call &rarr;</a>
+        <a href="/pricing/" class="btn btn-secondary btn-lg">View Pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a href="/" class="nav-logo"><div class="logo-icon">M</div>Manager OS</a>
+          <p class="footer-tagline">We deploy physical AI stations to UK businesses. Local hardware, local AI, full privacy.</p>
+          <div class="footer-badges">
+            <span class="footer-badge"><i data-lucide="shield-check" style="width:12px;height:12px"></i> ICO Registered</span>
+            <span class="footer-badge"><i data-lucide="clock" style="width:12px;height:12px"></i> 2-Week Setup</span>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Product</h4>
+          <ul class="footer-links">
+            <li><a href="/#platform">Features</a></li>
+            <li><a href="/pricing/">Pricing</a></li>
+            <li><a href="/#how-it-works">How It Works</a></li>
+            <li><a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}'>Book a Call</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="/about/">About</a></li>
+            <li><a href="/contact/">Contact</a></li>
+            <li><a href="mailto:hello@manageros.co.uk">hello@manageros.co.uk</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Manager OS. All rights reserved.</span>
+        <div class="footer-social"><a href="#" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:18px;height:18px"></i></a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="mobile-cta">
+    <a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-primary">Book a Demo</a>
+  </div>
+
+  <script type="text/javascript">
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", {origin:"https://app.cal.com"});
+    Cal("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+  </script>
+  <script src="../../scripts/main.js"></script>
+  <script src="../../scripts/solutions.js"></script>
+  <script>if (typeof lucide !== 'undefined') { lucide.createIcons(); }</script>
+</body>
+</html>

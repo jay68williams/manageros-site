@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Reporting | Manager OS</title>
+  <meta name="description" content="Automated weekly reports and KPI dashboards. Pull data from multiple sources into beautiful, branded reports." />
+  <link rel="canonical" href="https://manageros.co.uk/solutions/client-reporting/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <link rel="stylesheet" href="../../styles/main.css" />
+  <link rel="stylesheet" href="../../styles/solutions.css" />
+  <style>
+    .report-dashboard { width: 100%; }
+    .report-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+    .report-kpi { padding: 1.25rem; background: var(--off-white); border: 1px solid var(--border-grey); border-radius: var(--radius-md); text-align: center; }
+    .report-kpi .kpi-value { font-size: 1.75rem; font-weight: 800; font-family: var(--font-mono); color: var(--cherry-red); }
+    .report-kpi .kpi-label { font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem; }
+    .report-kpi .kpi-change { font-size: 0.75rem; font-weight: 600; color: var(--green); margin-top: 0.25rem; }
+    .report-chart { background: var(--off-white); border: 1px solid var(--border-grey); border-radius: var(--radius-md); padding: 1.5rem; }
+    .report-chart h4 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 1rem; }
+    .chart-bars { display: flex; align-items: flex-end; gap: 0.5rem; height: 140px; }
+    .chart-bar-wrapper { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+    .report-bar { width: 100%; background: linear-gradient(to top, var(--cherry-red), rgba(194,3,31,0.5)); border-radius: 4px 4px 0 0; min-height: 4px; }
+    .chart-bar-label { font-size: 0.7rem; color: var(--text-tertiary); margin-top: 0.5rem; font-family: var(--font-mono); }
+    [data-theme="dark"] .report-kpi, [data-theme="dark"] .report-chart { background: var(--dark-bg); border-color: rgba(255,255,255,0.08); }
+    @media (max-width: 768px) { .report-kpis { grid-template-columns: repeat(2, 1fr); } }
+  </style>
+</head>
+<body data-solution="client-reporting">
+
+  <nav class="navbar" id="navbar"><div class="container"><a href="/" class="nav-logo"><div class="logo-icon">M</div>Manager OS</a><ul class="nav-links" id="navLinks"><li><a href="/#platform">Features</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li class="nav-cta"><a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-primary">Get Started</a></li></ul><button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span class="toggle-track"><i data-lucide="sun" class="toggle-icon sun-icon" style="width:14px;height:14px"></i><i data-lucide="moon" class="toggle-icon moon-icon" style="width:14px;height:14px"></i><span class="toggle-thumb"></span></span></button><button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button></div></nav>
+
+  <section class="solution-hero">
+    <div class="container">
+      <div class="section-badge"><i data-lucide="bar-chart-2" style="width:14px;height:14px"></i> CLIENT REPORTING</div>
+      <h1>Automated <span class="highlight">weekly reports</span> that write themselves</h1>
+      <p class="hero-subtitle">Pull data from Analytics, CRM, and email — generate beautiful branded reports and send them to clients every week.</p>
+      <div class="solution-hero-tags">
+        <span class="solution-card-tag">SMB</span>
+        <span class="solution-card-tag">✦ 1-2 weeks</span>
+        <span class="tech-badge">Analytics</span>
+        <span class="tech-badge">Email</span>
+        <span class="tech-badge">Slack</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="diamond-divider"></div>
+
+  <section class="solution-demo-section">
+    <div class="container">
+      <div class="solution-demo-card reveal">
+        <div class="demo-card-header">
+          <span class="demo-card-dot"></span><span class="demo-card-dot"></span><span class="demo-card-dot"></span>
+          <span class="demo-card-title">weekly-report.app — Week of 17 Mar 2026</span>
+        </div>
+        <div class="demo-card-body">
+          <div class="report-dashboard">
+            <div class="report-kpis">
+              <div class="report-kpi"><div class="kpi-value counter-value" data-target="12847">0</div><div class="kpi-label">Website Visitors</div><div class="kpi-change">↑ 12%</div></div>
+              <div class="report-kpi"><div class="kpi-value counter-value" data-target="342">0</div><div class="kpi-label">New Leads</div><div class="kpi-change">↑ 8%</div></div>
+              <div class="report-kpi"><div class="kpi-value counter-value" data-target="28" data-prefix="£" data-suffix="k">0</div><div class="kpi-label">Revenue</div><div class="kpi-change">↑ 15%</div></div>
+              <div class="report-kpi"><div class="kpi-value counter-value" data-target="94" data-suffix="%">0</div><div class="kpi-label">CSAT Score</div><div class="kpi-change">↑ 2%</div></div>
+            </div>
+            <div class="report-chart">
+              <h4>📊 Weekly Traffic by Day</h4>
+              <div class="chart-bars">
+                <div class="chart-bar-wrapper"><div class="report-bar" data-height="55%"></div><div class="chart-bar-label">Mon</div></div>
+                <div class="chart-bar-wrapper"><div class="report-bar" data-height="72%"></div><div class="chart-bar-label">Tue</div></div>
+                <div class="chart-bar-wrapper"><div class="report-bar" data-height="85%"></div><div class="chart-bar-label">Wed</div></div>
+                <div class="chart-bar-wrapper"><div class="report-bar" data-height="65%"></div><div class="chart-bar-label">Thu</div></div>
+                <div class="chart-bar-wrapper"><div class="report-bar" data-height="90%"></div><div class="chart-bar-label">Fri</div></div>
+                <div class="chart-bar-wrapper"><div class="report-bar" data-height="40%"></div><div class="chart-bar-label">Sat</div></div>
+                <div class="chart-bar-wrapper"><div class="report-bar" data-height="30%"></div><div class="chart-bar-label">Sun</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="diamond-divider"></div>
+
+  <section class="solution-how-section">
+    <div class="container">
+      <div class="section-header reveal"><h2 class="section-title">How it <span class="highlight">works</span></h2></div>
+      <div class="how-steps reveal-stagger">
+        <div class="how-step"><div class="how-step-number">1</div><h4>Connect</h4><p>Link your Google Analytics, CRM, ad platforms, and email tools.</p></div>
+        <div class="how-step"><div class="how-step-number">2</div><h4>Design</h4><p>Choose a template or customise your report layout and branding.</p></div>
+        <div class="how-step"><div class="how-step-number">3</div><h4>Schedule</h4><p>Set the frequency — weekly, fortnightly, or monthly reports.</p></div>
+        <div class="how-step"><div class="how-step-number">4</div><h4>Send</h4><p>Reports are generated and emailed to clients automatically on schedule.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="diamond-divider"></div>
+
+  <section class="solution-features-section">
+    <div class="container">
+      <div class="section-header reveal"><h2 class="section-title">Key <span class="highlight">features</span></h2></div>
+      <div class="solution-features-grid reveal-stagger">
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="layout" style="width:20px;height:20px"></i></div><h4>Branded Templates</h4><p>Custom report templates with your logo, colours, and formatting.</p></div>
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="trending-up" style="width:20px;height:20px"></i></div><h4>KPI Dashboards</h4><p>Real-time dashboards showing the metrics that matter most.</p></div>
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="bell" style="width:20px;height:20px"></i></div><h4>Anomaly Alerts</h4><p>Get notified when metrics spike or drop below your defined thresholds.</p></div>
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="mail" style="width:20px;height:20px"></i></div><h4>Auto Delivery</h4><p>Reports are emailed as PDFs or interactive links on your schedule.</p></div>
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="pen-tool" style="width:20px;height:20px"></i></div><h4>AI Insights</h4><p>AI writes summary paragraphs highlighting key trends and recommendations.</p></div>
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="download" style="width:20px;height:20px"></i></div><h4>Export Options</h4><p>PDF, CSV, Google Sheets, or PowerPoint — export in any format.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta"><div class="container reveal"><h2>Ready to automate your client reports?</h2><p>Save hours every week. Let AI write and send your reports while you focus on strategy.</p><div class="final-cta-buttons"><a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-dark btn-lg">Book a Call &rarr;</a><a href="/pricing/" class="btn btn-secondary btn-lg">View Pricing</a></div></div></section>
+
+  <footer class="footer"><div class="container"><div class="footer-main"><div class="footer-brand"><a href="/" class="nav-logo"><div class="logo-icon">M</div>Manager OS</a><p class="footer-tagline">We deploy physical AI stations to UK businesses. Local hardware, local AI, full privacy.</p><div class="footer-badges"><span class="footer-badge"><i data-lucide="shield-check" style="width:12px;height:12px"></i> ICO Registered</span><span class="footer-badge"><i data-lucide="clock" style="width:12px;height:12px"></i> 2-Week Setup</span></div></div><div class="footer-column"><h4>Product</h4><ul class="footer-links"><li><a href="/#platform">Features</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/#how-it-works">How It Works</a></li><li><a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}'>Book a Call</a></li></ul></div><div class="footer-column"><h4>Company</h4><ul class="footer-links"><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="mailto:hello@manageros.co.uk">hello@manageros.co.uk</a></li></ul></div></div><div class="footer-bottom"><span>&copy; 2026 Manager OS. All rights reserved.</span><div class="footer-social"><a href="#" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:18px;height:18px"></i></a></div></div></div></footer>
+  <div class="mobile-cta"><a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-primary">Book a Demo</a></div>
+  <script type="text/javascript">(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");Cal("init", {origin:"https://app.cal.com"});Cal("ui", {"hideEventTypeDetails":false,"layout":"month_view"});</script>
+  <script src="../../scripts/main.js"></script>
+  <script src="../../scripts/solutions.js"></script>
+  <script>if (typeof lucide !== 'undefined') { lucide.createIcons(); }</script>
+</body>
+</html>

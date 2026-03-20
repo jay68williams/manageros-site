@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recruitment | Manager OS</title>
+  <meta name="description" content="AI recruitment assistant that screens resumes, schedules interviews, and scores candidates automatically." />
+  <link rel="canonical" href="https://manageros.co.uk/solutions/recruitment/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <link rel="stylesheet" href="../../styles/main.css" />
+  <link rel="stylesheet" href="../../styles/solutions.css" />
+  <style>
+    .pipeline-stages { display: flex; gap: 0.5rem; margin-bottom: 2rem; justify-content: center; }
+    .pipeline-stage { padding: 0.5rem 1.25rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: var(--light-grey); color: var(--text-secondary); font-family: var(--font-sans); transition: all 0.3s ease; }
+    .pipeline-stage.active { background: var(--cherry-red); color: #fff; }
+    .pipeline-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; width: 100%; }
+    .pipeline-card { padding: 1.25rem; background: var(--off-white); border: 1px solid var(--border-grey); border-radius: var(--radius-md); transition: all 0.5s ease; }
+    .pipeline-card h5 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--text-primary); }
+    .pipeline-card p { font-size: 0.78rem; color: var(--text-secondary); }
+    .pipeline-card .score { font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; margin-top: 0.5rem; }
+    .stage-applied .score { color: var(--text-tertiary); }
+    .stage-screen { border-color: rgba(194,3,31,0.3); }
+    .stage-screen .score { color: var(--cherry-red); }
+    .stage-offer { border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.04); }
+    .stage-offer .score { color: var(--green); }
+    .stage-hired { border-color: var(--green); background: rgba(16,185,129,0.08); }
+    .stage-hired .score { color: var(--green); }
+    [data-theme="dark"] .pipeline-card { background: var(--dark-bg); border-color: rgba(255,255,255,0.08); }
+    [data-theme="dark"] .pipeline-stage { background: rgba(255,255,255,0.06); color: #aaa; }
+  </style>
+</head>
+<body data-solution="recruitment">
+
+  <nav class="navbar" id="navbar"><div class="container"><a href="/" class="nav-logo"><div class="logo-icon">M</div>Manager OS</a><ul class="nav-links" id="navLinks"><li><a href="/#platform">Features</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li class="nav-cta"><a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-primary">Get Started</a></li></ul><button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span class="toggle-track"><i data-lucide="sun" class="toggle-icon sun-icon" style="width:14px;height:14px"></i><i data-lucide="moon" class="toggle-icon moon-icon" style="width:14px;height:14px"></i><span class="toggle-thumb"></span></span></button><button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button></div></nav>
+
+  <section class="solution-hero">
+    <div class="container">
+      <div class="section-badge"><i data-lucide="users" style="width:14px;height:14px"></i> RECRUITMENT</div>
+      <h1>Hire smarter with <span class="highlight">AI-powered</span> screening</h1>
+      <p class="hero-subtitle">Automatically screen resumes, score candidates, schedule interviews, and move top talent through your pipeline faster.</p>
+      <div class="solution-hero-tags">
+        <span class="solution-card-tag">SMB</span>
+        <span class="solution-card-tag">✦ 2-3 weeks</span>
+        <span class="tech-badge">LinkedIn</span>
+        <span class="tech-badge">Calendar</span>
+        <span class="tech-badge">Slack</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="diamond-divider"></div>
+
+  <section class="solution-demo-section">
+    <div class="container">
+      <div class="solution-demo-card reveal">
+        <div class="demo-card-header">
+          <span class="demo-card-dot"></span><span class="demo-card-dot"></span><span class="demo-card-dot"></span>
+          <span class="demo-card-title">recruitment-pipeline.app</span>
+        </div>
+        <div class="demo-card-body">
+          <div class="animated-demo-container">
+            <div class="pipeline-stages">
+              <span class="pipeline-stage active">Applied</span>
+              <span class="pipeline-stage">Screening</span>
+              <span class="pipeline-stage">Interview</span>
+              <span class="pipeline-stage">Offer</span>
+            </div>
+            <div class="pipeline-cards">
+              <div class="pipeline-card stage-applied"><h5>Sarah Chen</h5><p>Senior Engineer • 8 yrs</p><div class="score">Score: 92</div></div>
+              <div class="pipeline-card stage-applied"><h5>Tom Richards</h5><p>Full Stack Dev • 5 yrs</p><div class="score">Score: 87</div></div>
+              <div class="pipeline-card stage-applied"><h5>Amira Hassan</h5><p>Backend Engineer • 6 yrs</p><div class="score">Score: 84</div></div>
+              <div class="pipeline-card stage-applied"><h5>James Wright</h5><p>DevOps Lead • 4 yrs</p><div class="score">Score: 79</div></div>
+            </div>
+            <div class="demo-info-row" style="margin-top:1.5rem">
+              <div class="demo-info-card"><div class="info-value counter-value" data-target="248">0</div><div class="info-label">Applications</div></div>
+              <div class="demo-info-card"><div class="info-value counter-value" data-target="42">0</div><div class="info-label">Shortlisted</div></div>
+              <div class="demo-info-card"><div class="info-value counter-value" data-target="75" data-suffix="%">0</div><div class="info-label">Time Saved</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="diamond-divider"></div>
+
+  <section class="solution-how-section">
+    <div class="container">
+      <div class="section-header reveal"><h2 class="section-title">How it <span class="highlight">works</span></h2></div>
+      <div class="how-steps reveal-stagger">
+        <div class="how-step"><div class="how-step-number">1</div><h4>Receive</h4><p>Applications arrive from LinkedIn, job boards, or your careers page.</p></div>
+        <div class="how-step"><div class="how-step-number">2</div><h4>Screen</h4><p>AI parses every CV and scores candidates against your role requirements.</p></div>
+        <div class="how-step"><div class="how-step-number">3</div><h4>Schedule</h4><p>Top candidates get an auto-invite to book an interview slot.</p></div>
+        <div class="how-step"><div class="how-step-number">4</div><h4>Report</h4><p>Your team gets a ranked shortlist with AI-generated summaries for each candidate.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="diamond-divider"></div>
+
+  <section class="solution-features-section">
+    <div class="container">
+      <div class="section-header reveal"><h2 class="section-title">Key <span class="highlight">features</span></h2></div>
+      <div class="solution-features-grid reveal-stagger">
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="file-scan" style="width:20px;height:20px"></i></div><h4>Resume Parsing</h4><p>Extract skills, experience, and qualifications from any CV format automatically.</p></div>
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="star" style="width:20px;height:20px"></i></div><h4>AI Scoring</h4><p>Score candidates against role requirements with weighted criteria matching.</p></div>
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="calendar" style="width:20px;height:20px"></i></div><h4>Auto Scheduling</h4><p>Candidates self-schedule interview slots from your team's availability.</p></div>
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="mail" style="width:20px;height:20px"></i></div><h4>Email Templates</h4><p>Automated rejection, progression, and offer emails — personalised by AI.</p></div>
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="shield" style="width:20px;height:20px"></i></div><h4>Bias Reduction</h4><p>Anonymised screening option removes name, age, and photo from initial review.</p></div>
+        <div class="solution-feature-card"><div class="solution-feature-icon"><i data-lucide="bar-chart-2" style="width:20px;height:20px"></i></div><h4>Pipeline Analytics</h4><p>Track time-to-hire, drop-off rates, and source effectiveness in real-time.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta"><div class="container reveal"><h2>Ready to transform your hiring?</h2><p>Book a call and we'll show you how AI can screen 100 candidates in the time it takes to read one CV.</p><div class="final-cta-buttons"><a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-dark btn-lg">Book a Call &rarr;</a><a href="/pricing/" class="btn btn-secondary btn-lg">View Pricing</a></div></div></section>
+
+  <footer class="footer"><div class="container"><div class="footer-main"><div class="footer-brand"><a href="/" class="nav-logo"><div class="logo-icon">M</div>Manager OS</a><p class="footer-tagline">We deploy physical AI stations to UK businesses. Local hardware, local AI, full privacy.</p><div class="footer-badges"><span class="footer-badge"><i data-lucide="shield-check" style="width:12px;height:12px"></i> ICO Registered</span><span class="footer-badge"><i data-lucide="clock" style="width:12px;height:12px"></i> 2-Week Setup</span></div></div><div class="footer-column"><h4>Product</h4><ul class="footer-links"><li><a href="/#platform">Features</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/#how-it-works">How It Works</a></li><li><a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}'>Book a Call</a></li></ul></div><div class="footer-column"><h4>Company</h4><ul class="footer-links"><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="mailto:hello@manageros.co.uk">hello@manageros.co.uk</a></li></ul></div></div><div class="footer-bottom"><span>&copy; 2026 Manager OS. All rights reserved.</span><div class="footer-social"><a href="#" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:18px;height:18px"></i></a></div></div></div></footer>
+  <div class="mobile-cta"><a href="#" data-cal-link="jason-williams-manageros/30min" data-cal-config='{"layout":"month_view"}' class="btn btn-primary">Book a Demo</a></div>
+  <script type="text/javascript">(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");Cal("init", {origin:"https://app.cal.com"});Cal("ui", {"hideEventTypeDetails":false,"layout":"month_view"});</script>
+  <script src="../../scripts/main.js"></script>
+  <script src="../../scripts/solutions.js"></script>
+  <script>if (typeof lucide !== 'undefined') { lucide.createIcons(); }</script>
+</body>
+</html>
