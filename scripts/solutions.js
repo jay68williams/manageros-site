@@ -472,36 +472,38 @@ function initLeadGenDemo() {
 
 /* --- Recruitment Demo --- */
 function initRecruitmentDemo() {
-  const cards = document.querySelectorAll('.pipeline-card');
-  if (!cards.length) return;
+  const stages = document.querySelectorAll('.pipeline-stage');
+  const panels = document.querySelectorAll('.pipeline-panel');
+  if (!stages.length || !panels.length) return;
 
-  let current = 0;
-  function moveNext() {
-    if (current >= cards.length) {
-      // Reset
-      cards.forEach(card => {
-        card.classList.remove('stage-screen', 'stage-offer', 'stage-hired');
-        card.classList.add('stage-applied');
-      });
-      current = 0;
-      setTimeout(moveNext, 2000);
-      return;
-    }
-    const card = cards[current];
-    if (card.classList.contains('stage-applied')) {
-      card.classList.remove('stage-applied');
-      card.classList.add('stage-screen');
-    } else if (card.classList.contains('stage-screen')) {
-      card.classList.remove('stage-screen');
-      card.classList.add('stage-offer');
-    } else if (card.classList.contains('stage-offer')) {
-      card.classList.remove('stage-offer');
-      card.classList.add('stage-hired');
-    }
-    current++;
-    setTimeout(moveNext, 1200);
-  }
-  setTimeout(moveNext, 1500);
+  stages.forEach(stage => {
+    stage.addEventListener('click', () => {
+      const target = stage.dataset.stage;
+
+      // Update active tab
+      stages.forEach(s => s.classList.remove('active'));
+      stage.classList.add('active');
+
+      // Switch panel
+      panels.forEach(p => p.classList.remove('active'));
+      const panel = document.getElementById('panel-' + target);
+      if (panel) {
+        panel.classList.add('active');
+
+        // Animate cards in
+        const cards = panel.querySelectorAll('.pipeline-card');
+        cards.forEach((card, i) => {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(12px)';
+          setTimeout(() => {
+            card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, i * 80);
+        });
+      }
+    });
+  });
 }
 
 /* --- Data Operator Demo --- */

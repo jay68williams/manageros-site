@@ -18,12 +18,12 @@ function initThemeToggle() {
   const toggle = document.getElementById('themeToggle');
   if (!toggle) return;
 
-  // Check saved preference or system preference
+  // Check saved preference — default to light mode
   const saved = localStorage.getItem('theme');
-  if (saved) {
-    document.documentElement.setAttribute('data-theme', saved);
-  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  if (saved === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
   }
 
   toggle.addEventListener('click', () => {
