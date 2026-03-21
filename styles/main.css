@@ -965,7 +965,6 @@ section {
   height: 100%;
   background: var(--cherry-red);
   border-radius: 4px;
-  animation: barGrow 1s ease both;
   transition: width 0.6s ease;
   opacity: 0.7;
 }
@@ -975,9 +974,7 @@ section {
   opacity: 1;
 }
 
-@keyframes barGrow {
-  from { width: 0 !important; }
-}
+
 
 .bar-chart-footer {
   display: flex;
@@ -1137,7 +1134,6 @@ section {
   width: 100%;
   background: var(--cherry-red);
   border-radius: 4px 4px 0 0;
-  animation: vbarGrow 0.8s ease both;
   transition: height 0.4s ease;
   min-height: 4px;
   opacity: 0.7;
@@ -1148,9 +1144,7 @@ section {
   opacity: 1;
 }
 
-@keyframes vbarGrow {
-  from { height: 0 !important; }
-}
+
 
 .vbar-label {
   font-size: 0.6rem;
