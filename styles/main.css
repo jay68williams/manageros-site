@@ -274,7 +274,7 @@ section {
 
 .btn-primary {
   background: var(--red);
-  color: var(--white);
+  color: #fff;
   animation: btnGlow 2.5s ease-in-out infinite;
 }
 
@@ -285,7 +285,7 @@ section {
 
 .btn-primary:hover {
   background: var(--red-hover);
-  color: var(--white);
+  color: #fff;
   transform: translateY(-2px);
   box-shadow: 0 6px 25px var(--red-glow);
 }
