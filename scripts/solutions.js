@@ -252,17 +252,17 @@ function initMeetingDemo() {
     requestAnimationFrame(() => div.classList.add('visible'));
     panel.scrollTop = panel.scrollHeight;
 
-    // Show action items at certain points
-    if (lineIdx === 3 || lineIdx === 5 || lineIdx === 6 || lineIdx === 7) {
-      setTimeout(() => showNextAction(), 800);
+    // Show action items at certain points (earlier triggers)
+    if (lineIdx === 1 || lineIdx === 3 || lineIdx === 5 || lineIdx === 7) {
+      setTimeout(() => showNextAction(), 400);
     }
 
     lineIdx++;
     if (lineIdx < lines.length) {
-      setTimeout(showNextLine, 2500);
+      setTimeout(showNextLine, 1500);
     } else {
       // Check off items after all lines shown
-      setTimeout(checkOffActions, 2000);
+      setTimeout(checkOffActions, 1500);
     }
   }
 
