@@ -963,14 +963,16 @@ section {
 
 .bar-fill {
   height: 100%;
-  background: var(--charcoal);
+  background: var(--cherry-red);
   border-radius: 4px;
   animation: barGrow 1s ease both;
   transition: width 0.6s ease;
+  opacity: 0.7;
 }
 
 .bar-fill.accent {
   background: var(--cherry-red);
+  opacity: 1;
 }
 
 @keyframes barGrow {
@@ -1133,15 +1135,17 @@ section {
 
 .vbar {
   width: 100%;
-  background: var(--border-grey);
+  background: var(--cherry-red);
   border-radius: 4px 4px 0 0;
   animation: vbarGrow 0.8s ease both;
   transition: height 0.4s ease;
   min-height: 4px;
+  opacity: 0.7;
 }
 
 .vbar.accent {
   background: var(--cherry-red);
+  opacity: 1;
 }
 
 @keyframes vbarGrow {
