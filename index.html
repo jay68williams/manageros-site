@@ -1386,9 +1386,11 @@
   </script>
   <script src="scripts/main.js"></script>
   <script>
-    if (typeof lucide !== 'undefined') {
-      lucide.createIcons();
-    }
+    window.addEventListener('load', function() {
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    });
   </script>
 
 </body>
