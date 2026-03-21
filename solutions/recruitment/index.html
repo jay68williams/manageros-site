@@ -19,9 +19,9 @@
     .pipeline-stage.active { background: var(--cherry-red); color: #fff; }
     .pipeline-stage.active:hover { background: var(--cherry-red); color: #fff; }
     .pipeline-panel { display: none; }
-    .pipeline-panel.active { display: block; }
-    .pipeline-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; width: 100%; }
-    .pipeline-card { padding: 1.25rem; background: var(--off-white); border: 1px solid var(--border-grey); border-radius: var(--radius-md); transition: all 0.5s ease; }
+    .pipeline-panel.active { display: flex; flex-direction: column; align-items: center; }
+    .pipeline-cards { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; width: 100%; }
+    .pipeline-card { padding: 1.25rem; background: var(--off-white); border: 1px solid var(--border-grey); border-radius: var(--radius-md); transition: all 0.5s ease; width: 200px; text-align: left; }
     .pipeline-card h5 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--text-primary); }
     .pipeline-card p { font-size: 0.78rem; color: var(--text-secondary); }
     .pipeline-card .score { font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; margin-top: 0.5rem; display: flex; align-items: center; gap: 0.35rem; }
@@ -29,6 +29,7 @@
     .pipeline-card .score.mid { color: var(--text-tertiary); }
     .pipeline-card .score.pending { color: #d97706; }
     .pipeline-card .score svg { flex-shrink: 0; width: 12px; height: 12px; min-width: 12px; min-height: 12px; max-width: 12px; max-height: 12px; }
+    .pipeline-panel .demo-info-row { justify-content: center; margin: 1.5rem auto 0; }
     [data-theme="dark"] .pipeline-card { background: var(--dark-bg); border-color: rgba(255,255,255,0.08); }
     [data-theme="dark"] .pipeline-stage { background: rgba(255,255,255,0.06); color: #aaa; }
     [data-theme="dark"] .pipeline-stage:hover { background: rgba(194,3,31,0.15); color: #f87171; }
@@ -80,7 +81,7 @@
                 <div class="pipeline-card"><h5>Amira Hassan</h5><p>Backend Engineer • 6 yrs</p><div class="score mid">Score: 84</div></div>
                 <div class="pipeline-card"><h5>James Wright</h5><p>DevOps Lead • 4 yrs</p><div class="score mid">Score: 79</div></div>
               </div>
-              <div class="demo-info-row" style="margin-top:1.5rem">
+              <div class="demo-info-row">
                 <div class="demo-info-card"><div class="info-value">248</div><div class="info-label">Applications</div></div>
                 <div class="demo-info-card"><div class="info-value">42</div><div class="info-label">Shortlisted</div></div>
                 <div class="demo-info-card"><div class="info-value">75%</div><div class="info-label">Time Saved</div></div>
@@ -94,7 +95,7 @@
                 <div class="pipeline-card"><h5>Tom Richards</h5><p>Full Stack Dev • 5 yrs</p><div class="score high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Skills Verified</div></div>
                 <div class="pipeline-card"><h5>Amira Hassan</h5><p>Backend Engineer • 6 yrs</p><div class="score pending">⏳ In Review</div></div>
               </div>
-              <div class="demo-info-row" style="margin-top:1.5rem">
+              <div class="demo-info-row">
                 <div class="demo-info-card"><div class="info-value">42</div><div class="info-label">Screened</div></div>
                 <div class="demo-info-card"><div class="info-value">38</div><div class="info-label">Passed</div></div>
                 <div class="demo-info-card"><div class="info-value">2.1 days</div><div class="info-label">Avg. Time</div></div>
@@ -107,7 +108,7 @@
                 <div class="pipeline-card"><h5>Sarah Chen</h5><p>Senior Engineer • 8 yrs</p><div class="score high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Completed</div></div>
                 <div class="pipeline-card"><h5>Tom Richards</h5><p>Full Stack Dev • 5 yrs</p><div class="score pending">📅 Mar 24, 2pm</div></div>
               </div>
-              <div class="demo-info-row" style="margin-top:1.5rem">
+              <div class="demo-info-row">
                 <div class="demo-info-card"><div class="info-value">18</div><div class="info-label">Interviewed</div></div>
                 <div class="demo-info-card"><div class="info-value">4.2 ★</div><div class="info-label">Avg. Rating</div></div>
                 <div class="demo-info-card"><div class="info-value">92%</div><div class="info-label">Show Rate</div></div>
@@ -119,7 +120,7 @@
               <div class="pipeline-cards">
                 <div class="pipeline-card"><h5>Sarah Chen</h5><p>Senior Engineer • 8 yrs</p><div class="score high"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Accepted</div></div>
               </div>
-              <div class="demo-info-row" style="margin-top:1.5rem">
+              <div class="demo-info-row">
                 <div class="demo-info-card"><div class="info-value">6</div><div class="info-label">Offers Sent</div></div>
                 <div class="demo-info-card"><div class="info-value">83%</div><div class="info-label">Accept Rate</div></div>
                 <div class="demo-info-card"><div class="info-value">18 days</div><div class="info-label">Time to Hire</div></div>

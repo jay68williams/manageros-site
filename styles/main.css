@@ -275,6 +275,12 @@ section {
 .btn-primary {
   background: var(--red);
   color: var(--white);
+  animation: btnGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes btnGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(194, 3, 31, 0.3), 0 0 20px rgba(194, 3, 31, 0.1); }
+  50% { box-shadow: 0 0 16px rgba(194, 3, 31, 0.5), 0 0 40px rgba(194, 3, 31, 0.2); }
 }
 
 .btn-primary:hover {
@@ -1127,7 +1133,7 @@ section {
 
 .vbar {
   width: 100%;
-  background: var(--charcoal);
+  background: var(--border-grey);
   border-radius: 4px 4px 0 0;
   animation: vbarGrow 0.8s ease both;
   transition: height 0.4s ease;
@@ -1144,7 +1150,7 @@ section {
 
 .vbar-label {
   font-size: 0.6rem;
-  color: var(--text-muted);
+  color: var(--text-tertiary);
   font-weight: 500;
 }
 
