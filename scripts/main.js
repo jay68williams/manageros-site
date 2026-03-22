@@ -536,34 +536,44 @@ function animateLeadNetwork() {
 
       const target = nodes[idx];
 
-      // Create line — only extends 60% of the way to avoid overlapping icons
-      const lineEnd = 0.6;
+      // Calculate line start/end so it doesn't overlap the central icon (r=28) or outer nodes (r=12)
+      const dx = target.x - cx;
+      const dy = target.y - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const ux = dx / dist, uy = dy / dist;
+      const startOffset = 36;  // clear the central pulse circle (r=28) + gap
+      const endOffset = 22;    // clear the outer node bg circle (r=12) + shoulders + gap
+      const x1 = cx + ux * startOffset;
+      const y1 = cy + uy * startOffset;
+      const x2Final = target.x - ux * endOffset;
+      const y2Final = target.y - uy * endOffset;
+
       const line = document.createElementNS(ns, 'line');
-      line.setAttribute('x1', cx);
-      line.setAttribute('y1', cy);
-      line.setAttribute('x2', cx);
-      line.setAttribute('y2', cy);
+      line.setAttribute('x1', x1);
+      line.setAttribute('y1', y1);
+      line.setAttribute('x2', x1);
+      line.setAttribute('y2', y1);
       line.setAttribute('stroke', 'var(--cherry-red)');
       line.setAttribute('stroke-width', '1');
       line.setAttribute('opacity', '0.25');
       line.setAttribute('stroke-linecap', 'round');
       linesGroup.appendChild(line);
 
-      // Animate line growing from center to ~60% of distance
-      const dx = target.x - cx;
-      const dy = target.y - cy;
+      // Animate line growing from start offset to end offset
+      const lineDx = x2Final - x1;
+      const lineDy = y2Final - y1;
       let t = 0;
       const grow = setInterval(() => {
         t += 0.05;
-        if (t >= lineEnd) {
-          t = lineEnd;
+        if (t >= 1) {
+          t = 1;
           clearInterval(grow);
           // Show node when line arrives
           target.el.style.transition = 'opacity 0.3s ease';
           target.el.setAttribute('opacity', '1');
         }
-        line.setAttribute('x2', cx + dx * t);
-        line.setAttribute('y2', cy + dy * t);
+        line.setAttribute('x2', x1 + lineDx * t);
+        line.setAttribute('y2', y1 + lineDy * t);
       }, 16);
 
       idx++;
@@ -791,7 +801,18 @@ function animateNodeTree() {
     sourceEls.push({ el: g, x: s.x, y: s.y });
   });
 
-  function drawFlowLine(x1, y1, x2, y2, delay) {
+  function drawFlowLine(sx, sy, ex, ey, delay) {
+    // Offset start and end so lines don't overlap icons
+    const dx = ex - sx, dy = ey - sy;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const ux = dx / dist, uy = dy / dist;
+    const startOffset = 34;  // clear source icon bg circle (r=14) + label + generous gap
+    const endOffset = 34;    // clear report center bg circle (r=20) + generous gap
+    const x1 = sx + ux * startOffset;
+    const y1 = sy + uy * startOffset;
+    const x2Final = ex - ux * endOffset;
+    const y2Final = ey - uy * endOffset;
+
     const line = document.createElementNS(ns, 'line');
     line.setAttribute('x1', x1);
     line.setAttribute('y1', y1);
@@ -804,13 +825,13 @@ function animateNodeTree() {
     linesGroup.appendChild(line);
 
     setTimeout(() => {
-      const dx = x2 - x1, dy = y2 - y1;
+      const lineDx = x2Final - x1, lineDy = y2Final - y1;
       let t = 0;
       const anim = setInterval(() => {
         t += 0.04;
         if (t >= 1) { t = 1; clearInterval(anim); }
-        line.setAttribute('x2', x1 + dx * t);
-        line.setAttribute('y2', y1 + dy * t);
+        line.setAttribute('x2', x1 + lineDx * t);
+        line.setAttribute('y2', y1 + lineDy * t);
       }, 16);
     }, delay);
   }
@@ -830,7 +851,7 @@ function animateNodeTree() {
     // Phase 2: Draw flow lines from each source to center
     const phase2Start = sourceEls.length * 200 + 400;
     sourceEls.forEach((s, i) => {
-      drawFlowLine(s.x, s.y + 14, reportCenter.x, reportCenter.y - 20, phase2Start + i * 180);
+      drawFlowLine(s.x, s.y, reportCenter.x, reportCenter.y, phase2Start + i * 180);
     });
 
     // Phase 3: Hold, then fade and restart
