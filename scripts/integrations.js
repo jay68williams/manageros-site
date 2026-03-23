@@ -163,11 +163,11 @@
       card.style.animationDelay = (index * 0.025) + 's';
 
       card.innerHTML =
-        '<div class="int-card-tag">' + item.category + '</div>' +
         '<div class="int-card-logo" style="background:' + item.color + '">' +
-          '<i data-lucide="' + item.icon + '" style="width:24px;height:24px;color:#fff"></i>' +
+          '<i data-lucide="' + item.icon + '" style="width:20px;height:20px;color:#fff"></i>' +
         '</div>' +
-        '<h4 class="int-card-name">' + item.name + '</h4>';
+        '<h4 class="int-card-name">' + item.name + '</h4>' +
+        '<div class="int-card-tag">' + item.category + '</div>';
 
       gridEl.appendChild(card);
     });
